@@ -1,3 +1,4 @@
+import 'package:wego/providers/calendar_provider/calendar_provider.dart';
 import 'package:wego/providers/logic_provider/logic_provider.dart';
 import 'package:wego/providers/profile_provider/profile_provider.dart';
 import 'package:wego/providers/settings_provider/settings_provider.dart';
@@ -53,6 +54,10 @@ class WeGo extends StatelessWidget {
         ChangeNotifierProxyProvider2(
           create: (context) => LogicProvider(Provider.of<ProfileProvider>(context, listen: false),Provider.of<SettingsProvider>(context, listen: false)),
           update: (context, ProfileProvider profile, SettingsProvider settings, logic) => LogicProvider(profile, settings),
+        ),
+        ChangeNotifierProxyProvider(
+          create: (context) => CalendarProvider(Provider.of<SettingsProvider>(context, listen: false)),
+          update: (context, SettingsProvider settings, calendar) => CalendarProvider(settings),
         ),
         ChangeNotifierProvider(
           create: (context) => WelcomeProvider(),

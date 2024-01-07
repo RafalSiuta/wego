@@ -5,7 +5,7 @@ import '../../../providers/logic_provider/logic_provider.dart';
 import '../../../providers/profile_provider/profile_provider.dart';
 import '../../../providers/settings_provider/settings_provider.dart';
 import '../../../widgets/headers/widget_header.dart';
-import '../details_calc_screen.dart';
+import 'details_calc_screen.dart';
 
 class CalculationScreen extends StatefulWidget {
   const CalculationScreen({super.key});
@@ -26,11 +26,11 @@ class _CalculationScreenState extends State<CalculationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20,),
-          WidgetHeader(
-            title: "calculations",
-            fontSize: 15,
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-          ),
+          // WidgetHeader(
+          //   title: "calculations",
+          //   fontSize: 15,
+          //   padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          // ),
           Expanded(
               child:
           GridView.count(

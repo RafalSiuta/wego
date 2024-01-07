@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/calculation_model/calculation_model.dart';
+import '../../../model/calculation_model/calculation_model.dart';
 
 class DetailCalcScreen extends StatelessWidget {
   const DetailCalcScreen({required this.data,required this.heroTag, super.key});
@@ -11,6 +11,17 @@ class DetailCalcScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double fontSize = 12.0;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.close),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

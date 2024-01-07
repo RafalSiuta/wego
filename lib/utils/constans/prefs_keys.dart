@@ -12,3 +12,5 @@ const weightOptionValue = 'USER_WEIGHT_COUNT_OPTION';
 
 const themeMode = "THEME_MODE";
 
+const calendarFormatKey = "CALENDAR_FORMAT";
+

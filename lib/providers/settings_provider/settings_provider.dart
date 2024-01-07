@@ -108,4 +108,11 @@ class SettingsProvider extends ChangeNotifier {
   }
   // SavingTypeList savingTypeList = SavingTypeList();
 
+//todo: calendar settings:
+bool isCalStartsMonday = true;
+void onCalDay(){
+  isCalStartsMonday  = !isCalStartsMonday;
+  notifyListeners();
+}
+
 }

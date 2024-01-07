@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-const theme_4MainBcgColor = Color(0xFFEEEEEE);//F4F0CE Color(0xFFEEEEEE);//F4F0CE
-const theme_4TitleBoxBcgColor = Colors.white;
+const mainBcgColor = Color(0xFFEEEEEE);//F4F0CE Color(0xFFEEEEEE);//F4F0CE
+const titleBoxBcgColor = Colors.white;
 // const theme_4firstGradientColor = Color(0xFF00C3FF);
 // const theme_4middleGradientColor = Color(0xFF1B6BFF);
 // const theme_4lastGradientColor = Color(0xFF2525FF);
-const theme_4firstGradientColor = Color(0xFFC8DBC1);
+const theme_4firstGradientColor = Color(0xFF876eff);//4a32bf
 const theme_4middleGradientColor = Color(0xFFB1CEB7);
-const theme_4lastGradientColor = Color(0xFF74B6AA);
+const theme_4lastGradientColor = Color(0xFF4a32bf);
 const theme_4noteCardColor = Color(0xFFf5f5f5); //Color(0xFFdec9ab);f5f5f5
 const theme_4descriptionColor = Color(0xFF636363);
 const theme_4dividerColor = Color(0xFF636363);
@@ -18,7 +18,10 @@ const theme_4unselectedColor = Color(0xFF9e9e9e); //595959
 const theme_4indicatorColor = Color(0xFF6F57E5);//Color(0xFFffca28); Color(0xFFF3EBA0); Color(0xFF94FFAF)// FEA735 f5f5f5 //94FFAF
 const theme_4shadowColor = Color(0xFFC0C0C0);
 const baseTextColor = Color(0xFF091C2B);
-const menuSelectionBackground = Color(0xFF6F57E5);
+const menuSelectionBackground = Color(0xFF6F57E5);//7a5eff
+const lightAccentShade = Color(0xFF876eff);
+const cardLightBackground = Color(0xFFD5CEFD);//D5CEFD //D5CEFD //9585F9 //998BF6
+const cardDarkBackground = Color(0xFF9585F9);
 
 
 final themeLight = ThemeData(
@@ -26,23 +29,23 @@ final themeLight = ThemeData(
     brightness: Brightness.light,
     useMaterial3: true,
     splashFactory: NoSplash.splashFactory,
-    scaffoldBackgroundColor: theme_4MainBcgColor,
+    scaffoldBackgroundColor: mainBcgColor,
     // backgroundColor: theme_2TitleBoxBcgColor,
 
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
       primary: theme_4firstGradientColor,
-      onPrimary: theme_4firstGradientColor,
+      onPrimary: theme_4lastGradientColor,
       secondary: Colors.white,
       onSecondary: menuSelectionBackground,
       error: Color(0xFFF32424),
       onError: Color(0xFFF32424),
-      background: theme_4TitleBoxBcgColor,
-      onBackground: theme_4TitleBoxBcgColor,
-      surface: theme_4MainBcgColor,
-      onSurface: theme_4MainBcgColor,
+      background: titleBoxBcgColor,
+      onBackground: titleBoxBcgColor,
+      surface: cardLightBackground,
+      onSurface: cardDarkBackground,
     ),
-    canvasColor: theme_4TitleBoxBcgColor,
+    canvasColor: titleBoxBcgColor,
     focusColor: theme_4middleGradientColor,
 
     unselectedWidgetColor: theme_4unselectedColor,
@@ -52,7 +55,7 @@ final themeLight = ThemeData(
     cardColor: theme_4middleGradientColor,
     indicatorColor: theme_4indicatorColor,
     highlightColor: Colors.transparent,
-    shadowColor: theme_4MainBcgColor,
+    shadowColor: mainBcgColor,
     dialogBackgroundColor: theme_4lastGradientColor,
     primarySwatch: Colors.amber,
     splashColor: Colors.transparent,
@@ -113,6 +116,12 @@ final themeLight = ThemeData(
               color: theme_4noteCardColor,
               fontWeight: FontWeight.bold,
               overflow: TextOverflow.ellipsis)),
+      titleSmall: GoogleFonts.exo2(
+          textStyle: const TextStyle(
+              fontSize: 10,
+              color: titleBoxBcgColor,
+              fontWeight: FontWeight.bold,
+              overflow: TextOverflow.ellipsis)),
     ),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
@@ -124,7 +133,7 @@ final themeLight = ThemeData(
                   return theme_4unselectedColor;
                 if (states.contains(MaterialState.focused) ||
                     states.contains(MaterialState.pressed))
-                  return theme_4TitleBoxBcgColor.withOpacity(0.1);
+                  return titleBoxBcgColor.withOpacity(0.1);
                 return theme_4unselectedColor; // Defer to the widget's default.
               },
             ),
@@ -142,7 +151,7 @@ final themeLight = ThemeData(
     ),
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-            overlayColor: MaterialStateProperty.all(theme_4MainBcgColor.withOpacity(0.1))
+            overlayColor: MaterialStateProperty.all(mainBcgColor.withOpacity(0.1))
         )
     ),
 
@@ -160,15 +169,15 @@ final themeLight = ThemeData(
           //side: BorderSide(color: Theme.of(context).disabledColor, width: 0.5),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-      color: theme_4TitleBoxBcgColor,//theme_4TitleBoxBcgColor
+      color: titleBoxBcgColor,//theme_4TitleBoxBcgColor
     ),
     sliderTheme: SliderThemeData(
       trackShape: RectangularSliderTrackShape(),
       trackHeight: 2,
       activeTrackColor:theme_4indicatorColor,
       inactiveTrackColor: theme_4unselectedColor,
-      thumbColor: theme_4TitleBoxBcgColor,
-      overlayColor: theme_4TitleBoxBcgColor.withOpacity(0.3),
+      thumbColor: titleBoxBcgColor,
+      overlayColor: titleBoxBcgColor.withOpacity(0.3),
       thumbShape:
       const RoundSliderThumbShape(enabledThumbRadius: 10),
       overlayShape: RoundSliderOverlayShape(
@@ -234,7 +243,7 @@ final themeLight = ThemeData(
       )
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: theme_4TitleBoxBcgColor,
+      backgroundColor: titleBoxBcgColor,
 
       selectedIconTheme: const IconThemeData(
         size: 18.0,
@@ -277,7 +286,7 @@ final themeLight = ThemeData(
               fontSize: 12,
               fontWeight: FontWeight.w400),
         ),
-        backgroundColor: theme_4MainBcgColor,
+        backgroundColor: mainBcgColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
     inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
