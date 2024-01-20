@@ -122,6 +122,14 @@ final themeLight = ThemeData(
               color: titleBoxBcgColor,
               fontWeight: FontWeight.bold,
               overflow: TextOverflow.ellipsis)),
+      titleLarge: GoogleFonts.exo2(
+        textStyle: const TextStyle(
+            fontSize: 18,
+            color: baseTextColor ,
+            fontWeight: FontWeight.bold,
+            decoration: TextDecoration.none,
+            overflow: TextOverflow.ellipsis),
+      ),
     ),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(

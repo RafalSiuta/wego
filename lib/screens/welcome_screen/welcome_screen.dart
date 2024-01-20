@@ -40,16 +40,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     var data = welcomeProvider.userDataCalendar[itemIndex];
                     return WelcomeCard(
                               title: data.title,
+                              subtitle: '${4} ${data.subtitle}:',
                               value: data.progressValue,
                               imagePath: data.imagePath,
+                              category: data.category,
                             );
                   },
                   options: CarouselOptions(
                       height: MediaQuery.of(context).size.height,
                       aspectRatio: 2/6,
-                      viewportFraction: 0.65,
+                      viewportFraction: 0.7,
                       initialPage: welcomeProvider.currentPage,
-                      enableInfiniteScroll: true,
+                      enableInfiniteScroll: false,
                       reverse: false,
                       autoPlay: false,
                       autoPlayInterval: Duration(seconds: 3),
@@ -114,6 +116,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                         itemCount: logic.numbersListCounter,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
                         itemBuilder: (context,index){
                       final listData = logic.mainNumbersList[index];
                       return FitCardSmall(data: listData);

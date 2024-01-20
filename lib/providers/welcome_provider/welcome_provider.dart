@@ -1,8 +1,7 @@
 import 'dart:collection';
-
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
-
+import 'package:wego/utils/constans/prefs_keys.dart';
 import '../../model/header_model/header_model.dart';
 import '../../model/user_calendar_model/user_calendar_model.dart';
 
@@ -20,21 +19,32 @@ class WelcomeProvider extends ChangeNotifier{
 
   final List<UserCalendarModel> _userData = [
     UserCalendarModel(
-        title: 'Workout',
+        title: 'Back workout',
+        subtitle: "Exercises",
+        category: workoutCategory,
         imagePath: 'images/workout_dude.png',
         progressValue: 0.2
     ),
     UserCalendarModel(
-        title: 'Meals',
+        title: 'High calories',
+        subtitle: "Meals",
+        category: mealCategory,
         imagePath: 'images/food_1.png',
+        date: DateTime.now(),
         progressValue: 0.7),
     UserCalendarModel(
-        title: 'Drinks',
-        imagePath: 'images/workout_dude.png',
+        title: 'High hydration',
+        subtitle: "Drinks",
+        category: drinkCategory,
+        imagePath: 'images/drink_1.png',
+        date: DateTime.now(),
         progressValue: 0.8),
     UserCalendarModel(
         title: 'Supplements',
-        imagePath: 'images/workout_dude.png',
+        subtitle: "Doses",
+        category: supplementCategory,
+        imagePath: 'images/supl_1.png',
+        date: DateTime.now(),
         progressValue: 0.4),
   ];
 

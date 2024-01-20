@@ -32,22 +32,27 @@ class CalendarProvider extends ChangeNotifier {
   Map<DateTime, List<UserCalendarModel>> tasks = {};
   //todo temp dummy data:
   List<UserCalendarModel> _taskList = [
+
     UserCalendarModel(
         title: 'Workout',
+        category: workoutCategory,
         imagePath: 'images/workout_dude.png',
         progressValue: 0.2
     ),
     UserCalendarModel(
         title: 'Meals',
+        category: mealCategory,
         imagePath: 'images/food_1.png',
         progressValue: 0.7),
     UserCalendarModel(
         title: 'Drinks',
-        imagePath: 'images/workout_dude.png',
+        category: drinkCategory,
+        imagePath: 'images/drink_1.png',
         progressValue: 0.8),
     UserCalendarModel(
         title: 'Supplements',
-        imagePath: 'images/workout_dude.png',
+        category: supplementCategory,
+        imagePath: 'images/supl_1.png',
         progressValue: 0.4),
   ];
   CalendarFormat format = CalendarFormat.month;
