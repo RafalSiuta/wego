@@ -9,7 +9,11 @@ import '../../providers/logic_provider/logic_provider.dart';
 import '../../providers/welcome_provider/welcome_provider.dart';
 import '../../widgets/cards/welcome_card.dart';
 import '../../widgets/carousel/indicators.dart';
+import '../../widgets/headers/info_text.dart';
 import '../../widgets/headers/widget_header.dart';
+import '../../widgets/responsive/list_builder.dart';
+import '../creator_screen/task_creator.dart';
+import '../stats_screen/stats_subscreens/details_calc_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -34,16 +38,30 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               DateHeader(),
               Expanded(
                 child: CarouselSlider.builder(
-                  itemCount: welcomeProvider.userDataCalendarListCounter,
+                  itemCount: welcomeProvider.calendarProvider.taskListCounter,
                   carouselController: welcomeProvider.carouselController,
                   itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
-                    var data = welcomeProvider.userDataCalendar[itemIndex];
+                    var data = welcomeProvider.calendarProvider.taskList[itemIndex];
                     return WelcomeCard(
                               title: data.title,
                               subtitle: '${4} ${data.subtitle}:',
                               value: data.progressValue,
                               imagePath: data.imagePath,
                               category: data.category,
+                      onTap:(){
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data,),
+                            transitionDuration: Duration(milliseconds: 300),
+                            transitionsBuilder:
+                                (context, animation, secondaryAnimation, child) {
+                              var scale = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+                                  parent: animation, curve: Curves.easeIn));
+                              return ScaleTransition(
+                                  alignment: Alignment.center, scale: scale, child: child);
+                            },
+                          ),);
+                      }
                             );
                   },
                   options: CarouselOptions(
@@ -76,8 +94,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       onPressed: welcomeProvider.goToPrevious
                   ),
                   SliderIndicators(
-                    items: welcomeProvider.userDataCalendar,
-                    itemCount: welcomeProvider.userDataCalendarListCounter,
+                    items: welcomeProvider.calendarProvider.taskList,
+                    itemCount: welcomeProvider.calendarProvider.taskListCounter,
                     mapIndicators: (i, url) {
                       return Container(
                         margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
@@ -102,52 +120,48 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  WidgetHeader(
-                    title: "FitNumbers",
-                    fontSize: 18,
-                    padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: fontSize),
+                  InfoText(
+                    title: 'Body calculations',
+                    padding: EdgeInsets.only(left: 12.0, ),
                   ),
                   Divider(indent: fontSize, endIndent: fontSize,),
                   //todo add categories to sort list items
                   Container(
                     margin: EdgeInsets.all(8.0),
 
-                    height: MediaQuery.of(context).size.height / 6,
-                    child: ListView.builder(
+                    height: MediaQuery.of(context).size.height / 5.7,
+                    child: ListBuilder(
+                      padding: EdgeInsets.zero,
                       scrollDirection: Axis.horizontal,
                         itemCount: logic.numbersListCounter,
-                        physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics()),
+                        // physics: const BouncingScrollPhysics(
+                        //     parent: AlwaysScrollableScrollPhysics()),
                         itemBuilder: (context,index){
                       final listData = logic.mainNumbersList[index];
-                      return FitCardSmall(data: listData);
-                          // AspectRatio(
-                          //   aspectRatio: 1,
-                          //   child: Card(
-                          //     margin: EdgeInsets.all(5.0),
-                          //     child: Padding(
-                          //       padding: const EdgeInsets.all(8.0),
-                          //       child: Column(
-                          //         mainAxisAlignment: MainAxisAlignment.start,
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           Text('${listData.shortTitle}:', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
-                          //           RichText(text: TextSpan(
-                          //               text: '${listData.value!.toStringAsFixed(2)} ',
-                          //               style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: listData.infoColor, fontSize: fontSize),
-                          //               children: <TextSpan>[
-                          //                 TextSpan(
-                          //                   text: listData.unit,
-                          //                   style: Theme.of(context).textTheme.headlineMedium!.copyWith( fontSize: fontSize),
-                          //                 )
-                          //               ]
-                          //           )),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // );
-                    }),
+                      return GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation, secondaryAnimation) => DetailCalcScreen(
+                                  data: listData,
+                                  heroTag: '${listData.id}',
+                                ),
+                                transitionDuration: Duration(milliseconds: 300),
+                                transitionsBuilder:
+                                    (context, animation, secondaryAnimation, child) {
+                                  var scale = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+                                      parent: animation, curve: Curves.easeIn));
+                                  return ScaleTransition(
+                                      alignment: Alignment.center, scale: scale, child: child);
+                                },
+                              ),);
+                          },
+                          child: FitCardSmall(data: listData));
+                    },
+                    //   separatorBuilder: (context, index){
+                    //     return SizedBox(width: 1,);
+                    // }
+                    ),
                   ),
                 ],
               )

@@ -1,15 +1,18 @@
 import 'package:wego/utils/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/dimensions/size_info.dart';
+
 class InfoText extends StatelessWidget {
-  const InfoText({required this.title,required this.padding, this.fontSize = 12.0, super.key});
+  const InfoText({required this.title,required this.padding, super.key});
 
   final String? title;
   final EdgeInsets? padding;
-  final double fontSize;
+ // final double fontSize;
 
   @override
   Widget build(BuildContext context) {
+    var subtitleSize = SizeInfo.headerSubtitleSize;
     return Padding(
       padding: padding!,
       child: Row(
@@ -17,8 +20,8 @@ class InfoText extends StatelessWidget {
         children: [
           Text(
             title!.capitalizeFirstLetter(),
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                fontSize: fontSize ),
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                fontSize: subtitleSize ),
           ),
           IconButton(onPressed: (){}, icon: Icon(Icons.info))
         ],

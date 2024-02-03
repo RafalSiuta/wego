@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../providers/logic_provider/logic_provider.dart';
 import '../../../providers/profile_provider/profile_provider.dart';
 import '../../../providers/settings_provider/settings_provider.dart';
+import '../../../widgets/cards/fit_card.dart';
+import '../../../widgets/headers/info_text.dart';
 import '../../../widgets/headers/widget_header.dart';
 import 'details_calc_screen.dart';
 
@@ -18,6 +20,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
   @override
   Widget build(BuildContext context) {
     double fontSize = 12.0;
+    double sidePadding = 12.0;
     return Consumer3<ProfileProvider, LogicProvider, SettingsProvider>(
         builder: (context, profile, logic, settings, child){
 
@@ -25,7 +28,11 @@ class _CalculationScreenState extends State<CalculationScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20,),
+          InfoText(
+            title: 'Calculations',
+            padding: EdgeInsets.only(left: sidePadding, ),
+          ),
+         // SizedBox(height: 20,),
           // WidgetHeader(
           //   title: "calculations",
           //   fontSize: 15,
@@ -53,8 +60,9 @@ class _CalculationScreenState extends State<CalculationScreen> {
           child: ScaleAnimation(
           scale: 0.9,
           child: FadeInAnimation(
-          child: GestureDetector(
-            onTap: (){
+          child: FitCardLarge(
+            data: listData,
+            openDetailPage: (){
               Navigator.of(context).push(
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) => DetailCalcScreen(
@@ -71,29 +79,6 @@ class _CalculationScreenState extends State<CalculationScreen> {
                   },
                 ),);
             },
-            child: Card(
-                child:
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('${listData.title}:', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
-                    RichText(text: TextSpan(
-                      text: '${listData.value!.toStringAsFixed(2)} ',
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: listData.infoColor, fontSize: fontSize),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: listData.unit,
-                          style: Theme.of(context).textTheme.headlineMedium!.copyWith( fontSize: fontSize),
-                        )
-                      ]
-                    )),
-                    Text(listData.description!, style: Theme.of(context).textTheme.headlineMedium!.copyWith( fontSize: fontSize),),
-                  ],
-                ),
-              )),
           )),
           ),
           );

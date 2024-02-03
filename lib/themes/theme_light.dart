@@ -65,6 +65,7 @@ final themeLight = ThemeData(
           textStyle: const TextStyle(
             color: baseTextColor ,
             fontSize: 32,
+            fontWeight: FontWeight.bold
           )),
       /// list title //headline 3 // calendar header/ header secondary date
       headlineMedium: GoogleFonts.exo2(
@@ -193,10 +194,10 @@ final themeLight = ThemeData(
     ),
     navigationRailTheme: NavigationRailThemeData(
       labelType: NavigationRailLabelType.all,
-      //useIndicator: true,
+      useIndicator: true,
 
       indicatorColor: Colors.transparent,
-      groupAlignment: .0,
+      groupAlignment: -.5,
       selectedIconTheme: const IconThemeData(
         color: theme_4indicatorColor,
 
@@ -204,17 +205,17 @@ final themeLight = ThemeData(
       unselectedIconTheme: const IconThemeData(color: theme_4unselectedColor,),
       selectedLabelTextStyle: GoogleFonts.exo2(
         textStyle: const TextStyle(
-            color: baseTextColor , fontSize: 12.0, fontWeight: FontWeight.w900),
+            color: baseTextColor , fontSize: 15.0, fontWeight: FontWeight.bold),
       ),
       unselectedLabelTextStyle: GoogleFonts.exo2(
           textStyle: const TextStyle(
               color: theme_4unselectedColor,
-              fontSize: 10.0,
+              fontSize: 14.0,
               fontWeight: FontWeight.w500
           )),
     ),
    // actionIconTheme: const ActionIconThemeData(),//const IconThemeData(color: theme_4noteCardColor, size: 18),
-    iconTheme: const IconThemeData(color: theme_4indicatorColor, size: 18),
+    iconTheme: const IconThemeData(color: theme_4indicatorColor, size: 15),
     switchTheme: SwitchThemeData(
 
         thumbColor: MaterialStateProperty.resolveWith(

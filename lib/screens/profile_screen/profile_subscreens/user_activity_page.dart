@@ -18,15 +18,21 @@ class UserActivityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const tileSize = 100.0;
+    const layoutPadding =  EdgeInsets.only(left:12, right: 12.0, top: 12.0, bottom: 12.0);
+    const headerPadding =  EdgeInsets.only(left: 12, right: .0, top: 12.0, bottom: 12.0);
     return Consumer<ProfileProvider>(
         builder: (context, profileProvider, child){
           return
             Column(
               children: [
-                const SizedBox(height: 20,),
-                WidgetHeader(
+                //const SizedBox(height: 20,),
+                // WidgetHeader(
+                //   title: "activity",
+                //   padding: layoutPadding,
+                // ),
+                InfoText(
                   title: "activity",
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  padding: headerPadding,
                 ),
                 ActivityCarousel(),
                // SizedBox(height: 20,),
@@ -34,13 +40,16 @@ class UserActivityPage extends StatelessWidget {
                   indent: 70,
                   endIndent: 70,
                 ),
+
                 InfoText(
                   title: "4-6 max repetition lift",
-                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                  padding: headerPadding,
                 ),
+
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: layoutPadding,
                   child: ColumnBuilder(
+
                     itemCount: profileProvider.activityPowerData.activityPowerListCounter,
                     itemBuilder: (context, index) {
                       var data = profileProvider.userPowerActivityList[index];
@@ -62,9 +71,6 @@ class UserActivityPage extends StatelessWidget {
                         onChangeEnd: (newValue) {},
                       );
                     },
-          //           separatorBuilder: (context, item){
-          // return  const SizedBox(height: 5,);
-          // },
                   ),
                 ),
                 const SizedBox(height: 10,),

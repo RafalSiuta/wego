@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/calendar_provider/calendar_provider.dart';
+import '../../screens/creator_screen/task_creator.dart';
 import '../cards/fit_card.dart';
 import '../cards/small_calendar_card.dart';
 import '../cards/welcome_card.dart';
 import '../headers/empty_list.dart';
+import '../headers/info_text.dart';
 import '../headers/widget_header.dart';
 
 class TaskList extends StatelessWidget {
@@ -27,18 +28,17 @@ class TaskList extends StatelessWidget {
         );
       }else {
         return Padding(
-          padding: EdgeInsets.all(sidePadding),
+          padding: EdgeInsets.only(top: sidePadding, bottom: sidePadding, left: 0),
           child: Column(
             children: [
-              WidgetHeader(
+              InfoText(
                 title: 'You have ${calendarProvider.taskListCounter} task${calendarProvider.taskListCounter > 1 ? 's' : ""}',
-                fontSize: 18,
-                padding: EdgeInsets.symmetric(vertical: .0, horizontal: sidePadding),
+                padding: EdgeInsets.only(left: sidePadding, ),
               ),
               Divider(indent: sidePadding, endIndent: sidePadding,),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: sidePadding),
-                height: MediaQuery.of(context).size.height / 5,
+                margin: EdgeInsets.only(left: sidePadding),
+                height: MediaQuery.of(context).size.height / 4.5,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(
@@ -59,6 +59,20 @@ class TaskList extends StatelessWidget {
                                   value: data.progressValue,
                                   imagePath: data.imagePath,
                                   category: data.category,
+                                  openDetails: (){
+                                    Navigator.of(context).push(
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data,),
+                                        transitionDuration: Duration(milliseconds: 300),
+                                        transitionsBuilder:
+                                            (context, animation, secondaryAnimation, child) {
+                                          var scale = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+                                              parent: animation, curve: Curves.easeIn));
+                                          return ScaleTransition(
+                                              alignment: Alignment.center, scale: scale, child: child);
+                                        },
+                                      ),);
+                                  }
 
                                 ),
                                 // AspectRatio(
@@ -85,44 +99,6 @@ class TaskList extends StatelessWidget {
 
                     }),
               ),
-              // AnimationLimiter(
-              //   child: GridView.count(
-              //       physics: const BouncingScrollPhysics(
-              //           parent: AlwaysScrollableScrollPhysics()),
-              //       scrollDirection:Axis.vertical,
-              //       crossAxisSpacing: 0.0,
-              //       shrinkWrap: true,
-              //       mainAxisSpacing: 0.0,
-              //       crossAxisCount: columnCount,
-              //       childAspectRatio: 2.3 / 3,
-              //       children: List.generate(calendarProvider.taskListCounter, (index) {
-              //         final tasks = calendarProvider.taskList[index];
-              //         return AnimationConfiguration.staggeredGrid(
-              //           columnCount: columnCount,
-              //           position: index,
-              //           duration: const Duration(milliseconds: 375),
-              //           child: ScaleAnimation(
-              //             scale: 0.5,
-              //             child: FadeInAnimation(
-              //                 child: Card(
-              //                   child: Center(
-              //                     child: Text('${tasks.title}'),
-              //                   ),
-              //                   //todo direct to creator page
-              //                   // await Navigator.push(
-              //                   // context,
-              //                   // CustomPageRoute(
-              //                   //     child: NoteCreator(
-              //                   //       newNote: list,
-              //                   //       editEnable: false,
-              //                   //     ),
-              //                   //     direction: AxisDirection.up));
-              //                 )
-              //             ),
-              //           ),
-              //         );
-              //       })),
-              // ),
             ],
           )
         );

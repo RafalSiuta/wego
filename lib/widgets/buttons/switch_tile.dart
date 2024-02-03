@@ -9,15 +9,15 @@ class SwitchTile extends StatelessWidget {
     required this.textValue1,
     required this.textValue2,
     this.fontSize= 12.0,
-    this.paddingHorizontal = 20.0,
-    this.paddingVertical = 16.0,
+    this.padding = const EdgeInsets.only(left:12.0, right: 12.0, top: 16.0, bottom: 16.0),
     super.key});
 
   final bool? switchValue;
   final Function(bool)? onChanged;
   final String? textValue1;
   final String? textValue2;
-  final double fontSize, paddingHorizontal, paddingVertical;
+  final double fontSize;
+  final EdgeInsets padding;
 
 
   @override
@@ -28,7 +28,7 @@ class SwitchTile extends StatelessWidget {
     var unselectedText = theme.textTheme.displaySmall!.copyWith(
       fontSize: fontSize,height: 1.5);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
+      padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,

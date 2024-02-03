@@ -6,12 +6,14 @@ import 'package:flutter/rendering.dart';
 
 class LargeSliverHeader extends SliverPersistentHeaderDelegate {
 
-  LargeSliverHeader({this.minHeight = 50,this.maxHeight = 60, this.padding, this.fontSize = 12,required this.title});
+  LargeSliverHeader({this.minHeight = 50,this.maxHeight = 60,
+    this.padding = const EdgeInsets.only(left:12.0, right: 12.0, top: 16.0, bottom: 16.0),
+    this.fontSize = 15,required this.title});
 
   final double? minHeight;
   final double? maxHeight;
   final String? title;
-  final EdgeInsets? padding;
+  final EdgeInsets padding;
   final double fontSize;
 
   @override
@@ -30,10 +32,11 @@ class LargeSliverHeader extends SliverPersistentHeaderDelegate {
             children: [
               Text(
                 title!.capitalizeFirstLetter(),
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     fontSize: fontSize ),
               ),
               IconButton(
+                alignment: Alignment.centerRight,
                 padding: EdgeInsets.zero,
                 icon: Icon(Icons.info_outline),
                 onPressed: (){},

@@ -30,7 +30,7 @@ class DetailCalcScreen extends StatelessWidget {
             Image(
                 width: MediaQuery.of(context).size.width - 24,
                 fit: BoxFit.contain,
-                image: AssetImage('images/workout_dude.png')),
+                image: AssetImage(data!.imagePath!)),
         Text('${data!.title}:', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
         RichText(text: TextSpan(
         text: '${data!.value!.toStringAsFixed(2)} ',

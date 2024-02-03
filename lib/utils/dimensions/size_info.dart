@@ -20,7 +20,7 @@ class SizeInfo {
 
   ///general - repeat in other widgets:
   static double headerTitleSize = 32;
-  static double headerSubtitleSize = 18;
+  static double headerSubtitleSize = 15;
   static double verticalHeaderPadding = 5.0;
 
   static double helpTextSize = 8.0;

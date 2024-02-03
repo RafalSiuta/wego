@@ -3,7 +3,7 @@ import 'package:wego/utils/extensions/string_extension.dart';
 
 
 class WidgetHeader extends StatelessWidget {
-  const WidgetHeader({required this.title,required this.padding, this.fontSize = 12.0, super.key});
+  const WidgetHeader({required this.title,required this.padding, this.fontSize = 18.0, super.key});
 
   final String? title;
   final EdgeInsets? padding;
@@ -18,7 +18,7 @@ class WidgetHeader extends StatelessWidget {
         children: [
           Text(
             title!.capitalizeFirstLetter(),
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                 fontSize: fontSize ),
           ),
         ],

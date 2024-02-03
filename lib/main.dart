@@ -59,8 +59,10 @@ class WeGo extends StatelessWidget {
           create: (context) => CalendarProvider(Provider.of<SettingsProvider>(context, listen: false)),
           update: (context, SettingsProvider settings, calendar) => CalendarProvider(settings),
         ),
-        ChangeNotifierProvider(
-          create: (context) => WelcomeProvider(),
+        ChangeNotifierProxyProvider(
+          //create: (context) => WelcomeProvider(),
+          create: (context) => WelcomeProvider(Provider.of<CalendarProvider>(context, listen: false)),
+          update: (context, CalendarProvider calendar, welcome) => WelcomeProvider(calendar),
         ),
       ],
       child: Consumer<SettingsProvider>(

@@ -4,6 +4,7 @@ import '../../../providers/profile_provider/profile_provider.dart';
 import '../../../widgets/buttons/radio_tile.dart';
 import '../../../widgets/buttons/large_switch_tile.dart';
 import '../../../widgets/dividers/list_divider.dart';
+import '../../../widgets/headers/info_text.dart';
 import '../../../widgets/headers/widget_header.dart';
 import '../../../widgets/responsive/column_row_builder.dart';
 import '../../../widgets/seekbar/seekbar.dart';
@@ -16,16 +17,23 @@ class UserNutritionPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Consumer<ProfileProvider>(
+
         builder: (context, profileProvider, child){
+          const layoutPadding =  EdgeInsets.only(left:12, right: 12.0, top: 12.0, bottom: 12.0);
+          const headerPadding =  EdgeInsets.only(left: 12, right: .0, top: 12.0, bottom: 12.0);
           return
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 20,),
-                WidgetHeader(
+               // const SizedBox(height: 20,),
+               //  WidgetHeader(
+               //    title: "macronutrients",
+               //    padding: layoutPadding,
+               //  ),
+                InfoText(
                   title: "macronutrients",
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  padding: headerPadding,
                 ),
                 LargeSwitchTile(
                   title1: "default",
@@ -42,7 +50,7 @@ class UserNutritionPage extends StatelessWidget {
                   child: Visibility(
                     visible: profileProvider.isCustomNutrition == true ? true : false,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                      padding: layoutPadding,
                       child: ColumnBuilder(
                         itemCount: profileProvider.userNutritionData.customNutritionListCounter,
                         itemBuilder: (context, index) {
@@ -81,6 +89,7 @@ class UserNutritionPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var data = profileProvider.userNutritionDefaultList[index];
                         return  RadioTile(
+                          padding: layoutPadding,
                           title: data.name,
                           description: data.description,
                           value: index,

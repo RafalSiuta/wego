@@ -162,27 +162,6 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                             .elementAt(index);
                       })),
             ),
-            // SideNav(
-            //   leading: IconButton(
-            //     splashColor: Colors.transparent,
-            //     icon: Icon(
-            //       Icons.settings
-            //       ,
-            //       size: leadingIconSize,
-            //     ),
-            //     onPressed: () async {
-            //       //await Navigator.pushNamed(context, '/settings');
-            //     },
-            //   ),
-            //
-            //   itemCount: _pages.length,
-            //   titles: _pages.map((e) => e.title!).toList(),
-            //   selectedItem: _currentPage,
-            //   onTap: (int sel) {
-            //     _onPageChange(sel);
-            //     hideTrigger();
-            //   },
-            // ),
           ],
         ),
       ),

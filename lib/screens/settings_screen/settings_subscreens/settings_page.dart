@@ -14,6 +14,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tilePadding = 5.0;
+    const layoutPadding =  EdgeInsets.only(left:12.0, right: 12.0, top: 5.0, bottom: 5.0);
     return Consumer<SettingsProvider>(
       builder: (context, settingsProvider, child){
         return Container(
@@ -24,7 +25,7 @@ class SettingsPage extends StatelessWidget {
                 pinned: true,
                 delegate:  LargeSliverHeader(
                   title: "theme mode",
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                  //padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 ),),
               SliverToBoxAdapter(
                   child: SwitchTile(
@@ -43,7 +44,7 @@ class SettingsPage extends StatelessWidget {
                 pinned: true,
                 delegate:  LargeSliverHeader(
                   title: "units",
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                 // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 ),),
               SliverToBoxAdapter(
                   child: SwitchTile(
@@ -58,73 +59,73 @@ class SettingsPage extends StatelessWidget {
               const SliverToBoxAdapter(
                 child: ListDivider(),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate:  LargeSliverHeader(
-                  title: "nutrition",
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                ),),
-
-              SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      childCount: settingsProvider.nutritionSettingsList.nutritionListCounter,
-                          (context,index){
-                        var data = settingsProvider.nutritionSettings[index];
-                        return
-                          SwitchTile(
-                            textValue1: data.firstOption,
-                            textValue2: data.secondOption,
-                            switchValue: data.value,
-                            onChanged: (newVal){
-                              settingsProvider.onNutritionOption(newVal, index);
-                            },
-                          );
-                        //   RadioTile(
-                        //     title: "test ${index}",
-                        //     description: "description ${index}",
-                        //     value: index,
-                        //     groupValue: 2,
-                        //     paddingVertical: tilePadding,
-                        //     onChoice: (newVal){
-                        //     }
-                        // );
-                      })
-              ),
-              const SliverToBoxAdapter(
-                child: ListDivider(),
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: LargeSliverHeader(
-                  title: "Body weight",
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                ),),
-
-              SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      childCount: settingsProvider.weightOptionList.weightCountingListCounter,
-                          (context,index){
-                        var data = settingsProvider.weightSettings[index];
-                        return RadioTile(
-                            title: data.firstOption,
-                            description: data.secondOption,
-                            value: index,
-                            groupValue: settingsProvider.weightChoice,
-                            paddingVertical: tilePadding,
-                            onChoice: (newVal){
-                              settingsProvider.onBodyWeightOption(newVal);
-                            }
-                        );
-                      })
-              ),
-              const SliverToBoxAdapter(
-                child: ListDivider(),
-              ),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate:  LargeSliverHeader(
+              //     title: "nutrition",
+              //     //padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              //   ),),
+              //
+              // SliverList(
+              //     delegate: SliverChildBuilderDelegate(
+              //         childCount: settingsProvider.nutritionSettingsList.nutritionListCounter,
+              //             (context,index){
+              //           var data = settingsProvider.nutritionSettings[index];
+              //           return
+              //             SwitchTile(
+              //               textValue1: data.firstOption,
+              //               textValue2: data.secondOption,
+              //               switchValue: data.value,
+              //               onChanged: (newVal){
+              //                 settingsProvider.onNutritionOption(newVal, index);
+              //               },
+              //             );
+              //           //   RadioTile(
+              //           //     title: "test ${index}",
+              //           //     description: "description ${index}",
+              //           //     value: index,
+              //           //     groupValue: 2,
+              //           //     paddingVertical: tilePadding,
+              //           //     onChoice: (newVal){
+              //           //     }
+              //           // );
+              //         })
+              // ),
+              // const SliverToBoxAdapter(
+              //   child: ListDivider(),
+              // ),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate: LargeSliverHeader(
+              //     title: "Body weight",
+              //    // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              //   ),),
+              //
+              // SliverList(
+              //     delegate: SliverChildBuilderDelegate(
+              //         childCount: settingsProvider.weightOptionList.weightCountingListCounter,
+              //             (context,index){
+              //           var data = settingsProvider.weightSettings[index];
+              //           return RadioTile(
+              //               title: data.firstOption,
+              //               description: data.secondOption,
+              //               value: index,
+              //               groupValue: settingsProvider.weightChoice,
+              //               padding: layoutPadding,
+              //               onChoice: (newVal){
+              //                 settingsProvider.onBodyWeightOption(newVal);
+              //               }
+              //           );
+              //         })
+              // ),
+              // const SliverToBoxAdapter(
+              //   child: ListDivider(),
+              // ),
               SliverPersistentHeader(
                 pinned: true,
                 delegate:  LargeSliverHeader(
                   title: "Store data",
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                 // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                 ),),
 
               SliverList(
@@ -136,7 +137,7 @@ class SettingsPage extends StatelessWidget {
                             description: "description ${index}",
                             value: index,
                             groupValue: 2,
-                            paddingVertical: tilePadding,
+                            padding:layoutPadding,
                             onChoice: (newVal){
                             }
                         );

@@ -35,14 +35,12 @@ class _TabNavState extends State<TabNav> with SingleTickerProviderStateMixin{
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-          child: TabBar(
+
+        TabBar(
             indicatorWeight: .5,
-              dividerColor: Theme.of(context).tabBarTheme.dividerColor,
-              controller: _tabController,
-              tabs: tabs!),
-        ),
+            dividerColor: Theme.of(context).tabBarTheme.dividerColor,
+            controller: _tabController,
+            tabs: tabs!),
         Expanded(
           child: TabBarView(
             controller: _tabController,
@@ -52,6 +50,7 @@ class _TabNavState extends State<TabNav> with SingleTickerProviderStateMixin{
               // parent: BouncingScrollPhysics()),
           ),
         ),
+
       ],
     );
   }

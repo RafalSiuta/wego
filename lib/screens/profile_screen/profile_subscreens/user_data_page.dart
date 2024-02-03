@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:wego/providers/profile_provider/profile_provider.dart';
 import '../../../model/choice_model/choice_model.dart';
 import '../../../widgets/buttons/tile_button.dart';
+import '../../../widgets/headers/info_text.dart';
 import '../../../widgets/headers/widget_header.dart';
 import '../../../widgets/responsive/list_builder.dart';
 
@@ -16,7 +17,8 @@ class UserDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const tileSize = 100.0;
     const fontSize  = 12.0;
-
+    const layoutPadding =  EdgeInsets.only(left: 12, right: 12.0, top: 12.0, bottom: 12.0);
+    const headerPadding =  EdgeInsets.only(left: 12, right: .0, top: 12.0, bottom: 12.0);
     return Consumer<ProfileProvider>(
       builder: (context, profileProvider, child){
 
@@ -24,10 +26,14 @@ class UserDataPage extends StatelessWidget {
       return
         Column(
           children: [
-            SizedBox(height: 20,),
-            WidgetHeader(
+           // SizedBox(height: 20,),
+           //  WidgetHeader(
+           //    title: "gender",
+           //    padding: layoutPadding,
+           //  ),
+            InfoText(
               title: "gender",
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              padding: headerPadding,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -64,7 +70,12 @@ class UserDataPage extends StatelessWidget {
               indent: 70,
             endIndent: 70,
             ),
-            ListBuilder(
+            InfoText(
+              title: "body measurement",
+              padding: headerPadding,
+            ),
+            ListSeparated(
+              padding: layoutPadding,
               itemCount: profileProvider.usrData.userDataListCounter,
               itemBuilder:  (context, index){
                 final data = profileProvider.userDataList[index];

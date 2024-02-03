@@ -4,16 +4,17 @@ import '../shapes/card_shape.dart';
 
 
 class WelcomeCard extends StatelessWidget {
-  const WelcomeCard({this.imagePath = '', required this.title, required this.subtitle, required this.value, this.category, super.key});
+  const WelcomeCard({this.imagePath = '',required this.onTap, required this.title, required this.subtitle, required this.value, this.category, super.key});
   final String? imagePath;
   final String? title;
   final String? subtitle;
   final double? value;
   final String? category;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    double fontSize = 12.0;
+    double fontSize = 10.0;
     double largeFontSize = 15.0;
     var bcgColor;
     if(category == workoutCategory){
@@ -145,7 +146,7 @@ class WelcomeCard extends StatelessWidget {
                                   IconButton(
                                     padding: EdgeInsets.zero,
                                     alignment: Alignment.centerRight,
-                                      onPressed: (){},
+                                      onPressed: onTap,
                                       icon: Icon(
                                           Icons.info
                                       ))
@@ -201,7 +202,7 @@ class WelcomeCard extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                                   child: LinearProgressIndicator(
                                     value: value,
-                                    semanticsLabel: 'Progrss',
+                                    semanticsLabel: 'Progress',
                                   ),
                                 ),
                               ],

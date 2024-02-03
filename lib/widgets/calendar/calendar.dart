@@ -7,8 +7,11 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wego/model/user_calendar_model/user_calendar_model.dart';
 import 'package:wego/providers/settings_provider/settings_provider.dart';
+import 'package:wego/widgets/responsive/column_row_builder.dart';
 import '../../../providers/calendar_provider/calendar_provider.dart';
 import '../../../utils/custom_page_route/custom_page_route.dart';
+import '../../utils/constans/prefs_keys.dart';
+import '../../utils/dimensions/size_info.dart';
 
 
 class Calendar extends StatelessWidget {
@@ -18,15 +21,15 @@ class Calendar extends StatelessWidget {
   Widget build(BuildContext context) {
     var rowHeight = 50.0;//SizeInfo.rowHeight;
     var calendarFontSize = 10.0;//SizeInfo.calendarDaySize;
-    var headerFontSize = 15.0;//SizeInfo.headerSubtitleSize;
+    var headerFontSize = SizeInfo.headerSubtitleSize;//15.0;//SizeInfo.headerSubtitleSize;
     var calendarButtonFontSize = 10.0;//SizeInfo.taskCardTitle;
     var chevronIconSize = 18.0;//SizeInfo.switchButtonIconSize;
-    var markerRadius = 18.0;//SizeInfo.calendarMarkerSize;
-    var markerFontSize = 8.0;//SizeInfo.calendarMarkerFontSize;
+    var markerRadius = 12.0;//SizeInfo.calendarMarkerSize;
+    var markerFontSize = 6.0;//SizeInfo.calendarMarkerFontSize;
     var cellMargin = 10.0;//SizeInfo.calendarCellMargin;
     return Consumer2<CalendarProvider, SettingsProvider>(builder: (context, calendarProvider, settingsProvider, child){
       return Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.only(right: 8.0),
         child: AnimationLimiter(
           child: TableCalendar<UserCalendarModel>(
             focusedDay: calendarProvider.focDay,
@@ -73,7 +76,7 @@ class Calendar extends StatelessWidget {
                             '${DateFormat('MMMM yy').format(date)} ',
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineMedium!
+                                .headlineLarge!
                                 .copyWith(fontSize: headerFontSize),
                           ),
                         );
@@ -139,24 +142,54 @@ class Calendar extends StatelessWidget {
               markerBuilder: (context, date, notes) {
                 return notes.isNotEmpty
                     ? Positioned(
-                    right: 1,
-                    bottom: 1,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context).indicatorColor,
-                      ),
-                      width: markerRadius,
-                      height: markerRadius,
-                      child: Center(
-                        child: Text('${notes.length}',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(fontSize: markerFontSize)),
-                      ),
-                    ))
+                    right: 1.5,
+                    bottom: 0.8,
+                    child: ColumnBuilder(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      itemCount: calendarProvider.categoryOrder.length,
+                      itemBuilder: (context, index) {
+                        var bcgColor;
+                        String category = calendarProvider.categoryOrder[index];
+                        int counter = calendarProvider.countItemsInCategory(notes, category);
+
+                        if (category == workoutCategory) {
+                          bcgColor = Color(0xFFF1BCD5);
+                        } else if (category == mealCategory) {
+                          bcgColor = Color(0xFFEDF0A5);
+                        } else if (category == drinkCategory) {
+                          bcgColor = Color(0xFFA0DCF1);
+                        } else if (category == supplementCategory) {
+                          bcgColor = Color(0xFF85DA96);
+                        } else {
+                          bcgColor = Theme.of(context).colorScheme.surface;
+                        }
+
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: bcgColor,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(index == 0 ? 5 : 0),
+                              bottomRight: Radius.circular(index == calendarProvider.categoryOrder.length - 1 ? 5 : 0),
+                            ),
+                          ),
+                          width: markerRadius,
+                          height: markerRadius,
+                          child: Center(
+                            child: Text(
+                              '$counter',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(fontSize: markerFontSize),
+                            ),
+                          ),
+                        );
+                      },
+                    )
+
+                )
                     : const Positioned(
                   right: 1,
                   bottom: 1,

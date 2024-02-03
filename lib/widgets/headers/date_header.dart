@@ -43,7 +43,7 @@ class DateHeader extends StatelessWidget {
                             text: '${homeProvider.date}',
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineMedium!
+                                .headlineLarge!
                                 .copyWith(fontSize: subtitleSize),
                           )
                         ]),

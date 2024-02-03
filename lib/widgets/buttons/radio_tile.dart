@@ -10,8 +10,7 @@ class RadioTile extends StatelessWidget {
     required this.title,
     required this.description,
     this.fontSize= 12.0,
-    this.paddingHorizontal = 20.0,
-    this.paddingVertical = 16.0,
+    this.padding ,
     super.key});
 
   final ValueChanged<int?>? onChoice;
@@ -19,7 +18,8 @@ class RadioTile extends StatelessWidget {
   final int? groupValue;
   final String? title;
   final String? description;
-  final double fontSize, paddingHorizontal, paddingVertical;
+  final double fontSize;
+  final EdgeInsets? padding;
 
 
   @override
@@ -30,7 +30,7 @@ class RadioTile extends StatelessWidget {
     var unselectedText = theme.textTheme.displaySmall!.copyWith(
       fontSize: fontSize,height: 1.5);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
+      padding: padding!,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +50,9 @@ class RadioTile extends StatelessWidget {
             ), overflow: TextOverflow.ellipsis,maxLines: 4,),
           ),
           const SizedBox(width: 10,),
-          Radio(value: value!, groupValue: groupValue!, onChanged: onChoice,),
+          Radio(
+
+            value: value!, groupValue: groupValue!, onChanged: onChoice,),
 
         ],
       ),
