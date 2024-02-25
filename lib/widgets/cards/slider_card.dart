@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
 
+import '../../utils/internationalization/app_localizations.dart';
+
 class SliderCard extends StatelessWidget {
   const SliderCard({required this.icon, required this.description, this.color = Colors.amber, super.key});
 
@@ -28,7 +30,11 @@ class SliderCard extends StatelessWidget {
               const SizedBox(height: 8.0,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Text(description!.capitalizeFirstLetter(), style: Theme.of(context).textTheme.displayMedium ,overflow: TextOverflow.ellipsis,),
+                child:Text(
+                  AppLocalizations.of(context)!.translate(description!).capitalizeFirstLetter(),
+                 // description!.capitalizeFirstLetter(),
+                  overflow:TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.displayMedium),
               )
             ],
           ),

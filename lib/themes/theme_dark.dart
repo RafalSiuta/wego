@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-const theme_4MainBcgColor = Color(0xFF1F1F1F);
+const theme_4MainBcgColor = Color(0xFF141221);
 const theme_4TitleBoxBcgColor = Colors.white;
 // const theme_4firstGradientColor = Color(0xFF00C3FF);
 // const theme_4middleGradientColor = Color(0xFF1B6BFF);

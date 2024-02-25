@@ -34,6 +34,7 @@ class TaskList extends StatelessWidget {
               InfoText(
                 title: 'You have ${calendarProvider.taskListCounter} task${calendarProvider.taskListCounter > 1 ? 's' : ""}',
                 padding: EdgeInsets.only(left: sidePadding, ),
+                isInfoIcon: false,
               ),
               Divider(indent: sidePadding, endIndent: sidePadding,),
               Container(
@@ -59,10 +60,11 @@ class TaskList extends StatelessWidget {
                                   value: data.progressValue,
                                   imagePath: data.imagePath,
                                   category: data.category,
+                                  heroTag: '${data.imagePath}$index${data.title}',
                                   openDetails: (){
                                     Navigator.of(context).push(
                                       PageRouteBuilder(
-                                        pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data,),
+                                        pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data,heroTag: '${data.imagePath}$index${data.title}',),
                                         transitionDuration: Duration(milliseconds: 300),
                                         transitionsBuilder:
                                             (context, animation, secondaryAnimation, child) {
@@ -75,23 +77,6 @@ class TaskList extends StatelessWidget {
                                   }
 
                                 ),
-                                // AspectRatio(
-                                //   aspectRatio: 1,
-                                //   child: Card(
-                                //     child: Center(
-                                //       child: Text('${data.title}'),
-                                //     ),
-                                //     //todo direct to creator page
-                                //     // await Navigator.push(
-                                //     // context,
-                                //     // CustomPageRoute(
-                                //     //     child: NoteCreator(
-                                //     //       newNote: list,
-                                //     //       editEnable: false,
-                                //     //     ),
-                                //     //     direction: AxisDirection.up));
-                                //   ),
-                                // )
                             ),
                           ),
                         ),

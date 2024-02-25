@@ -12,7 +12,7 @@ class SizeInfo {
   static int gridColumnCount = 2;
 
   ///padding / margins:
-  static double edgePadding = 8.0;
+  static double edgePadding = 12.0;
   static double menuTopMargin = 8.0;
 
   ///corner radius

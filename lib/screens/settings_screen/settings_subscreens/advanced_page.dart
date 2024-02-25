@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/settings_provider/settings_provider.dart';
+import '../../../utils/dimensions/size_info.dart';
 import '../../../widgets/buttons/radio_tile.dart';
 import '../../../widgets/buttons/switch_tile.dart';
 import '../../../widgets/dividers/list_divider.dart';
 import '../../../widgets/headers/sliver_header.dart';
+import '../../../widgets/headers/sliver_header_medium.dart';
 
 class AdvancedPage extends StatelessWidget {
   const AdvancedPage({super.key});
@@ -13,57 +15,18 @@ class AdvancedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tilePadding = 5.0;
-    const layoutPadding =  EdgeInsets.only(left:12.0, right: 12.0, top: 5.0, bottom: 5.0);
+    const layoutPadding =  EdgeInsets.only(left:12.0, right: 12.0, top: 10.0, bottom: 5.0);
+    var titleFontSize = SizeInfo.headerSubtitleSize;
     return Consumer<SettingsProvider>(
       builder: (context, settingsProvider, child){
         return Container(
           child: CustomScrollView(
             physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
-              // SliverPersistentHeader(
-              //   pinned: true,
-              //   delegate:  LargeSliverHeader(
-              //     title: "theme mode",
-              //     //padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              //   ),),
-              // SliverToBoxAdapter(
-              //     child: SwitchTile(
-              //       textValue1: "light theme",
-              //       textValue2:"dark theme",
-              //       switchValue: settingsProvider.currentTheme,
-              //       onChanged: (newVal){
-              //         settingsProvider.onThemeChange(newVal);
-              //       },
-              //     )
-              // ),
-              // const SliverToBoxAdapter(
-              //   child: ListDivider(),
-              // ),
-              // SliverPersistentHeader(
-              //   pinned: true,
-              //   delegate:  LargeSliverHeader(
-              //     title: "units",
-              //     // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              //   ),),
-              // SliverToBoxAdapter(
-              //     child: SwitchTile(
-              //       textValue1: "metric units",
-              //       textValue2:"imperial units",
-              //       switchValue: true,
-              //       onChanged: (newVal){
-              //
-              //       },
-              //     )
-              // ),
-              // const SliverToBoxAdapter(
-              //   child: ListDivider(),
-              // ),
               SliverPersistentHeader(
                 pinned: true,
-                delegate:  LargeSliverHeader(
-                  title: "nutrition",
-                  //padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                ),),
+                delegate: MediumSliverHeader(title: 'sets_macro_nutrients', fontSize: titleFontSize)
+                ,),
 
               SliverList(
                   delegate: SliverChildBuilderDelegate(
@@ -79,27 +42,21 @@ class AdvancedPage extends StatelessWidget {
                               settingsProvider.onNutritionOption(newVal, index);
                             },
                           );
-                        //   RadioTile(
-                        //     title: "test ${index}",
-                        //     description: "description ${index}",
-                        //     value: index,
-                        //     groupValue: 2,
-                        //     paddingVertical: tilePadding,
-                        //     onChoice: (newVal){
-                        //     }
-                        // );
                       })
               ),
               const SliverToBoxAdapter(
                 child: ListDivider(),
-              ),
+              ),//set_calories_counting
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate: LargeSliverHeader(
+              //     title: "Body weight",
+              //     // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              //   ),),
               SliverPersistentHeader(
                 pinned: true,
-                delegate: LargeSliverHeader(
-                  title: "Body weight",
-                  // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                ),),
-
+                delegate: MediumSliverHeader(title: 'set_calories_counting', fontSize: titleFontSize)
+                ,),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
                       childCount: settingsProvider.weightOptionList.weightCountingListCounter,

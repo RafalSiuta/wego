@@ -31,7 +31,7 @@ class UserActivityPage extends StatelessWidget {
                 //   padding: layoutPadding,
                 // ),
                 InfoText(
-                  title: "activity",
+                  title: "activity_level",
                   padding: headerPadding,
                 ),
                 ActivityCarousel(),
@@ -42,7 +42,7 @@ class UserActivityPage extends StatelessWidget {
                 ),
 
                 InfoText(
-                  title: "4-6 max repetition lift",
+                  title: "ask_heaviest_weight",
                   padding: headerPadding,
                 ),
 
@@ -60,13 +60,13 @@ class UserActivityPage extends StatelessWidget {
                         minValue: data.minValue,
                         maxValue: data.maxValue,
                         btnPlus: () {
-                          profileProvider.setPowerActivityData(index, operator: "+");
+                          profileProvider.setPowerActivityData(index,data.maxValue, operator: "+");
                         },
                         btnMinus: () {
-                          profileProvider.setPowerActivityData(index, operator: "-");
+                          profileProvider.setPowerActivityData(index,data.maxValue, operator: "-");
                         },
                         onChange: (newVal) {
-                          profileProvider.setPowerActivityData(index,newValue: newVal);
+                          profileProvider.setPowerActivityData(index,data.maxValue,newValue: newVal);
                         },
                         onChangeEnd: (newValue) {},
                       );

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/settings_provider/settings_provider.dart';
+import '../../../utils/dimensions/size_info.dart';
 import '../../../widgets/buttons/large_switch_tile.dart';
 import '../../../widgets/buttons/radio_tile.dart';
 import '../../../widgets/buttons/switch_tile.dart';
 import '../../../widgets/dividers/list_divider.dart';
 import '../../../widgets/headers/sliver_header.dart';
+import '../../../widgets/headers/sliver_header_medium.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -14,7 +16,8 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tilePadding = 5.0;
-    const layoutPadding =  EdgeInsets.only(left:12.0, right: 12.0, top: 5.0, bottom: 5.0);
+    const layoutPadding =  EdgeInsets.only(left:12.0, right: 12.0, top: 10.0, bottom: 5.0);
+    var titleFontSize = SizeInfo.headerSubtitleSize;
     return Consumer<SettingsProvider>(
       builder: (context, settingsProvider, child){
         return Container(
@@ -23,10 +26,8 @@ class SettingsPage extends StatelessWidget {
             slivers: [
               SliverPersistentHeader(
                 pinned: true,
-                delegate:  LargeSliverHeader(
-                  title: "theme mode",
-                  //padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                ),),
+                delegate: MediumSliverHeader(title: 'theme_mode', fontSize: titleFontSize)
+                ,),
               SliverToBoxAdapter(
                   child: SwitchTile(
                     textValue1: "light theme",
@@ -42,10 +43,14 @@ class SettingsPage extends StatelessWidget {
               ),
               SliverPersistentHeader(
                 pinned: true,
-                delegate:  LargeSliverHeader(
-                  title: "units",
-                 // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                ),),
+                delegate: MediumSliverHeader(title: 'unit_switch', fontSize: titleFontSize)
+                ,),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate:  LargeSliverHeader(
+              //     title: "units",
+              //    // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              //   ),),
               SliverToBoxAdapter(
                   child: SwitchTile(
                     textValue1: "metric units",
@@ -121,13 +126,16 @@ class SettingsPage extends StatelessWidget {
               // const SliverToBoxAdapter(
               //   child: ListDivider(),
               // ),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate:  LargeSliverHeader(
+              //     title: "Store data",
+              //    // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+              //   ),),
               SliverPersistentHeader(
                 pinned: true,
-                delegate:  LargeSliverHeader(
-                  title: "Store data",
-                 // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-                ),),
-
+                delegate: MediumSliverHeader(title: 'option_store_data', fontSize: titleFontSize)
+                ,),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
                       childCount: 4,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
 
+import '../../utils/internationalization/app_localizations.dart';
+
 
 class SeekBar extends StatelessWidget {
   final String? title;
@@ -40,7 +42,8 @@ class SeekBar extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                title!.capitalizeFirstLetter(),
+                //title!.capitalizeFirstLetter(),
+                AppLocalizations.of(context)!.translate(title!).capitalizeFirstLetter(),
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                     fontSize: fontSize ),
               ),
@@ -50,13 +53,13 @@ class SeekBar extends StatelessWidget {
               child: RichText(
                 maxLines: 1,
                 text: TextSpan(
-                    text: sliderValue.toStringAsFixed(0),
+                    text: "${sliderValue.toStringAsFixed(0)} ",
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                         fontSize: fontSize ),
                     children: <TextSpan>[
                       TextSpan(
                         text:
-                        " ${unit}",
+                        AppLocalizations.of(context)!.translate(unit!),
                         style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   fontSize: fontSize ),
                       ),

@@ -7,19 +7,19 @@ class UserNutrition {
   final List<SliderModel> _customNutritionList = [
     SliderModel(
         name: 'protein',
-        unit: '%',
+        unit: 'unit_percent',
         minValue: 0,
         maxValue: 100,
         sliderValue: 20),
     SliderModel(
         name: 'carbo',
-        unit: '%',
+        unit: 'unit_percent',
         minValue: 0,
         maxValue: 100,
         sliderValue: 45),
     SliderModel(
         name: 'fat',
-        unit: '%',
+        unit: 'unit_percent',
         minValue: 0,
         maxValue: 100,
         sliderValue: 35),
@@ -35,20 +35,20 @@ class UserNutrition {
 
   final List<NutritionModel> _defaultNutritionList =  [
      NutritionModel(
-        name: 'weight loss',
-        description: 'Set nutrition percentage with 35-50% protein, 25-45% carbohydrate, and 20-35% fat.',
+        name: 'weight_loss',
+        description: 'weight_loss_description',
         protein: 40,
         carbohydrate: 30,
         fat: 30),
     NutritionModel(
         name: 'maintain',
-        description: 'Set nutrition percentage with 25-40% protein, 35-55% carbohydrate, and 25-40% fat.',
+        description: 'maintain_description',
         protein: 30,
         carbohydrate: 40,
         fat: 30),
     NutritionModel(
-        name: 'gain weight',
-        description: 'Set nutrition percentage with 35% protein, 45% carbohydrate, and 20% fat.',
+        name: 'gain_weight',
+        description: 'gain_weight_description',
         protein: 35,
         carbohydrate: 50,
         fat: 20),

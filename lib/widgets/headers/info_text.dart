@@ -2,12 +2,14 @@ import 'package:wego/utils/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/dimensions/size_info.dart';
+import '../../utils/internationalization/app_localizations.dart';
 
 class InfoText extends StatelessWidget {
-  const InfoText({required this.title,required this.padding, super.key});
+  const InfoText({required this.title,required this.padding, this.isInfoIcon = true, super.key});
 
   final String? title;
   final EdgeInsets? padding;
+  final bool? isInfoIcon;
  // final double fontSize;
 
   @override
@@ -19,11 +21,14 @@ class InfoText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title!.capitalizeFirstLetter(),
+            AppLocalizations.of(context)!.translate(title!).capitalizeFirstLetter(),
+            //title!.capitalizeFirstLetter(),
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                 fontSize: subtitleSize ),
           ),
-          IconButton(onPressed: (){}, icon: Icon(Icons.info))
+          Visibility(
+              visible: isInfoIcon ?? true,
+              child: IconButton(onPressed: (){}, icon: const Icon(Icons.info_outline)))
         ],
       ),
     );

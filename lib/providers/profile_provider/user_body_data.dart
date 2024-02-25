@@ -6,37 +6,37 @@ class UserBodyData {
   List<SliderModel> _userBodyData = [
     SliderModel(
         name: 'age',
-        unit: 'age',
+        unit: 'unit_age',
         minValue: 0,
         maxValue: 150,
         sliderValue: 25),
     SliderModel(
         name: 'weight',
-        unit: 'kg',
+        unit: 'unit_kg',
         minValue: 0,
         maxValue: 300,
         sliderValue: 90),
     SliderModel(
         name: 'height',
-        unit: 'cm',
+        unit: 'unit_cm',
         minValue: 0,
         maxValue: 250,
         sliderValue: 187),
     SliderModel(
         name: 'waist',
-        unit: 'cm',
+        unit: 'unit_cm',
         minValue: 0,
         maxValue: 300,
         sliderValue: 95),
     SliderModel(
         name: 'hip',
-        unit: 'cm',
+        unit: 'unit_cm',
         minValue: 0,
         maxValue: 300,
         sliderValue: 110),
     SliderModel(
         name: 'neck',
-        unit: 'cm',
+        unit: 'unit_cm',
         minValue: 0,
         maxValue: 150,
         sliderValue: 45),

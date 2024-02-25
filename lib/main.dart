@@ -10,7 +10,8 @@ import 'package:wego/utils/custom_page_route/custom_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:wego/utils/internationalization/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'themes/theme_dark.dart';
 
 void main() {
@@ -74,6 +75,27 @@ class WeGo extends StatelessWidget {
               darkTheme: themeDark,
               themeMode: settings.getTheme(),
               home: const MainScreen(),
+              supportedLocales: [
+                Locale('en', 'US'),
+                Locale('pl', 'PL'),
+                // Locale('en'),
+                // Locale('pl'),
+              ],
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              localeResolutionCallback: (locale, suppertedLocales) {
+                //check is the current locale is supported:
+                for (var supportedLocale in suppertedLocales) {
+                  if (supportedLocale.languageCode == locale!.languageCode &&
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return suppertedLocales.first;
+              },
             );
           }
       ),

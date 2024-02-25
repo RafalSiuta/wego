@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-const mainBcgColor = Color(0xFFEEEEEE);//F4F0CE Color(0xFFEEEEEE);//F4F0CE
+const mainBcgColor = Color(0xFFf7f6fe);//EEEEEE  //f7f6fe
 const titleBoxBcgColor = Colors.white;
 // const theme_4firstGradientColor = Color(0xFF00C3FF);
 // const theme_4middleGradientColor = Color(0xFF1B6BFF);
@@ -90,7 +90,7 @@ final themeLight = ThemeData(
               fontSize: 10,
               color: theme_4indicatorColor,
               fontWeight: FontWeight.w500,
-              letterSpacing: 1)),
+              )),
       //small unselected text
       displaySmall: GoogleFonts.exo2(
           textStyle: const TextStyle(
@@ -333,6 +333,8 @@ final themeLight = ThemeData(
     ),
     progressIndicatorTheme:const ProgressIndicatorThemeData(
       refreshBackgroundColor: theme_4unselectedColor,
+      linearTrackColor: theme_4indicatorColor,
+
       // linearTrackColor: theme_4indicatorColor
 
 
@@ -366,11 +368,21 @@ final themeLight = ThemeData(
         textStyle: const TextStyle(
             fontSize: 15,
             color: baseTextColor ,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
             decoration: TextDecoration.none,
             overflow: TextOverflow.ellipsis),
       ),
     ),
+    chipTheme: ChipThemeData(
+        showCheckmark: false,
+      shadowColor: Colors.transparent,
+      disabledColor: theme_4unselectedColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: const BorderSide(color: theme_4unselectedColor),
+      ),
+    ),
+
 );
 
 

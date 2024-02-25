@@ -38,15 +38,16 @@ class SettingsProvider extends ChangeNotifier {
 
   void loadTheme() async{
     currentTheme = await _prefs.restoreBool(themeMode, currentTheme);
-    print("theme is loaded");
-    print("current theme is ${currentTheme}");
+    //todo clear comments
+    // print("theme is loaded");
+    // print("current theme is ${currentTheme}");
   }
 
   void onThemeChange(bool sel){
     currentTheme = sel;
     _prefs.storeBool(themeMode, currentTheme);
     getTheme();
-    print("switch theme is ${currentTheme}");
+   // print("switch theme is ${currentTheme}");
     notifyListeners();
   }
 

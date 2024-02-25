@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,9 +9,10 @@ import '../../utils/dimensions/size_info.dart';
 import '../../widgets/navigators/side_nav.dart';
 
 class TaskCreator extends StatefulWidget {
-  const TaskCreator({required this.userModel, super.key});
+  const TaskCreator({required this.userModel, required this.heroTag, super.key});
 
   final UserCalendarModel userModel;
+  final String heroTag;
 
   @override
   State<TaskCreator> createState() => _TaskCreatorState();
@@ -116,11 +118,14 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                             ),
                         children: [
                           IntrinsicHeight(
-                            child: Image(
-                                alignment: Alignment.topRight,
-                                width: MediaQuery.of(context).size.width / 1.5,
-                                fit: BoxFit.contain,
-                                image: AssetImage(widget.userModel.imagePath!)),
+                            child: Hero(
+                              tag: widget.heroTag,
+                              child: Image(
+                                  alignment: Alignment.topRight,
+                                  width: MediaQuery.of(context).size.width / 1.5,
+                                  fit: BoxFit.contain,
+                                  image: AssetImage(widget.userModel.imagePath!)),
+                            ),
                           ),
                         ],
                       )),

@@ -5,6 +5,7 @@ import '../../../providers/logic_provider/logic_provider.dart';
 import '../../../providers/profile_provider/profile_provider.dart';
 import '../../../providers/settings_provider/settings_provider.dart';
 import '../../../widgets/cards/fit_card.dart';
+import '../../../widgets/chips/chips_list.dart';
 import '../../../widgets/headers/info_text.dart';
 import '../../../widgets/headers/widget_header.dart';
 import 'details_calc_screen.dart';
@@ -29,10 +30,11 @@ class _CalculationScreenState extends State<CalculationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoText(
-            title: 'Calculations',
+            title: 'body_calculations',
             padding: EdgeInsets.only(left: sidePadding, ),
           ),
-         // SizedBox(height: 20,),
+          const ChoiceChipsList(),
+          SizedBox(height: 8.0,),
           // WidgetHeader(
           //   title: "calculations",
           //   fontSize: 15,
@@ -41,7 +43,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
           Expanded(
               child:
           GridView.count(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 18),
           physics: const BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics()),
           scrollDirection:Axis.vertical,
@@ -62,12 +64,13 @@ class _CalculationScreenState extends State<CalculationScreen> {
           child: FadeInAnimation(
           child: FitCardLarge(
             data: listData,
+            heroTag: '${listData.imagePath}${listData.id}$index',
             openDetailPage: (){
               Navigator.of(context).push(
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) => DetailCalcScreen(
                     data: listData,
-                    heroTag: '${listData.id}',
+                    heroTag: '${listData.imagePath}${listData.id}$index',
                   ),
                   transitionDuration: Duration(milliseconds: 300),
                   transitionsBuilder:
@@ -85,22 +88,6 @@ class _CalculationScreenState extends State<CalculationScreen> {
           }
           )),
           ),
-          //     GridView.builder(
-          //     itemCount: logic.numbersListCounter,
-          //     itemBuilder: (context, index){
-          //   final listData = logic.mainNumbersList[index];
-          //
-          //   return Card(
-          //
-          //       child:
-          //   Column(
-          //     children: [
-          //       Text('${listData.title}:', style: Theme.of(context).textTheme.headlineMedium,),
-          //       Text(listData.value!.toStringAsFixed(2), style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: listData.infoColor),),
-          //     ],
-          //   ));
-          // })
-         // )
         ],
       );
     });

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../model/choice_model/chip_choice.dart';
 import '../../model/nutrition_model/nutrition_settings_model.dart';
 import '../../model/slider_model/slider_model.dart';
 
@@ -100,6 +101,22 @@ class Prefs extends ChangeNotifier {
       if (result != null) {
         list = result.map((i) {
           return NutritionSettingsModel.fromJson(jsonDecode(i));
+        }).toList();
+      }
+    } catch (e) {}
+
+    notifyListeners();
+    return list;
+  }
+  Future<List<ChipChoice>> restoreChipChoiceList(String key, List<ChipChoice> list) async {
+    final prefs = await _prefs;
+
+    final result = prefs.getStringList(key);
+
+    try {
+      if (result != null) {
+        list = result.map((i) {
+          return ChipChoice.fromJson(jsonDecode(i));
         }).toList();
       }
     } catch (e) {}

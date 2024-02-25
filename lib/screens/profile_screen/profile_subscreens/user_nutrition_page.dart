@@ -32,7 +32,7 @@ class UserNutritionPage extends StatelessWidget {
                //    padding: layoutPadding,
                //  ),
                 InfoText(
-                  title: "macronutrients",
+                  title: "nutrition_details",
                   padding: headerPadding,
                 ),
                 LargeSwitchTile(
@@ -62,13 +62,13 @@ class UserNutritionPage extends StatelessWidget {
                             minValue: data.minValue,
                             maxValue: data.maxValue,
                             btnPlus: () {
-                              profileProvider.setNutritionData(index, operator: "+");
+                              profileProvider.setNutritionData(index,data.maxValue, operator: "+");
                             },
                             btnMinus: () {
-                              profileProvider.setNutritionData(index, operator: "-");
+                              profileProvider.setNutritionData(index,data.maxValue, operator: "-");
                             },
                             onChange: (newVal) {
-                              profileProvider.setNutritionData(index,newValue: newVal);
+                              profileProvider.setNutritionData(index,data.maxValue,newValue: newVal);
                             },
                             onChangeEnd: (newValue) {
 

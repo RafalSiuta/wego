@@ -6,20 +6,20 @@ class UserActivityPowerData {
 
   List<SliderModel> _activityPowerData = [
     SliderModel(
-        name: 'bench press',
-        unit: 'kg',
+        name: 'bench_press',
+        unit: 'unit_kg',
         minValue: 0,
         maxValue: 500,
         sliderValue: 100),
     SliderModel(
         name: 'squat',
-        unit: 'kg',
+        unit: 'unit_kg',
         minValue: 0,
         maxValue: 500,
         sliderValue: 120),
     SliderModel(
-        name: 'dead lift',
-        unit: 'kg',
+        name: 'dead_lift',
+        unit: 'unit_kg',
         minValue: 0,
         maxValue: 500,
         sliderValue: 120),

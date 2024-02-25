@@ -29,8 +29,6 @@ class ProfileProvider extends ChangeNotifier {
 
   final Prefs _prefs = Prefs();
 
-
-
   //gender setup
   bool isGenderSelected = true;
 
@@ -47,19 +45,22 @@ class ProfileProvider extends ChangeNotifier {
 
   List userDataList = [];
 
-  void setUserData( int index,{double? newValue,String? operator}) {
-
+  void setUserData( int index, double maxValue,{double? newValue,String? operator}) {
+    var data = userDataList[index];
     if (operator == '+') {
-
-      userDataList[index].sliderValue++;
+      if(data.sliderValue <  maxValue){
+        data.sliderValue++;
+      }else{
+        //do nothink
+      }
     } else if (operator == '-') {
 
-      if (userDataList[index].sliderValue != 0) {
-        userDataList[index].sliderValue--;
+      if (data.sliderValue != 0) {
+        data.sliderValue--;
       }
     } else {
 
-      userDataList[index].sliderValue = newValue!.roundToDouble();
+      data.sliderValue = newValue!.roundToDouble();
     }
     _prefs.storeList(userBodyDataKey, userDataList);
 
@@ -117,10 +118,15 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setPowerActivityData(int index, {double? newValue, String? operator, }) {
+  setPowerActivityData(int index, double maxValue,{double? newValue, String? operator, }) {
     var data = userPowerActivityList[index];
     if (operator == '+') {
-      data.sliderValue++;
+      if(data.sliderValue < maxValue){
+        data.sliderValue++;
+      }else{
+
+      }
+
     } else if (operator == '-') {
       if (data.sliderValue != 0) {
         data.sliderValue--;
@@ -165,10 +171,15 @@ class ProfileProvider extends ChangeNotifier {
   bool isCustomNutrition = false;
   int defaultNutritionChoice = 0;
 
-  setNutritionData(int index, {double? newValue, String? operator, }) {
+  setNutritionData(int index,double maxValue, {double? newValue, String? operator, }) {
     var data = userNutritionDataList[index];
     if (operator == '+') {
-      data.sliderValue++;
+      if(data.sliderValue < maxValue){
+        data.sliderValue++;
+      }else{
+
+      }
+
     } else if (operator == '-') {
       if (data.sliderValue != 0) {
         data.sliderValue--;
@@ -214,6 +225,7 @@ class ProfileProvider extends ChangeNotifier {
   notifyListeners();
   }
   UserDataModel userData = UserDataModel();
+
   UserDataModel getUserData() {
 
     List? data = [...userDataList, ...userPowerActivityList];
@@ -221,7 +233,7 @@ class ProfileProvider extends ChangeNotifier {
     userData.gender = isGenderSelected;
     userData.activity = activityLevel;
 
-    print('ITEMS NUMBER ${data.length}');
+   // print('ITEMS NUMBER ${data.length}');
     for(int i = 0; i < data.length; i++){
      // print('This is new list from all sliders - ${data[i].name}');
       switch(data[i].name){

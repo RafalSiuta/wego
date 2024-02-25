@@ -6,7 +6,6 @@ import 'package:wego/providers/profile_provider/profile_provider.dart';
 import '../../../model/choice_model/choice_model.dart';
 import '../../../widgets/buttons/tile_button.dart';
 import '../../../widgets/headers/info_text.dart';
-import '../../../widgets/headers/widget_header.dart';
 import '../../../widgets/responsive/list_builder.dart';
 
 
@@ -26,11 +25,6 @@ class UserDataPage extends StatelessWidget {
       return
         Column(
           children: [
-           // SizedBox(height: 20,),
-           //  WidgetHeader(
-           //    title: "gender",
-           //    padding: layoutPadding,
-           //  ),
             InfoText(
               title: "gender",
               padding: headerPadding,
@@ -71,7 +65,7 @@ class UserDataPage extends StatelessWidget {
             endIndent: 70,
             ),
             InfoText(
-              title: "body measurement",
+              title: "personal_details_description",
               padding: headerPadding,
             ),
             ListSeparated(
@@ -82,36 +76,17 @@ class UserDataPage extends StatelessWidget {
                 return SeekBar(
                   data.sliderValue.toDouble(),
                   btnPlus: (){
-                    profileProvider.setUserData(index, operator: "+");
+                    //todo fix max values:
+                    profileProvider.setUserData(index,data.maxValue!, operator: "+");
                   }, btnMinus: (){
-                  profileProvider.setUserData(index, operator: "-");
+                  profileProvider.setUserData(index,data.maxValue!, operator: "-");
                 }, onChange: (newVal){
-                  profileProvider.setUserData(index, newValue: newVal,);
-                }, title: data.name,unit: data.unit,minValue: data.minValue, maxValue: data.maxValue,);
+                  profileProvider.setUserData(index,data.maxValue!, newValue: newVal,);
+                }, title: data.name,unit: data.unit,minValue: data.minValue!, maxValue: data.maxValue!,);
               }, separatorBuilder: (context, item){
               return  const SizedBox(height: 10,);
             },
             ),
-            // Expanded(
-            //   child: ListView.separated(
-            //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-            //      itemCount: profileProvider.usrData.userDataListCounter,
-            //       itemBuilder: (context, index){
-            //         final data = profileProvider.userDataList[index];
-            //     return SeekBar(
-            //       data.sliderValue.toDouble(),
-            //       btnPlus: (){
-            //         profileProvider.setUserData(index, operator: "+");
-            //       }, btnMinus: (){
-            //       profileProvider.setUserData(index, operator: "-");
-            //     }, onChange: (newVal){
-            //       profileProvider.setUserData(index, newValue: newVal,);
-            //     }, title: data.name,unit: data.unit,minValue: data.minValue, maxValue: data.maxValue,);
-            //   }, separatorBuilder: (context, item){
-            //     return  const SizedBox(height: 10,);
-            //   },
-            //   ),
-            // ),
             const SizedBox(height: 20,),
             Divider(
               indent: 70,

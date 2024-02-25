@@ -18,4 +18,7 @@ const workoutCategory = "CALENDAR_WORKOUT_CATEGORY";
 const mealCategory = "CALENDAR_MEAL_CATEGORY";
 const drinkCategory = "CALENDAR_DRINK_CATEGORY";
 const supplementCategory = "CALENDAR_SUPPLEMENT_CATEGORY";
+const isFavoriteCategory = "MY_FAVORITE_CARD_CATEGORY";
+
+const chipChoiceListKey = "CHIP_CHOICE_LIST";
 

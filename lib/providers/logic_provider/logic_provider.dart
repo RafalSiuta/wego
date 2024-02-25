@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../model/calculation_model/calculation_model.dart';
 import '../../model/chart_model/chart_model.dart';
+import '../../model/choice_model/chip_choice.dart';
+import '../../utils/prefs/prefs.dart';
 import '../profile_provider/profile_provider.dart';
 import '../settings_provider/settings_provider.dart';
-
+import 'package:wego/utils/constans/prefs_keys.dart';
 class LogicProvider extends ChangeNotifier {
 
   LogicProvider( this.profile, this.settings){
@@ -21,28 +23,71 @@ class LogicProvider extends ChangeNotifier {
   ProfileProvider profile;
   SettingsProvider settings;
 
+  final Prefs _prefs = Prefs();
+
   List<CalculationModel> _numbersList = [];
 
+
+  List<ChipChoice> choiceChipList = [
+    ChipChoice(name:'indicators' ,category: supplementCategory, value:true),
+    ChipChoice(name:'calories', category: mealCategory, value:true),
+    ChipChoice(name:'hydration', category: drinkCategory, value:true),
+    ChipChoice(name:'strength', category: workoutCategory, value:true),
+    ChipChoice(name:'favorites', category: isFavoriteCategory, value:true),
+  ];
+  void chipChoice(int index, bool val){
+    choiceChipList[index].value = val;
+    _prefs.storeList(chipChoiceListKey, choiceChipList);
+    updateCalculationList();
+    notifyListeners();
+  }
+
   Future<List<CalculationModel>> _calculationsList() async {
+    choiceChipList = await _prefs.restoreChipChoiceList(chipChoiceListKey, choiceChipList);
+
     List<CalculationModel> list = [
       bmiResult(),
       bmrResult(),
-      terResult(),
-      ymcaResult(),
-      aymcaResult(),
-      whrResult(),
-      whtrResult(),
-      pottonResult(),
-      pureWeightResult(),
       waterIntakeResult(),
       proteinIntakeResult(),
       carboIntakeResult(),
       fatIntakeResult(),
+      terResult(),
+      ymcaResult(),
+      //aymcaResult(),
+      whrResult(),
+      //whtrResult(),
+      pottonResult(),
+      pureWeightResult(),
       benchResult(),
       squatResult(),
       deadLiftResult()
     ];
+
+    List<CalculationModel> filteredList = [];
+
+    //DOBRA WERSJA
+    for (var chip in choiceChipList) {
+      if (chip.value == true) {
+        for (var calculation in list) {
+          if (calculation.category == chip.category ) {
+            if (!filteredList.contains(calculation)) {
+              filteredList.add(calculation);
+            }
+          } else if (calculation.isFavorite == true && chip.category == isFavoriteCategory) {
+            if (!filteredList.contains(calculation)) {
+
+              filteredList.add(calculation);
+            }
+          }
+        }
+      }
+    }
+
+    list.clear();
+    list.addAll(filteredList);
     notifyListeners();
+
     return list;
   }
 
@@ -139,7 +184,9 @@ class LogicProvider extends ChangeNotifier {
       bmi.formulaMale = 'BMI = W / H ²';
       bmi.formulaFemale = "";
       bmi.chartList = chart; //bmiChart;
-      bmi.imagePath = 'images/food_1.png';//imagePath('male_index', 'female_index');
+      bmi.imagePath = 'images/bmi.png';//imagePath('male_index', 'female_index');
+      bmi.category = supplementCategory;
+      bmi.isFavorite = true;
 
     }
     notifyListeners();
@@ -168,8 +215,9 @@ class LogicProvider extends ChangeNotifier {
       bmr.formulaFemale =
       'BMR = 665.09 + (9.56 * W ) + (1.85 * H) - (4.67 * A)';
       bmr.chartList = chart; //bmrChart;
-      bmr.imagePath = 'images/food_1.png';//imagePath('male_food', 'female_food');
+      bmr.imagePath = 'images/bmr.png';//imagePath('male_food', 'female_food');
       bmr.infoColor = checkWarning(0);
+      bmr.category = mealCategory;
       notifyListeners();
     }
     notifyListeners();
@@ -217,7 +265,8 @@ class LogicProvider extends ChangeNotifier {
       'BMR = 665.09 + (9.56 * W ) + (1.85 * H) - (4.67 * A) \n TER = BMR * AC ';
       ter.chartList = chart;
       ter.infoColor = checkWarning(0);
-      ter.imagePath = 'images/food_1.png';//imagePath('male_food_prot', 'female_food_fat');
+      ter.imagePath = 'images/ter.png';//imagePath('male_food_prot', 'female_food_fat');
+      ter.category = mealCategory;
       notifyListeners();
     }
 
@@ -285,7 +334,8 @@ class LogicProvider extends ChangeNotifier {
       ymca.formulaFemale =
       'YMCA = ((1.634 * Wa - 0.1804 * W - 76.76) / 2.2 * W) / 100  ';
       ymca.chartList = chart;
-      ymca.imagePath = 'images/food_1.png';//imagePath('male_index2', 'female_index2');
+      ymca.imagePath = 'images/ymca.png';//imagePath('male_index2', 'female_index2');
+      ymca.category = supplementCategory;
 
     }
     notifyListeners();
@@ -358,7 +408,8 @@ class LogicProvider extends ChangeNotifier {
       aymca.formulaFemale =
       'BF = 495 / (1.29579 - 0.35004 * (log(Wa[cm] + Hi - N) / log(10)) + 0.22100 * (log(H) / log(10))) - 450 \n BF = ((BF * W) / 100)  * 0.45359237 ';
       aymca.chartList = chart;
-      aymca.imagePath = 'images/food_1.png';//imagePath('male_index3', 'female_index3');
+      aymca.imagePath = 'images/ymca.png';//imagePath('male_index3', 'female_index3');
+      aymca.category = supplementCategory;
 
     }
     notifyListeners();
@@ -409,6 +460,7 @@ class LogicProvider extends ChangeNotifier {
       whr.formulaFemale = "";
       whr.chartList = chart;
       whr.imagePath = 'images/food_1.png';//imagePath('male_index1', 'female_index2');
+      whr.category = supplementCategory;
 
     }
     notifyListeners();
@@ -484,6 +536,7 @@ class LogicProvider extends ChangeNotifier {
       whtr.formulaFemale = '';
       whtr.chartList = chart;
       whtr.imagePath = 'images/food_1.png';//imagePath('male_index2', 'female_index');
+      whtr.category = supplementCategory;
     }
     notifyListeners();
     return whtr;
@@ -512,6 +565,7 @@ class LogicProvider extends ChangeNotifier {
       potton.imagePath =
           'images/food_1.png';//imagePath('male_weight_potton', 'female_weight_potton');
       potton.infoColor = checkWarning(0);
+      potton.category = supplementCategory;
     }
     notifyListeners();
     return potton;
@@ -539,6 +593,7 @@ class LogicProvider extends ChangeNotifier {
       lorenz.chartList = chart;
       lorenz.imagePath = 'images/food_1.png';//imagePath('male_weight', 'female_weight');
       lorenz.infoColor = checkWarning(0);
+      lorenz.category  = supplementCategory;
     }
     notifyListeners();
     return lorenz;
@@ -576,8 +631,8 @@ class LogicProvider extends ChangeNotifier {
       leanWeight.formulaMale = 'LowFatWeight = W - BF';
       leanWeight.formulaFemale = '';
       leanWeight.chartList = chart;
-      leanWeight.imagePath = 'images/food_1.png';//imagePath('male_weight_fat', 'female_weight_fat');
-
+      leanWeight.imagePath = 'images/pure_weight.png';//imagePath('male_weight_fat', 'female_weight_fat');
+      leanWeight.category = supplementCategory;
       leanWeight.infoColor = checkWarning(0);
     }
     notifyListeners();
@@ -684,8 +739,9 @@ class LogicProvider extends ChangeNotifier {
       water.formulaMale = 'H2O = (W * 30) / 1000';
       water.formulaFemale = "";
       water.chartList = chart;
-      water.imagePath = 'images/food_1.png';//imagePath('male_water', 'female_water');
+      water.imagePath = 'images/water.png';//imagePath('male_water', 'female_water');
       water.infoColor = checkWarning(0);
+      water.category = drinkCategory;
     }
     notifyListeners();
     return water;
@@ -741,8 +797,9 @@ class LogicProvider extends ChangeNotifier {
       proteinIntake.formulaMale = "P = (K * M) / 100";
       proteinIntake.formulaFemale = "";
       proteinIntake.chartList = chart;
-      proteinIntake.imagePath = 'images/food_1.png';//imagePath('male_food_prot', 'female_food');
+      proteinIntake.imagePath = 'images/protein.png';//imagePath('male_food_prot', 'female_food');
       proteinIntake.infoColor = checkWarning(0);
+      proteinIntake.category = mealCategory;
     }
     notifyListeners();
     return proteinIntake;
@@ -799,8 +856,9 @@ class LogicProvider extends ChangeNotifier {
       carboIntake.formulaMale = "C = (K * M) / 100";
       carboIntake.formulaFemale = "";
       carboIntake.chartList = chart;
-      carboIntake.imagePath = 'images/food_1.png';//imagePath('male_food', 'female_food_carbo');
+      carboIntake.imagePath = 'images/carbo.png';//imagePath('male_food', 'female_food_carbo');
       carboIntake.infoColor = checkWarning(0);
+      carboIntake.category = mealCategory;
     }
     notifyListeners();
     return carboIntake;
@@ -856,8 +914,9 @@ class LogicProvider extends ChangeNotifier {
       fatIntake.formulaMale = "F = (K * M) / 100";
       fatIntake.formulaFemale = "";
       fatIntake.chartList = chart;
-      fatIntake.imagePath = 'images/food_1.png';//imagePath('male_food_fat', 'female_food_fat');
+      fatIntake.imagePath = 'images/fats.png';//imagePath('male_food_fat', 'female_food_fat');
       fatIntake.infoColor = checkWarning(0);
+      fatIntake.category = mealCategory;
     }
     notifyListeners();
     return fatIntake;
@@ -908,8 +967,9 @@ class LogicProvider extends ChangeNotifier {
       maxBenchPress.formulaMale = 'Bp = (W * 1.1307) + 0.6998';
       maxBenchPress.formulaFemale = "";
       maxBenchPress.chartList = chart;
-      maxBenchPress.imagePath = 'images/food_1.png';//imagePath('male_bench', 'female_bench');
+      maxBenchPress.imagePath = 'images/workout_dude.png';//imagePath('male_bench', 'female_bench');
       maxBenchPress.infoColor = checkWarning(0);
+      maxBenchPress.category = workoutCategory;
     }
     notifyListeners();
     return maxBenchPress;
@@ -931,8 +991,9 @@ class LogicProvider extends ChangeNotifier {
       maxSquat.formulaMale = 'Ms = (W * 1.09703) + 14.2546';
       maxSquat.formulaFemale = "";
       maxSquat.chartList = chart;
-      maxSquat.imagePath = 'images/food_1.png';//imagePath('male_squat', 'female_squat');
+      maxSquat.imagePath = 'images/workout_dude.png';//imagePath('male_squat', 'female_squat');
       maxSquat.infoColor = checkWarning(0);
+      maxSquat.category = workoutCategory;
     }
     notifyListeners();
     return maxSquat;
@@ -954,8 +1015,9 @@ class LogicProvider extends ChangeNotifier {
       maxDeadLift.formulaMale = 'Md = (W * 1.09703) + 14.2546';
       maxDeadLift.formulaFemale = "";
       maxDeadLift.chartList = chart;
-      maxDeadLift.imagePath = 'images/food_1.png';//imagePath('male_deadlift', 'female_deadlift');
+      maxDeadLift.imagePath = 'images/workout_dude.png';//imagePath('male_deadlift', 'female_deadlift');
       maxDeadLift.infoColor  = checkWarning(0);
+      maxDeadLift.category = workoutCategory;
     }
     notifyListeners();
     return maxDeadLift;

@@ -7,6 +7,7 @@ class CalculationModel {
   String? symbol;
   String? title;
   String? shortTitle;
+  String? category;
   bool? isFavorite;
   double? value;
   String? unit;
@@ -31,7 +32,8 @@ class CalculationModel {
     this.isFavorite = false,
     this.imagePath = '',
     this.chartList,
-    this.infoColor
+    this.infoColor,
+    this.category
   });
 
   Map<String, dynamic> toJson() =>

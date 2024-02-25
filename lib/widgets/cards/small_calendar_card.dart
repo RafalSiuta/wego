@@ -3,13 +3,14 @@ import 'package:wego/utils/constans/prefs_keys.dart';
 import '../shapes/card_shape.dart';
 
 class SmallCalendarCard extends StatelessWidget {
-  const SmallCalendarCard({this.imagePath = '',required this.openDetails, required this.title, required this.subtitle, required this.value, this.category, super.key});
+  const SmallCalendarCard({this.imagePath = '',required this.openDetails, required this.title, required this.subtitle, required this.value, this.category, required this.heroTag, super.key});
   final String? imagePath;
   final String? title;
   final String? subtitle;
   final double? value;
   final String? category;
   final VoidCallback openDetails;
+  final String? heroTag;
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +114,13 @@ class SmallCalendarCard extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Center(
-                    child: Image(
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.contain,
-                        image: AssetImage(imagePath!)),
+                    child: Hero(
+                      tag: heroTag ?? '',
+                      child: Image(
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.contain,
+                          image: AssetImage(imagePath!)),
+                    ),
                   ),
                 ),
                 Expanded(

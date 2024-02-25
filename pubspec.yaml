@@ -49,6 +49,8 @@ dependencies:
   share_plus: ^5.0.0 #import 'package:share_plus/share_plus.dart';
   page_view_indicators: ^2.0.0 #flutter pub add page_view_indicators
   google_nav_bar: ^5.0.6 #import 'package:google_nav_bar/google_nav_bar.dart';
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +80,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - images/
+    - lang/en.json
+    - lang/pl.json
 #    - images/food_1.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

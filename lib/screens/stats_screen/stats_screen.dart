@@ -10,16 +10,17 @@ import '../../widgets/navigators/tab_nav.dart';
 import '../subscren_container.dart';
 
 final  List<SubScreenModel> _statsPages = [
-  SubScreenModel(
-    page: const CalendarScreen(),
-    title: NavModel(
-      title: 'Calendar',
-    ),
-  ),
+
   SubScreenModel(
     page: const CalculationScreen(),
     title: NavModel(
       title: 'Calculations',
+    ),
+  ),
+  SubScreenModel(
+    page: const CalendarScreen(),
+    title: NavModel(
+      title: 'Calendar',
     ),
   ),
   SubScreenModel(
@@ -41,11 +42,11 @@ class StatsScreen extends StatelessWidget {
         Expanded(
           child: TabNav(
               tabTitles: [
-                "Calendar", "Calculations", "Statistics"
+                "Calculations", "Calendar", "Statistics"
               ],
               list:[
-                CalendarScreen(),
                 CalculationScreen(),
+                CalendarScreen(),
                 StatisticsScreen()
 
               ]

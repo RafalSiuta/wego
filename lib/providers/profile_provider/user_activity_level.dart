@@ -7,23 +7,23 @@ class UserActivityLevel {
   List<ActivityModel> _activityLevelList = [
     ActivityModel(
       icon: Icons.self_improvement,
-      description: "Very low activity",// , daily routine, light office work, cleaning house
+      description: "activity_list_very_low",// , daily routine, light office work, cleaning house
     ),
     ActivityModel(
       icon: Icons.nordic_walking,
-      description: "Low activity",//, light laborer work, random jogging",
+      description: "activity_list_low",//, light laborer work, random jogging",
     ),
     ActivityModel(
       icon: Icons.rowing,
-      description:  "Medium activity",//, harder laborer work random sports, swimming, regular jogging,",
+      description:  "activity_list_medium",//, harder laborer work random sports, swimming, regular jogging,",
     ),
     ActivityModel(
       icon: Icons.sports_handball,
-      description: "High activity",//, regular sport, gym, play football, fitness",
+      description: "activity_list_high",//, regular sport, gym, play football, fitness",
     ),
     ActivityModel(
       icon: Icons.sports_martial_arts,
-      description: "Very high activity",//, heavy weight lifting, martial arts, bodybuilding",
+      description: "activity_list_very_high",//, heavy weight lifting, martial arts, bodybuilding",
     ),
   ];
 
