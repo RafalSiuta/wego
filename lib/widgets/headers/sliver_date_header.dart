@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'dart:math' as math;
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/animation_builder/play_animation_builder.dart';
 
@@ -11,12 +13,13 @@ import 'date_header.dart';
 
 class SliverDateHeader extends SliverPersistentHeaderDelegate {
 
-  SliverDateHeader({this.minHeight = 75,this.maxHeight = 80,
+  SliverDateHeader({this.minHeight = 75,this.maxHeight = 80, this.isIconVisible = true,
     this.fontSize = 15});
 
   final double? minHeight;
   final double? maxHeight;
   final double fontSize;
+  final bool? isIconVisible;
 
   @override
   Widget build(
@@ -25,6 +28,7 @@ class SliverDateHeader extends SliverPersistentHeaderDelegate {
     var subtitleSize = SizeInfo.headerSubtitleSize;
     var menuTop = SizeInfo.menuTopMargin;
     var edgePadding = SizeInfo.edgePadding;
+
     return Consumer<WelcomeProvider>(
       builder: (context, homeProvider, child) {
         return Row(
@@ -73,16 +77,19 @@ class SliverDateHeader extends SliverPersistentHeaderDelegate {
                 ),
               ),
             ),
-            IconButton(
-                padding: EdgeInsets.all(edgePadding),
-                alignment: Alignment.centerRight,
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.close,
-                  color: Theme.of(context).textTheme.headlineLarge!.color,
-                ))
+            Visibility(
+              visible: isIconVisible!,
+              child: IconButton(
+                  padding: EdgeInsets.all(edgePadding),
+                  alignment: Alignment.centerRight,
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.close,
+                    color: Theme.of(context).textTheme.headlineLarge!.color,
+                  )),
+            )
           ],
         );
       },

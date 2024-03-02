@@ -152,8 +152,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         //     parent: AlwaysScrollableScrollPhysics()),
                         itemBuilder: (context,index){
                       final listData = logic.mainNumbersList[index];
-                      return GestureDetector(
-                          onTap: (){
+                      return FitCardSmall(
+                        data: listData,
+                        heroTag: '${listData.imagePath}$index',
+                        onTap: (){
                             Navigator.of(context).push(
                               PageRouteBuilder(
                                 pageBuilder: (context, animation, secondaryAnimation) => DetailCalcScreen(
@@ -169,8 +171,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       alignment: Alignment.center, scale: scale, child: child);
                                 },
                               ),);
-                          },
-                          child: FitCardSmall(data: listData, heroTag: '${listData.imagePath}$index',));
+                        },
+                      );
                     },
                     //   separatorBuilder: (context, index){
                     //     return SizedBox(width: 1,);

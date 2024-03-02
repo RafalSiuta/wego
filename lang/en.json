@@ -1,5 +1,40 @@
 {
 
+  "nav_calc": "Calculations",
+  "nav_cal": "Calendar",
+  "nav_stats": "Statistics",
+
+  "nav_person": "body",
+  "nav_activity": "Activity",
+  "nav_nutri": "Nutrition",
+
+  "nav_workout": "workouts",
+  "nav_meals": "meals",
+  "nav_drinks": "drinks",
+  "nav_supl": "supplements",
+
+  "nav_sets": "Settings",
+  "nav_sets_adv": "Advanced",
+  "nav_about": "About",
+
+  "chips_indicators": "indicators",
+  "chips_calories": "calories",
+  "chips_hydro": "hydration",
+  "chips_strength": "strength",
+  "chips_fav": "favorites",
+
+  "theme_mode": "theme mode",
+  "light_theme": "light theme",
+  "dark_theme": "dark theme",
+
+  "metric_unit": "Metric unit enable",
+  "imperial_unit": "Imperial unit enable",
+  "unit_switch": "Switch units",
+
+  "counter_txt_1": "You have",
+  "counter_txt_2": "task",
+  "counter_txt_3": "task's",
+
   "age": "Age",
   "weight": "Weight",
   "height": "Height",
@@ -74,6 +109,10 @@
 
   "male": "Male",
   "female": "Female",
+
+  "save_to_chart": "Add to chart",
+  "page_close": "Close",
+  "add_favorite": "Favorite",
 
   "read_more": "...read more  ",
 
@@ -251,23 +290,23 @@
   "sets_delete":"Delete data:",
   "sets_advanced_delete":"Be careful with this option. It can delete your savings permanently.",
 
-  "sets_macro_nutrients": "Macronutrients values",
+  "sets_macro_nutrients": "Set macronutrients counting:",
   "set_calories_counting": "Counting macronutrients",
   "option_current_weight": "From Current Weight",
   "option_lorenz_weight": "From Lorenz",
   "option_potton_weight": "From Potton",
   "option_low_fat_weight": "From Low Fat Weight",
 
-  "option_protein_kcal_enable": "Protein [KCAL]",
-  "option_protein_gram_enable": "Protein [GRAM]",
-  "option_max_kcal": "Max [KCAL]",
-  "option_min_kcal": "Min [KCAL]",
+  "option_protein_kcal_enable": "Protein calculation result [KCAL]",
+  "option_protein_gram_enable": "Protein calculation result [GRAM]",
+  "option_max_kcal": "Maximum calories intake [KCAL]",
+  "option_min_kcal": "Minimum calories intake [KCAL]",
 
-  "option_carbo_kcal_enable": "Carbo [KCAL]",
-  "option_carbo_gram_enable": "Carbo [GRAM]",
+  "option_carbo_kcal_enable": "Carbo calculation result [KCAL]",
+  "option_carbo_gram_enable": "Carbo calculation result [GRAM]",
 
-  "option_fat_kcal_enable": "Fat [KCAL]",
-  "option_fat_gram_enable": "Fat [GRAM]",
+  "option_fat_kcal_enable": "Fat calculation result [KCAL]",
+  "option_fat_gram_enable": "Fat calculation result [GRAM]",
 
   "add_to_chart_title": "Add to Chart?",
   "add_to_chart_description": "Do you want to add data to the chart?",
@@ -280,9 +319,7 @@
   "remember_warning": "Remember !!!",
   "usage_warning_description": "All calculators are provided as self-help tools for self-use with results based on information provided by the user. All examples are hypothetical and for illustrative purposes only. Calculated results are believed to be accurate, but results are not guaranteed. The exercise, fitness, health, and weight loss calculators are not intended to provide medical advice and should not be replaced by medical direction. Users should consult their physician before undertaking strenuous exercise or diet plan.",
 
-  "metric_unit": "Metric unit enable",
-  "imperial_unit": "Imperial unit enable",
-  "unit_switch": "Switch units",
+
 
   "from_author": "From author:",
   "from_author_description": "There are so many calculations that contain information about our body, many scientists have been developing mathematical formulas for years that bring us closer to information about our health. FitNumbers is a project whose idea is to collect as many such calculations as possible, thus allowing us to observe the discrepancies between them. Such analyses can help design a diet, assess health or physical condition.",
@@ -343,7 +380,7 @@
   "are_you_sure": "Do you want delete all data?",
   "yes": "Accept",
   "no": "Cancel",
-  "detail_title": "Details",
-  "theme_mode": "theme mode"
+  "detail_title": "Details"
+
 }
 

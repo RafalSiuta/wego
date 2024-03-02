@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 const theme_4MainBcgColor = Color(0xFF141221);
-const theme_4TitleBoxBcgColor = Colors.white;
+const titleBoxBcgColor = Colors.white;
 // const theme_4firstGradientColor = Color(0xFF00C3FF);
 // const theme_4middleGradientColor = Color(0xFF1B6BFF);
 // const theme_4lastGradientColor = Color(0xFF2525FF);
@@ -12,8 +12,8 @@ const theme_4middleGradientColor = Color(0xFFB1CEB7);
 const theme_4lastGradientColor = Color(0xFF74B6AA);
 const theme_4noteCardColor = Color(0xFFf5f5f5); //Color(0xFFdec9ab);f5f5f5
 const theme_4descriptionColor = Color(0xFF636363);
-const theme_4dividerColor = Color(0xFF636363);
-const theme_4unselectedColor = Color(0xFF9e9e9e); //595959
+const dividerColor = Color(0xFF636363);
+const unselectedColor = Color(0xFF9e9e9e); //595959
 //const theme_4calendarWeekendColor = Color(0xFFab977b);
 const theme_4indicatorColor = Color(0xFF6F57E5);//Color(0xFFffca28); Color(0xFFF3EBA0); Color(0xFF94FFAF)// FEA735 f5f5f5 //94FFAF
 const theme_4shadowColor = Color(0xFFC0C0C0);
@@ -37,15 +37,15 @@ final themeDark = ThemeData(
       onSecondary: menuSelectionBackground,
       error: Color(0xFFF32424),
       onError: Color(0xFFF32424),
-      background: theme_4TitleBoxBcgColor,
-      onBackground: theme_4TitleBoxBcgColor,
+      background: titleBoxBcgColor,
+      onBackground: titleBoxBcgColor,
       surface: theme_4MainBcgColor,
       onSurface: theme_4MainBcgColor,
     ),
-    canvasColor: theme_4TitleBoxBcgColor,
+    canvasColor: titleBoxBcgColor,
     focusColor: theme_4middleGradientColor,
 
-    unselectedWidgetColor: theme_4unselectedColor,
+    unselectedWidgetColor: unselectedColor,
     primaryColor: theme_4firstGradientColor,
     primaryColorLight: theme_4middleGradientColor,
     primaryColorDark: theme_4lastGradientColor,
@@ -91,7 +91,7 @@ final themeDark = ThemeData(
       displaySmall: GoogleFonts.exo2(
           textStyle: const TextStyle(
               fontSize: 10,
-              color: theme_4unselectedColor,
+              color: unselectedColor,
               fontWeight: FontWeight.w500,)),
       ///calendar weekend text style
       bodyLarge: GoogleFonts.exo2(
@@ -114,6 +114,32 @@ final themeDark = ThemeData(
               fontWeight: FontWeight.bold,
               overflow: TextOverflow.ellipsis)),
     ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+
+        alignment: Alignment.center,
+        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered))
+              return unselectedColor;
+            if (states.contains(MaterialState.focused) ||
+                states.contains(MaterialState.pressed))
+              return titleBoxBcgColor.withOpacity(0.1);
+            return unselectedColor; // Defer to the widget's default.
+          },
+        ),
+        iconColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered))
+              return unselectedColor;
+            if (states.contains(MaterialState.focused) ||
+                states.contains(MaterialState.pressed))
+              return theme_4indicatorColor;
+            return unselectedColor; // Defer to the widget's default.
+          },
+        ),
+      )
+  ),
     iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
           
@@ -121,21 +147,21 @@ final themeDark = ThemeData(
             overlayColor: MaterialStateProperty.resolveWith<Color?>(
                   (Set<MaterialState> states) {
                 if (states.contains(MaterialState.hovered))
-                  return theme_4unselectedColor;
+                  return unselectedColor;
                 if (states.contains(MaterialState.focused) ||
                     states.contains(MaterialState.pressed))
-                  return theme_4TitleBoxBcgColor.withOpacity(0.1);
-                return theme_4unselectedColor; // Defer to the widget's default.
+                  return titleBoxBcgColor.withOpacity(0.1);
+                return unselectedColor; // Defer to the widget's default.
               },
             ),
             iconColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
               if (states.contains(MaterialState.hovered))
-                return theme_4unselectedColor;
+                return unselectedColor;
               if (states.contains(MaterialState.focused) ||
                   states.contains(MaterialState.pressed))
                 return theme_4indicatorColor;
-              return theme_4unselectedColor; // Defer to the widget's default.
+              return unselectedColor; // Defer to the widget's default.
             },
           ),
         )
@@ -150,7 +176,7 @@ final themeDark = ThemeData(
       selectionHandleColor: Colors.transparent,
     ),
     dividerTheme: const DividerThemeData(
-      color: theme_4dividerColor,
+      color: dividerColor,
       thickness: 0.5,
 
     ),
@@ -160,15 +186,15 @@ final themeDark = ThemeData(
           //side: BorderSide(color: Theme.of(context).disabledColor, width: 0.5),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-      color: theme_4TitleBoxBcgColor,//theme_4TitleBoxBcgColor
+      color: titleBoxBcgColor,//theme_4TitleBoxBcgColor
     ),
     sliderTheme: SliderThemeData(
       trackShape: RectangularSliderTrackShape(),
       trackHeight: 2,
       activeTrackColor:theme_4indicatorColor,
-      inactiveTrackColor: theme_4unselectedColor,
-      thumbColor: theme_4TitleBoxBcgColor,
-      overlayColor: theme_4TitleBoxBcgColor.withOpacity(0.3),
+      inactiveTrackColor: unselectedColor,
+      thumbColor: titleBoxBcgColor,
+      overlayColor: titleBoxBcgColor.withOpacity(0.3),
       thumbShape:
       const RoundSliderThumbShape(enabledThumbRadius: 10),
       overlayShape: RoundSliderOverlayShape(
@@ -184,14 +210,14 @@ final themeDark = ThemeData(
         color: theme_4indicatorColor,
 
       ),
-      unselectedIconTheme: const IconThemeData(color: theme_4unselectedColor,),
+      unselectedIconTheme: const IconThemeData(color: unselectedColor,),
       selectedLabelTextStyle: GoogleFonts.exo2(
         textStyle: const TextStyle(
             color: baseTextColor , fontSize: 12.0, fontWeight: FontWeight.w900),
       ),
       unselectedLabelTextStyle: GoogleFonts.exo2(
           textStyle: const TextStyle(
-              color: theme_4unselectedColor,
+              color: unselectedColor,
               fontSize: 10.0,
               fontWeight: FontWeight.w500
           )),
@@ -214,9 +240,9 @@ final themeDark = ThemeData(
             if (states.contains(MaterialState.selected)) {
               return theme_4indicatorColor;
             } else if (states.contains(MaterialState.disabled)){
-              return theme_4unselectedColor;
+              return unselectedColor;
             } else{
-              return theme_4unselectedColor;
+              return unselectedColor;
             }
           },
         ),),
@@ -226,15 +252,15 @@ final themeDark = ThemeData(
           if (states.contains(MaterialState.selected)) {
             return theme_4indicatorColor;
           } else if (states.contains(MaterialState.disabled)){
-            return theme_4unselectedColor;
+            return unselectedColor;
           } else{
-            return theme_4unselectedColor;
+            return unselectedColor;
           }
         },
       )
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: theme_4TitleBoxBcgColor,
+      backgroundColor: titleBoxBcgColor,
 
       selectedIconTheme: const IconThemeData(
         size: 18.0,
@@ -242,7 +268,7 @@ final themeDark = ThemeData(
       ),
       unselectedIconTheme: const IconThemeData(
             size: 18.0,
-            color: theme_4unselectedColor
+            color: unselectedColor
       ),
       selectedLabelStyle:  GoogleFonts.exo2(
           textStyle: const TextStyle(
@@ -252,12 +278,12 @@ final themeDark = ThemeData(
           )),
       unselectedLabelStyle:GoogleFonts.exo2(
           textStyle: const TextStyle(
-              color: theme_4unselectedColor,
+              color: unselectedColor,
               fontSize: 10.0,
               fontWeight: FontWeight.w500
           )),
       selectedItemColor: theme_4indicatorColor,
-      unselectedItemColor: theme_4unselectedColor
+      unselectedItemColor: unselectedColor
     ),
     floatingActionButtonTheme:
     const FloatingActionButtonThemeData(
@@ -284,7 +310,7 @@ final themeDark = ThemeData(
       focusedBorder:const UnderlineInputBorder(
           borderSide: BorderSide(
             width: .5,
-            color: theme_4dividerColor,
+            color: dividerColor,
           )),
       enabledBorder: InputBorder.none,
       errorBorder: InputBorder.none,
@@ -295,7 +321,7 @@ final themeDark = ThemeData(
       hintStyle:const TextStyle(color: baseTextColor , fontSize: 20),
       contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
       suffixStyle: const TextStyle(
-        color: theme_4unselectedColor,
+        color: unselectedColor,
       ),
       labelStyle: const TextStyle(
         color: theme_4noteCardColor,
@@ -303,7 +329,7 @@ final themeDark = ThemeData(
       helperMaxLines: 1,
       helperStyle: GoogleFonts.exo2(
         textStyle: const TextStyle(
-          color: theme_4unselectedColor,
+          color: unselectedColor,
           fontSize: 7.0,
           fontWeight: FontWeight.w300,
         ),
@@ -314,7 +340,7 @@ final themeDark = ThemeData(
       ),
     ),
     progressIndicatorTheme:const ProgressIndicatorThemeData(
-      refreshBackgroundColor: theme_4unselectedColor,
+      refreshBackgroundColor: unselectedColor,
       // linearTrackColor: theme_4indicatorColor
 
 
@@ -329,18 +355,18 @@ final themeDark = ThemeData(
     ),
 
     tabBarTheme: TabBarTheme(
-      dividerColor: theme_4dividerColor.withOpacity(0.5),
+      dividerColor: dividerColor.withOpacity(0.5),
 
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       indicator: const UnderlineTabIndicator(
           borderSide: BorderSide(width: 2.0, color: theme_4indicatorColor),
           insets: EdgeInsets.symmetric(horizontal: 12.0),),
       labelColor: baseTextColor ,
-      unselectedLabelColor: theme_4unselectedColor,
+      unselectedLabelColor: unselectedColor,
       unselectedLabelStyle: GoogleFonts.exo2(
         textStyle: const TextStyle(
             fontSize: 15,
-            color: theme_4unselectedColor,
+            color: unselectedColor,
             fontWeight: FontWeight.w300,
             decoration: TextDecoration.none),
       ),
@@ -353,6 +379,16 @@ final themeDark = ThemeData(
             overflow: TextOverflow.ellipsis),
       ),
     ),
+  chipTheme: ChipThemeData(
+      showCheckmark: false,
+      shadowColor: Colors.transparent,
+      disabledColor: unselectedColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: const BorderSide(color: dividerColor),
+      ),
+      side: const BorderSide(style: BorderStyle.none)
+  ),
 );
 
 

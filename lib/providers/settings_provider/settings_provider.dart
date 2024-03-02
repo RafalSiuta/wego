@@ -1,3 +1,4 @@
+import 'package:wego/providers/settings_provider/data_store_option_list.dart';
 import 'package:wego/providers/settings_provider/theme_option.dart';
 import 'package:flutter/material.dart';
 import '../../utils/constans/prefs_keys.dart';
@@ -15,6 +16,7 @@ class SettingsProvider extends ChangeNotifier {
     loadTheme();
     nutritionSettings = nutritionSettingsList.nutritionOptionList;
     weightSettings = weightOptionList.weightOptionTypeList;
+    storeDataSettings = dataStoreOption.dataStoreOptionList;
     getNutritionOptionList();
 
   }
@@ -58,6 +60,8 @@ class SettingsProvider extends ChangeNotifier {
   bool isCarboKcal = true;
   bool isFatKcal = true;
   NutritionOptionList nutritionSettingsList = NutritionOptionList();
+
+
   List nutritionSettings = [];
 
   getNutritionOptionList() async {
@@ -107,7 +111,23 @@ class SettingsProvider extends ChangeNotifier {
     _prefs.storeInt(weightOptionValue, weightChoice );
     notifyListeners();
   }
-  // SavingTypeList savingTypeList = SavingTypeList();
+  // store data options:
+
+  DataStoreOptionList dataStoreOption = DataStoreOptionList();
+  List storeDataSettings = [];
+  int storeDataChoice = 0;
+
+  getStoreDataOptionList() async {
+    storeDataChoice  = await _prefs.restoreInt(
+        weightOptionValue, storeDataChoice );
+    notifyListeners();
+  }
+
+  onStoreDataOption(int? index) {
+    storeDataChoice = index!;
+    _prefs.storeInt(weightOptionValue, storeDataChoice );
+    notifyListeners();
+  }
 
 //todo: calendar settings:
 bool isCalStartsMonday = true;

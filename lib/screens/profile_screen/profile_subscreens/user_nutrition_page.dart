@@ -26,11 +26,6 @@ class UserNutritionPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-               // const SizedBox(height: 20,),
-               //  WidgetHeader(
-               //    title: "macronutrients",
-               //    padding: layoutPadding,
-               //  ),
                 InfoText(
                   title: "nutrition_details",
                   padding: headerPadding,

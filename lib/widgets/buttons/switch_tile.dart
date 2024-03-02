@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
 
+import '../../utils/internationalization/app_localizations.dart';
+
 
 class SwitchTile extends StatelessWidget {
   const SwitchTile({
@@ -37,10 +39,10 @@ class SwitchTile extends StatelessWidget {
           Expanded(
             child: RichText(
                 text: TextSpan(
-                 text: textValue1!.capitalizeFirstLetter(),
+                 text: AppLocalizations.of(context)!.translate(textValue1!).capitalizeFirstLetter(),
                  style: switchValue! ? selectedText : unselectedText,
               children: <TextSpan>[
-                TextSpan(text: "\n${textValue2!.capitalizeFirstLetter()}",style: !switchValue! ? selectedText : unselectedText,)
+                TextSpan(text: "\n${AppLocalizations.of(context)!.translate(textValue2!).capitalizeFirstLetter()}",style: !switchValue! ? selectedText : unselectedText,)
               ]
             ), overflow: TextOverflow.ellipsis,maxLines: 2,),
           ),

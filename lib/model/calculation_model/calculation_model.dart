@@ -63,4 +63,6 @@ class CalculationModel {
         isFavorite = json['is_favorite'] as bool,
         infoColor = json['info_color'] as Color,
         imagePath = json['img_path'];
+
+
 }

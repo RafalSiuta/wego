@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../model/menu/nav_model.dart';
+import '../../utils/internationalization/app_localizations.dart';
 import '../responsive/screen_type_layout.dart';
 import '../../utils/extensions/string_extension.dart';
 
@@ -76,7 +77,8 @@ class SideNav extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: Text(
-                        '${titles[index].title}  ',
+                          AppLocalizations.of(context)!.translate(titles[index].title).capitalizeFirstLetter()
+                        //'${titles[index].title}  ',
                       ),
                     ),
                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
 
+import '../../utils/internationalization/app_localizations.dart';
+
 class LargeSwitchTile extends StatelessWidget {
   const LargeSwitchTile({
     required this.title1,
@@ -33,7 +35,8 @@ class LargeSwitchTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            title1!.capitalizeFirstLetter(),
+          AppLocalizations.of(context)!.translate(title1!).capitalizeFirstLetter(),
+           // title1!.capitalizeFirstLetter(),
             style: !switchValue! ? selectedText : unselectedText
           ),
 
@@ -48,7 +51,7 @@ class LargeSwitchTile extends StatelessWidget {
             ),
           ),
           Text(
-            title2!.capitalizeFirstLetter(),
+            AppLocalizations.of(context)!.translate(title2!).capitalizeFirstLetter(),
             style: switchValue! ? selectedText : unselectedText,
           ),
         ],

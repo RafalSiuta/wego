@@ -12,24 +12,24 @@ final  List<SubScreenModel> _creatorPages = [
   SubScreenModel(
     page:  const WorkoutCreatorScreen(),
     title: NavModel(
-      title: 'Workout',
+      title: 'nav_workout',
     ),
   ),
   SubScreenModel(
     page: const MealsCreatorScreen(),
     title: NavModel(
-      title: 'Meals',
+      title: 'nav_meals',
     ),
   ),
   SubScreenModel(
       page: const DrinksCreatorScreen(),
       title: NavModel(
-        title: 'Drinks',
+        title: 'nav_drinks',
       )),
   SubScreenModel(
       page: const SupplementsCreatorScreen(),
       title: NavModel(
-        title: 'Supplements',
+        title: 'nav_supl',
       ))
 ];
 
@@ -40,23 +40,5 @@ class CreatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SubScreenContainer(pages: _creatorPages,);
 
-    //   Column(
-    //   children: [
-    //
-    //     Expanded(
-    //       child: TabNav(
-    //           tabTitles: [
-    //             "Workout", "Meals", "Drinks", "Supplements"
-    //           ],
-    //           list:[
-    //             WorkoutCreatorScreen(),
-    //             MealsCreatorScreen(),
-    //             DrinksCreatorScreen(),
-    //             SupplementsCreatorScreen()
-    //           ]
-    //       ),
-    //     )
-    //   ],
-    // );
   }
 }

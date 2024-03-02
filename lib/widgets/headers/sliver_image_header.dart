@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'dart:math' as math;
@@ -6,6 +8,7 @@ import '../../model/calculation_model/calculation_model.dart';
 import '../../model/color/color_switch.dart';
 import '../../utils/dimensions/size_info.dart';
 import '../../utils/internationalization/app_localizations.dart';
+import 'date_header.dart';
 
 class SliverImageHeader extends SliverPersistentHeaderDelegate {
 
@@ -25,19 +28,20 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
     var subtitleSize = SizeInfo.headerSubtitleSize;
     var cardBcgColor  = ColorSwitch(category: data!.category);
     cardBcgColor.getColor(context);
+    
     print('MAX XTENT: ${maxHeight} / ${shrinkOffset * 0.1}');
-    double opacity = shrinkOffset > 100 ? 1.0 : 0;
     return Container(
-      margin: EdgeInsets.only(top: 50),
+      margin: EdgeInsets.only(top: topSpace(shrinkOffset)),
+     // color: cardBcgColor.bcgColor!.withOpacity(opacity(shrinkOffset)),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
           Transform.translate(
-            offset:  Offset(0, -90),
+            offset: Offset(0, -20),
             child: Container(
-              height: MediaQuery.of(context).size.width,
+             // height: 210,
               width: MediaQuery.of(context).size.width,
-              color: cardBcgColor.bcgColor!.withOpacity(opacity),
+              color: cardBcgColor.bcgColor!.withOpacity(opacity(shrinkOffset)),
             ),
           ),
           Container(
@@ -84,7 +88,7 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
             ),
           ),
           Transform.translate(
-            offset:  Offset(0, -90),
+            offset:  Offset(0, transY(shrinkOffset)),
             child: Hero(
               tag: heroTag ?? '',
               child: Image(
@@ -99,6 +103,32 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
         ],
       ),
     );
+  }
+  //import 'dart:math' as math;
+  double opacity(double shrinkOffset){
+    if(shrinkOffset > 39){
+      return 0.0 + math.min(1.0, shrinkOffset);
+    }else{
+      return 0.0;
+    }
+
+  }
+  double topSpace(double shrinkOffset){
+    if(shrinkOffset > 10 ){
+      return math.min(5.0, shrinkOffset);
+    }else{
+      return math.max(50.0, shrinkOffset);
+    }
+
+  }
+
+  double transY(double shrinkOffset){
+    if(shrinkOffset > 10){
+      return 0.0 + math.max(5,-shrinkOffset);
+    }else{
+      return 0.0 + math.min(-90,shrinkOffset);
+    }
+
   }
 
   double blur(double shrinkOffset) {

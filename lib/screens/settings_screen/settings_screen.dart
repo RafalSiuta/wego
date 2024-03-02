@@ -1,23 +1,29 @@
+import 'package:wego/screens/settings_screen/settings_subscreens/about_page.dart';
 import 'package:wego/screens/settings_screen/settings_subscreens/advanced_page.dart';
 import 'package:wego/screens/settings_screen/settings_subscreens/settings_page.dart';
 import 'package:flutter/material.dart';
 import '../../model/menu/nav_model.dart';
 import '../../model/menu/subscreen_model.dart';
 import '../../widgets/navigators/tab_nav.dart';
-import '../subscren_container.dart';
 
 
 final  List<SubScreenModel> _settingsPages = [
   SubScreenModel(
     page:  const SettingsPage(),
     title: NavModel(
-      title: 'Settings',
+      title: 'nav_sets',
     ),
   ),
   SubScreenModel(
-    page: const Center(child: Text("about"),),
+    page:  const AdvancedPage(),
     title: NavModel(
-      title: 'About',
+      title: 'nav_sets_adv',
+    ),
+  ),
+  SubScreenModel(
+    page: const AboutPage(),
+    title: NavModel(
+      title: 'nav_about',
     ),
   ),
 ];
@@ -35,12 +41,7 @@ class SettingsScreen extends StatelessWidget {
 
         Expanded(
           child: TabNav(
-            tabTitles: ["Settings","Advanced", "About"],
-              list:[
-                SettingsPage(),
-                AdvancedPage(),
-                Center(child: Text("about"),)
-              ]
+            pages: _settingsPages,
           ),
         )
       ],

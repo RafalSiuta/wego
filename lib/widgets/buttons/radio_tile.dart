@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
 
+import '../../utils/internationalization/app_localizations.dart';
+
 
 class RadioTile extends StatelessWidget {
   const RadioTile({
@@ -35,17 +37,16 @@ class RadioTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
-
           Expanded(
             child: RichText(
                 text: TextSpan(
-                 text: title!.capitalizeFirstLetter(),
+                 text: AppLocalizations.of(context)!.translate(title!).capitalizeFirstLetter(),
+                 //title!.capitalizeFirstLetter(),
 
                  style: value == groupValue ? selectedText : unselectedText,
 
               children: <TextSpan>[
-                TextSpan(text: "\n${description!.capitalizeFirstLetter()}",)
+                TextSpan(text: "\n${AppLocalizations.of(context)!.translate(description!).capitalizeFirstLetter()}",)
               ]
             ), overflow: TextOverflow.ellipsis,maxLines: 4,),
           ),

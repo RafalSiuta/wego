@@ -6,25 +6,25 @@ class WeightOptionList {
   final List<NutritionSettingsModel> _weightOptionTypeList = [
     NutritionSettingsModel(
       symbol: 'E',
-      firstOption: 'sets_macro_nutrients',
+      firstOption: '',
       secondOption: 'option_current_weight',
       value: false
     ),
     NutritionSettingsModel(
       symbol: 'F',
-      firstOption: 'sets_macro_nutrients',
+      firstOption: '',
       secondOption: 'option_lorenz_weight',
         value: false
     ),
     NutritionSettingsModel(
       symbol: 'E',
-      firstOption: 'sets_macro_nutrients',
+      firstOption: '',
       secondOption: 'option_potton_weight',
         value: false
     ),
     NutritionSettingsModel(
       symbol: 'G',
-      firstOption: 'sets_macro_nutrients',
+      firstOption: '',
       secondOption: 'option_low_fat_weight',
         value: false
     ),

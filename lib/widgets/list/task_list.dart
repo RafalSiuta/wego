@@ -6,6 +6,7 @@ import '../../screens/creator_screen/task_creator.dart';
 import '../cards/fit_card.dart';
 import '../cards/small_calendar_card.dart';
 import '../cards/welcome_card.dart';
+import '../headers/counter_text.dart';
 import '../headers/empty_list.dart';
 import '../headers/info_text.dart';
 import '../headers/widget_header.dart';
@@ -30,11 +31,19 @@ class TaskList extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: sidePadding, bottom: sidePadding, left: 0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InfoText(
-                title: 'You have ${calendarProvider.taskListCounter} task${calendarProvider.taskListCounter > 1 ? 's' : ""}',
+              // InfoText(
+              //   title: 'You have ${calendarProvider.taskListCounter} task${calendarProvider.taskListCounter > 1 ? 's' : ""}',
+              //   padding: EdgeInsets.only(left: sidePadding, ),
+              //   isInfoIcon: false,
+              // ),
+              CounterText(
+                text1: 'counter_txt_1',
+                text2: calendarProvider.taskListCounter > 1 ? "counter_txt_3" : "counter_txt_2",
+                valueCount: '${calendarProvider.taskListCounter}',
                 padding: EdgeInsets.only(left: sidePadding, ),
-                isInfoIcon: false,
               ),
               Divider(indent: sidePadding, endIndent: sidePadding,),
               Container(

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:wego/screens/stats_screen/stats_subscreens/calculation_screen.dart';
 import 'package:wego/screens/stats_screen/stats_subscreens/calendar_screen.dart';
 import 'package:wego/screens/stats_screen/stats_subscreens/statistics_screen.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
 
 import '../../model/menu/nav_model.dart';
 import '../../model/menu/subscreen_model.dart';
+import '../../utils/internationalization/app_localizations.dart';
 import '../../widgets/navigators/side_nav.dart';
 import '../../widgets/navigators/tab_nav.dart';
 import '../subscren_container.dart';
@@ -14,19 +16,19 @@ final  List<SubScreenModel> _statsPages = [
   SubScreenModel(
     page: const CalculationScreen(),
     title: NavModel(
-      title: 'Calculations',
+      title: 'nav_calc',
     ),
   ),
   SubScreenModel(
     page: const CalendarScreen(),
     title: NavModel(
-      title: 'Calendar',
+      title: 'nav_cal',
     ),
   ),
   SubScreenModel(
       page: const StatisticsScreen(),
       title: NavModel(
-        title: 'Statistics',
+        title: 'nav_stats',
       ))
 ];
 
@@ -41,15 +43,7 @@ class StatsScreen extends StatelessWidget {
 
         Expanded(
           child: TabNav(
-              tabTitles: [
-                "Calculations", "Calendar", "Statistics"
-              ],
-              list:[
-                CalculationScreen(),
-                CalendarScreen(),
-                StatisticsScreen()
-
-              ]
+              pages: _statsPages,
           ),
         )
       ],

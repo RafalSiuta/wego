@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
+import '../../model/menu/subscreen_model.dart';
+import '../../utils/internationalization/app_localizations.dart';
 
 class TabNav extends StatefulWidget {
-  const TabNav( {required this.list, required this.tabTitles,super.key});
-  final List<Widget>? list;
-  final List<String> tabTitles;
+  const TabNav( {required this.pages, super.key});
+  final List<SubScreenModel>? pages;
 
   @override
   State<TabNav> createState() => _TabNavState();
@@ -13,14 +15,12 @@ class _TabNavState extends State<TabNav> with SingleTickerProviderStateMixin{
 
   late TabController _tabController;
 
-  List<Tab>? tabs;
-
   final int _tabCounter = 0;
 
   @override
   void initState() {
-    tabs = widget.tabTitles.map((e) => Tab(text: e, height: 40,)).toList();
-    _tabController = TabController(initialIndex: _tabCounter, length: widget.list!.length, vsync: this);
+    //tabs = widget.pages!.map((e) => Tab(text:AppLocalizations.of(context)!.translate(e.title!.title).capitalizeFirstLetter() , height: 40,)).toList();
+    _tabController = TabController(initialIndex: _tabCounter, length: widget.pages!.length, vsync: this);
     super.initState();
 
   }
@@ -40,12 +40,14 @@ class _TabNavState extends State<TabNav> with SingleTickerProviderStateMixin{
             indicatorWeight: .5,
             dividerColor: Theme.of(context).tabBarTheme.dividerColor,
             controller: _tabController,
-            tabs: tabs!),
+            tabs: widget.pages!.map((e) => Tab(text:AppLocalizations.of(context)!.translate(e.title!.title).capitalizeFirstLetter() , height: 40,)).toList()
+
+        ),
         Expanded(
           child: TabBarView(
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
-            children: widget.list!,
+            children: widget.pages!.map((e) => e.page!).toList(),
               // const BouncingScrollPhysics(
               // parent: BouncingScrollPhysics()),
           ),

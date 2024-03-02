@@ -1,5 +1,40 @@
 {
 
+  "nav_calc": "Kalkulacje",
+  "nav_cal": "Kalendarz",
+  "nav_stats": "Statystyki",
+
+  "nav_person": "Ciało",
+  "nav_activity": "Aktywność",
+  "nav_nutri": "Odżywianie",
+
+  "nav_workout": "treningi",
+  "nav_meals": "posiłki",
+  "nav_drinks": "napoje",
+  "nav_supl": "suplementy",
+
+  "nav_sets": "Ustawienia",
+  "nav_sets_adv": "Zaawansowane",
+  "nav_about": "O apce",
+
+  "chips_indicators": "wskaźniki",
+  "chips_calories": "kalorie",
+  "chips_hydro": "nawodnienie",
+  "chips_strength": "siła",
+  "chips_fav": "ulubione",
+
+  "theme_mode": "motyw",
+  "light_theme": "jasny motyw",
+  "dark_theme": "ciemny motyw",
+
+  "metric_unit": "jednostki metryczne",
+  "imperial_unit": "Jednostki imperialne",
+  "unit_switch": "Zmiana jednostek",
+
+  "counter_txt_1": "Masz",
+  "counter_txt_2": "zadanie",
+  "counter_txt_3": "zadania",
+
   "age": "Wiek",
   "weight": "Waga",
   "height": "Wzrost",
@@ -74,6 +109,10 @@
 
   "male": "Mężczyzna",
   "female": "Kobieta",
+
+  "save_to_chart": "Dodaj do diagramu",
+  "page_close": "Zamknij",
+  "add_favorite": "Ulubione",
 
   "read_more": "...czytaj więcej  ",
 
@@ -258,16 +297,16 @@
   "option_potton_weight": "Waga wg. Potton-a",
   "option_low_fat_weight": "Beztłuszczowa waga",
 
-  "option_protein_kcal_enable": "Białko KCAL",
-  "option_protein_gram_enable": "Białko GRAM",
-  "option_max_kcal": "Maks [KCAL]",
-  "option_min_kcal": "Min [KCAL}",
+  "option_protein_kcal_enable": "Białko - wynik kalkulacji w [KCAL]",
+  "option_protein_gram_enable": "Białko - wynik kalkulacji w [GRAM]",
+  "option_max_kcal": "Maksymalne spożycie makroskładników [KCAL]",
+  "option_min_kcal": "Minimalne spożycie makroskładników [KCAL}",
 
-  "option_carbo_kcal_enable": "Węglowodany KCAL",
-  "option_carbo_gram_enable": "Węglowodany GRAM",
+  "option_carbo_kcal_enable": "Węglowodany - wynik kalkulacji w [KCAL]",
+  "option_carbo_gram_enable": "Węglowodany - wynik kalkulacji w [GRAM]",
 
-  "option_fat_kcal_enable": "Tłuszcze KCAL",
-  "option_fat_gram_enable": "Tłuszcze GRAM",
+  "option_fat_kcal_enable": "Tłuszcze - wynik kalkulacji w [KCAL]",
+  "option_fat_gram_enable": "Tłuszcze - wynik kalkulacji w [GRAM]",
 
   "add_to_chart_title": "Dodać do diagramu?",
   "add_to_chart_description": "Czy chcesz dodać wyniki do diagramu?",
@@ -280,9 +319,7 @@
   "remember_warning": "Pamiętaj !!!",
   "usage_warning_description": "Wszystkie kalkulatory są dostarczane jako narzędzia samopomocy do samodzielnego wykorzystania z wynikami opartymi na informacjach dostarczonych przez użytkownika. Wszystkie przykłady są hipotetyczne i służą wyłącznie celom ilustracyjnym. Uważa się, że obliczone wyniki są dokładne, ale wyniki nie są gwarantowane. Kalkulatory ćwiczeń, sprawności, zdrowia i utraty wagi nie mają na celu udzielania porad medycznych i nie powinny być zastępowane poradami medycznymi. Użytkownicy powinni skonsultować się z lekarzem przed podjęciem forsownych ćwiczeń lub planu diety.",
 
-  "metric_unit": "Metric unit enable",
-  "imperial_unit": "Imperial unit enable",
-  "unit_switch": "Zmiana jednostek",
+
 
   "from_author": "Od autora:",
   "from_author_description": "Tak wiele obliczeń zawiera informacje o naszym organizmie, wielu naukowców od lat opracowuje wzory matematyczne, które przybliżają nas do informacji o naszym zdrowiu. FitNumbers to projekt, którego ideą jest zebranie jak największej liczby takich obliczeń, dzięki czemu możemy obserwować rozbieżności między nimi. Takie obliczenia mogą być pomocne przy układaniu diety, ocenie stanu zdrowia czy kondycji fizycznej.",
@@ -343,8 +380,8 @@
   "are_you_sure": "Czy chcesz całkowicie usunąć dane ?",
   "yes": "Akceptuję",
   "no": "Anuluj",
-  "detail_title": "Szczegóły",
-  "theme_mode": "motyw"
+  "detail_title": "Szczegóły"
+
 
 }
 

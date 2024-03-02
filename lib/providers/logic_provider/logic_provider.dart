@@ -29,15 +29,21 @@ class LogicProvider extends ChangeNotifier {
 
 
   List<ChipChoice> choiceChipList = [
-    ChipChoice(name:'indicators' ,category: supplementCategory, value:true),
-    ChipChoice(name:'calories', category: mealCategory, value:true),
-    ChipChoice(name:'hydration', category: drinkCategory, value:true),
-    ChipChoice(name:'strength', category: workoutCategory, value:true),
-    ChipChoice(name:'favorites', category: isFavoriteCategory, value:true),
+    ChipChoice(name:'chips_indicators' ,category: supplementCategory, value:true),
+    ChipChoice(name:'chips_calories', category: mealCategory, value:true),
+    ChipChoice(name:'chips_hydro', category: drinkCategory, value:true),
+    ChipChoice(name:'chips_strength', category: workoutCategory, value:true),
+    ChipChoice(name:'chips_fav', category: isFavoriteCategory, value:true),
   ];
   void chipChoice(int index, bool val){
     choiceChipList[index].value = val;
     _prefs.storeList(chipChoiceListKey, choiceChipList);
+    updateCalculationList();
+    notifyListeners();
+  }
+
+  void addToFavorite(CalculationModel calc){
+    calc.isFavorite = !calc.isFavorite!;
     updateCalculationList();
     notifyListeners();
   }
@@ -218,6 +224,7 @@ class LogicProvider extends ChangeNotifier {
       bmr.imagePath = 'images/bmr.png';//imagePath('male_food', 'female_food');
       bmr.infoColor = checkWarning(0);
       bmr.category = mealCategory;
+      bmr.isFavorite = false;
       notifyListeners();
     }
     notifyListeners();
@@ -267,6 +274,7 @@ class LogicProvider extends ChangeNotifier {
       ter.infoColor = checkWarning(0);
       ter.imagePath = 'images/ter.png';//imagePath('male_food_prot', 'female_food_fat');
       ter.category = mealCategory;
+      ter.isFavorite = false;
       notifyListeners();
     }
 
@@ -336,6 +344,7 @@ class LogicProvider extends ChangeNotifier {
       ymca.chartList = chart;
       ymca.imagePath = 'images/ymca.png';//imagePath('male_index2', 'female_index2');
       ymca.category = supplementCategory;
+      ymca.isFavorite = false;
 
     }
     notifyListeners();
@@ -410,6 +419,7 @@ class LogicProvider extends ChangeNotifier {
       aymca.chartList = chart;
       aymca.imagePath = 'images/ymca.png';//imagePath('male_index3', 'female_index3');
       aymca.category = supplementCategory;
+      aymca.isFavorite = false;
 
     }
     notifyListeners();
@@ -461,6 +471,7 @@ class LogicProvider extends ChangeNotifier {
       whr.chartList = chart;
       whr.imagePath = 'images/food_1.png';//imagePath('male_index1', 'female_index2');
       whr.category = supplementCategory;
+      whr.isFavorite = false;
 
     }
     notifyListeners();
@@ -537,6 +548,7 @@ class LogicProvider extends ChangeNotifier {
       whtr.chartList = chart;
       whtr.imagePath = 'images/food_1.png';//imagePath('male_index2', 'female_index');
       whtr.category = supplementCategory;
+      whtr.isFavorite = false;
     }
     notifyListeners();
     return whtr;
@@ -566,6 +578,7 @@ class LogicProvider extends ChangeNotifier {
           'images/food_1.png';//imagePath('male_weight_potton', 'female_weight_potton');
       potton.infoColor = checkWarning(0);
       potton.category = supplementCategory;
+      potton.isFavorite = false;
     }
     notifyListeners();
     return potton;
@@ -594,6 +607,7 @@ class LogicProvider extends ChangeNotifier {
       lorenz.imagePath = 'images/food_1.png';//imagePath('male_weight', 'female_weight');
       lorenz.infoColor = checkWarning(0);
       lorenz.category  = supplementCategory;
+      lorenz.isFavorite = false;
     }
     notifyListeners();
     return lorenz;
@@ -634,6 +648,7 @@ class LogicProvider extends ChangeNotifier {
       leanWeight.imagePath = 'images/pure_weight.png';//imagePath('male_weight_fat', 'female_weight_fat');
       leanWeight.category = supplementCategory;
       leanWeight.infoColor = checkWarning(0);
+      leanWeight.isFavorite = false;
     }
     notifyListeners();
     return leanWeight;
@@ -742,6 +757,7 @@ class LogicProvider extends ChangeNotifier {
       water.imagePath = 'images/water.png';//imagePath('male_water', 'female_water');
       water.infoColor = checkWarning(0);
       water.category = drinkCategory;
+      water.isFavorite = false;
     }
     notifyListeners();
     return water;
@@ -800,6 +816,7 @@ class LogicProvider extends ChangeNotifier {
       proteinIntake.imagePath = 'images/protein.png';//imagePath('male_food_prot', 'female_food');
       proteinIntake.infoColor = checkWarning(0);
       proteinIntake.category = mealCategory;
+      proteinIntake.isFavorite = false;
     }
     notifyListeners();
     return proteinIntake;
@@ -859,6 +876,7 @@ class LogicProvider extends ChangeNotifier {
       carboIntake.imagePath = 'images/carbo.png';//imagePath('male_food', 'female_food_carbo');
       carboIntake.infoColor = checkWarning(0);
       carboIntake.category = mealCategory;
+      carboIntake.isFavorite = false;
     }
     notifyListeners();
     return carboIntake;
@@ -917,6 +935,7 @@ class LogicProvider extends ChangeNotifier {
       fatIntake.imagePath = 'images/fats.png';//imagePath('male_food_fat', 'female_food_fat');
       fatIntake.infoColor = checkWarning(0);
       fatIntake.category = mealCategory;
+      fatIntake.isFavorite = false;
     }
     notifyListeners();
     return fatIntake;
@@ -970,6 +989,7 @@ class LogicProvider extends ChangeNotifier {
       maxBenchPress.imagePath = 'images/workout_dude.png';//imagePath('male_bench', 'female_bench');
       maxBenchPress.infoColor = checkWarning(0);
       maxBenchPress.category = workoutCategory;
+      maxBenchPress.isFavorite = false;
     }
     notifyListeners();
     return maxBenchPress;
@@ -994,6 +1014,7 @@ class LogicProvider extends ChangeNotifier {
       maxSquat.imagePath = 'images/workout_dude.png';//imagePath('male_squat', 'female_squat');
       maxSquat.infoColor = checkWarning(0);
       maxSquat.category = workoutCategory;
+      maxSquat.isFavorite = false;
     }
     notifyListeners();
     return maxSquat;
@@ -1018,6 +1039,7 @@ class LogicProvider extends ChangeNotifier {
       maxDeadLift.imagePath = 'images/workout_dude.png';//imagePath('male_deadlift', 'female_deadlift');
       maxDeadLift.infoColor  = checkWarning(0);
       maxDeadLift.category = workoutCategory;
+      maxDeadLift.isFavorite = false;
     }
     notifyListeners();
     return maxDeadLift;
