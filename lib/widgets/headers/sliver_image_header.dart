@@ -29,7 +29,7 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
     var cardBcgColor  = ColorSwitch(category: data!.category);
     cardBcgColor.getColor(context);
     
-    print('MAX XTENT: ${maxHeight} / ${shrinkOffset * 0.1}');
+    //print('MAX XTENT: ${maxHeight} / ${shrinkOffset * 0.1}');
     return Container(
       margin: EdgeInsets.only(top: topSpace(shrinkOffset)),
      // color: cardBcgColor.bcgColor!.withOpacity(opacity(shrinkOffset)),

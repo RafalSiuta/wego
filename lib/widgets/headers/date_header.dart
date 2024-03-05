@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
+import 'package:wego/utils/internationalization/app_localizations.dart';
 import '../../providers/welcome_provider/welcome_provider.dart';
 import '../../utils/dimensions/size_info.dart';
 
@@ -31,16 +33,17 @@ class DateHeader extends StatelessWidget {
               builder: (context, value, child) {
                 return Transform.translate(
                   offset: value,
-                  child: RichText(
+                  child:
+                  RichText(
                     text: TextSpan(
-                        text: '${homeProvider.weekday}\n',
+                        text: '${AppLocalizations.of(context)!.dateFormat(homeProvider.today!, context).weekDay!.capitalizeFirstLetter()}\n',
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
                             .copyWith(fontSize: titleSize),
                         children: <TextSpan>[
                           TextSpan(
-                            text: '${homeProvider.date}',
+                            text: '${AppLocalizations.of(context)!.dateFormat(homeProvider.today!, context).fullDate}',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!
@@ -48,6 +51,23 @@ class DateHeader extends StatelessWidget {
                           )
                         ]),
                   ),
+                  // RichText(
+                  //   text: TextSpan(
+                  //       text: '${homeProvider.weekday}\n',
+                  //       style: Theme.of(context)
+                  //           .textTheme
+                  //           .headlineLarge!
+                  //           .copyWith(fontSize: titleSize),
+                  //       children: <TextSpan>[
+                  //         TextSpan(
+                  //           text: '${homeProvider.date}',
+                  //           style: Theme.of(context)
+                  //               .textTheme
+                  //               .headlineLarge!
+                  //               .copyWith(fontSize: subtitleSize),
+                  //         )
+                  //       ]),
+                  // ),
                 );
               },
             ),

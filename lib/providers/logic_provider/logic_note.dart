@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
 
-const workoutCategory = "CALENDAR_WORKOUT_CATEGORY";
-const mealCategory = "CALENDAR_MEAL_CATEGORY";
-const drinkCategory = "CALENDAR_DRINK_CATEGORY";
-const supplementCategory = "CALENDAR_SUPPLEMENT_CATEGORY";
-const isFavoriteCategory = "MY_FAVORITE_CARD_CATEGORY";
+import '../../utils/constans/prefs_keys.dart';
+
+// const workoutCategory = "CALENDAR_WORKOUT_CATEGORY";
+// const mealCategory = "CALENDAR_MEAL_CATEGORY";
+// const drinkCategory = "CALENDAR_DRINK_CATEGORY";
+// const supplementCategory = "CALENDAR_SUPPLEMENT_CATEGORY";
+// const isFavoriteCategory = "MY_FAVORITE_CARD_CATEGORY";
 
 class ChipChoiceModel{
   ChipChoiceModel({this.category, this.value, this.name});

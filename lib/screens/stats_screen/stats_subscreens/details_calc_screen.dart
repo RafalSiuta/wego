@@ -149,7 +149,7 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 300),
                         height: 50,
-                        width: MediaQuery.of(context).size.width,
+                       // width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -164,7 +164,7 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
 
                         ),
                         child: RowBuilder(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           itemCount: _menuItems.length,
@@ -185,7 +185,7 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                               isChecked: index == 1 ? widget.data!.isFavorite! : false,
                               icon: widget.data!.isFavorite! && index == 1 ? Icons.favorite :  menuItem.icon ,
                               title: menuItem.title,
-                              fontSize: descriptionFontSize,
+                              fontSize: 8.0,
                               spaceMargin: 12,
 
                             );

@@ -14,10 +14,10 @@ const themeMode = "THEME_MODE";
 
 const calendarFormatKey = "CALENDAR_FORMAT";
 
-const workoutCategory = "CALENDAR_WORKOUT_CATEGORY";
-const mealCategory = "CALENDAR_MEAL_CATEGORY";
-const drinkCategory = "CALENDAR_DRINK_CATEGORY";
-const supplementCategory = "CALENDAR_SUPPLEMENT_CATEGORY";
+const workoutCategory = "exercises_category";
+const mealCategory = "meals_category";
+const drinkCategory = "drinks_category";
+const supplementCategory = "supplements_category";
 const isFavoriteCategory = "MY_FAVORITE_CARD_CATEGORY";
 
 const chipChoiceListKey = "CHIP_CHOICE_LIST";

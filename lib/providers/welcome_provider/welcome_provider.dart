@@ -13,10 +13,12 @@ class WelcomeProvider extends ChangeNotifier{
 
   String? date;
   String? weekday;
+  DateTime? today;
 
   WelcomeProvider(this.calendarProvider){
     date = currentDate.fullDate.format(currentDate.date);
     weekday = currentDate.weekDay.format(currentDate.date);
+    today = DateTime.now();
   }
 
  // final List<UserCalendarModel> _userData = calendarProvider.taskList;

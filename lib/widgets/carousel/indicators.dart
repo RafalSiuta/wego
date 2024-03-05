@@ -54,3 +54,35 @@ class SliderIndicators extends StatelessWidget {
     ); //indicators
   }
 }
+
+class TextCounterIndicators extends StatelessWidget {
+
+  const TextCounterIndicators({
+    this.items,
+    this.itemCount = 0,
+    this.fontSize,
+    super.key
+  });
+
+  final List? items;
+  final int? itemCount;
+  final double? fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      maxLines:1,
+      text: TextSpan(
+          text: '${itemCount! + 1} / ',
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(fontSize: fontSize),
+          children: <TextSpan>[
+            TextSpan(
+              text: '${items!.length}',
+            ),
+          ]),
+    );
+  }
+}

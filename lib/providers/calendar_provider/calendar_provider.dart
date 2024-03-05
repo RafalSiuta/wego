@@ -20,7 +20,7 @@ class CalendarProvider extends ChangeNotifier {
     getAllTasks();
   }
 
-  DateTime focDay =
+  DateTime currentDay =
   DateTime(DateTime
       .now()
       .year, DateTime
@@ -44,6 +44,9 @@ class CalendarProvider extends ChangeNotifier {
   // temp dummy data:
   List<UserCalendarModel> _taskList = [];//DUMMY_DATA;
 
+  List<UserCalendarModel> _welcomeList = [];
+
+
   CalendarFormat format = CalendarFormat.month;
   late final PageController pageController;
 
@@ -60,19 +63,20 @@ class CalendarProvider extends ChangeNotifier {
   }
 
   onMonthChange(DateTime day) {
-    focDay = DateTime(day.year, day.month, 1);
+    currentDay = DateTime(day.year, day.month, 1);
     notifyListeners();
   }
 
   void onDaySelected(selectedDay, focusedDay) async {
     if (!isSameDay(selDay, selectedDay)) {
       selDay = selectedDay;
-      focDay = focusedDay;
+      currentDay = focusedDay;
       _rangeStart = null;
       _rangeEnd = null;
       rangeSelectionMode = RangeSelectionMode.toggledOff;
     }
     _taskList = getCalendarValues(selDay);
+
     notifyListeners();
   }
 
@@ -88,7 +92,7 @@ class CalendarProvider extends ChangeNotifier {
     } else {
       tasks[addDate] = [task];
     }
-    _taskList = getCalendarValues(focDay);
+    _taskList = getCalendarValues(currentDay);
     notifyListeners();
   }
 
@@ -100,6 +104,14 @@ class CalendarProvider extends ChangeNotifier {
     return _taskList.length;
   }
 
+  UnmodifiableListView<UserCalendarModel> get welcomeTaskList {
+    return UnmodifiableListView(_welcomeList);
+  }
+
+  int get welcomeTaskListCounter {
+    return _welcomeList.length;
+  }
+
   getAllTasks() {
     // Sortujemy listę DUMMY_DATA za pomocą funkcji porównującej
     DUMMY_DATA.sort(compareByCategory);
@@ -107,17 +119,19 @@ class CalendarProvider extends ChangeNotifier {
 // Teraz mamy posortowaną listę według kategorii, możesz ją przekształcić na nową listę w tej kolejności
     _taskList = DUMMY_DATA.toList();
 
-// Wyświetlamy posortowaną listę
-//     sortedList.forEach((item) {
-//       print("${item.title}, ${item.category}");
-//     });
+
 
     _taskList.forEach((element) {
       print('ALL ASKS LOADED ${element.title}');
       var addDate =
       DateTime(element.date!.year, element.date!.month, element.date!.day);
       addTaskMarker(element, addDate);
+      if(addDate == currentDay){
+        _welcomeList.add(element);
+      }
     });
+    notifyListeners();
+
   }
   final categoryOrder = [
     workoutCategory,

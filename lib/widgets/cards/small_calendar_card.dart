@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/constans/prefs_keys.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
+import '../../utils/internationalization/app_localizations.dart';
 import '../shapes/card_shape.dart';
 
 class SmallCalendarCard extends StatelessWidget {
-  const SmallCalendarCard({this.imagePath = '',required this.openDetails, required this.title, required this.subtitle, required this.value, this.category, required this.heroTag, super.key});
+  const SmallCalendarCard({this.imagePath = '',required this.itemsList, required this.openDetails, required this.title, required this.subtitle, required this.value, this.category, required this.heroTag, super.key});
   final String? imagePath;
+  final List? itemsList;
   final String? title;
   final String? subtitle;
   final double? value;
@@ -82,20 +85,72 @@ class SmallCalendarCard extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Text(subtitle!,overflow: TextOverflow.ellipsis,maxLines: 1, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: smallFontSize),),
+                                      padding: const EdgeInsets.only(top:2.0, left: 5.0, right: 5.0),
+                                      child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        text: TextSpan(
+                                            text: '${itemsList!.length } ',
+                                            style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: smallFontSize),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: "${AppLocalizations.of(context)!.translate(subtitle!).capitalizeFirstLetter()} :",
+                                              )
+                                            ]),
+                                      ),
+
+                                      // Text(subtitle!,overflow: TextOverflow.ellipsis,maxLines: 1, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: smallFontSize),),
                                     ),
                                     Expanded(
-                                        child: ListView(
+                                        child:
+                                        ListView.builder(
+                                          itemCount: 4,
                                           padding: EdgeInsets.symmetric(horizontal: 5.0,vertical: 3.0),
-                                          children: [
-                                            Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
-                                            Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
-                                            Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
-                                            Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
-
-                                          ],
-                                        )),
+                                          itemBuilder: (context, index){
+                                            int number = index + 1;
+                                            return
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  RichText(
+                                                    maxLines:1,
+                                                    text: TextSpan(
+                                                        text: '${number}. ',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineMedium!
+                                                            .copyWith(fontSize: smallFontSize),
+                                                        children: <TextSpan>[
+                                                          TextSpan(
+                                                            text: 'bench press '.capitalizeFirstLetter(),
+                                                          ),
+                                                          TextSpan(
+                                                            text: ' 4 sets'.capitalizeFirstLetter(),
+                                                            // style: Theme.of(context)
+                                                            //     .textTheme
+                                                            //     .headlineMedium!
+                                                            //     .copyWith(fontSize: fontSize),
+                                                          )
+                                                        ]),
+                                                  ),
+                                                  //Icon(Icons.sports_gymnastics),
+                                                  // Text('${number}) bench press 8x10'.capitalizeFirstLetter(), style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
+                                                ],
+                                              );
+                                          },
+                                        )
+                                        // ListView(
+                                        //   padding: EdgeInsets.symmetric(horizontal: 5.0,vertical: 3.0),
+                                        //   children: [
+                                        //     Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
+                                        //     Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
+                                        //     Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
+                                        //     Text('bench press 8x10', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: smallFontSize),),
+                                        //
+                                        //   ],
+                                        // )
+                                    ),
                                   ],
                                 )
 

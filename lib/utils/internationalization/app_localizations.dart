@@ -2,14 +2,19 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+
+import '../../model/date_model/date_model.dart';
 
 class AppLocalizations {
 
   AppLocalizations({this.locale});
 
   late final Locale? locale;
+  late final String? tag;
 
   static AppLocalizations? of(BuildContext context) {
+
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
@@ -46,6 +51,17 @@ class AppLocalizations {
   // This method will be called from every widget which needs a localized text
   String translate(String key) {
     return key == null || key == "" ? key : _localizedStrings![key] ?? '';
+  }
+
+  DateModel dateFormat(DateTime date, BuildContext context){
+    var tag = Localizations.maybeLocaleOf(context)?.toLanguageTag();
+    DateModel dateModel = DateModel();
+    dateModel.fullDate = DateFormat('dd MMM yyyy', tag).format(date);
+    dateModel.weekDay = DateFormat('EEEE', tag).format(date);
+    dateModel.monthYear  = DateFormat('MMMM yy', tag).format(date);
+    dateModel.shortWeekday = DateFormat('E',tag).format(date);
+
+    return dateModel;
   }
 }
 

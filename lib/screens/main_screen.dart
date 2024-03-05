@@ -5,9 +5,11 @@ import 'package:wego/screens/settings_screen/settings_screen.dart';
 import 'package:wego/screens/welcome_screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
 
 import '../model/menu/nav_model.dart';
 import '../model/menu/screen_model.dart';
+import '../utils/internationalization/app_localizations.dart';
 import '../widgets/navigators/side_nav.dart';
 import 'creator_screen/creator_screen.dart';
 
@@ -38,37 +40,37 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
   final List<ScreenModel> _pages = [
     ScreenModel(
-      page:  WelcomeScreen(),
-      navItem: GButton(
+      page:  const WelcomeScreen(),
+      navItem: NavModel(
       icon: Icons.dashboard,
-      text: "Dash"
+      title: "menu_dash"
       ),
     ),
     ScreenModel(
-      page:  StatsScreen(),
-      navItem: GButton(
+      page:  const StatsScreen(),
+      navItem: NavModel(
         icon: Icons.calendar_month,
-        text: "Cal"
+        title: "menu_stats"
         ),
     ),
     ScreenModel(
-      page: ProfileScreen(),
-      navItem: GButton(
+      page: const ProfileScreen(),
+      navItem: NavModel(
           icon: Icons.person,
-          text: "Profile"
+          title: "menu_profile"
       ),),
     ScreenModel(
-        page: CreatorScreen(),
-        navItem: GButton(
+        page: const CreatorScreen(),
+        navItem: NavModel(
           icon: Icons.create,
-          text: "Create"
+          title: "menu_create"
           ),),
 
     ScreenModel(
-        page: SettingsScreen(),
-        navItem:  GButton(
+        page: const SettingsScreen(),
+        navItem:  NavModel(
           icon: Icons.settings,
-          text: "Sets"
+          title: "menu_sets"
         )
         // BottomNavigationBarItem(
         //     icon: Icon(Icons.settings),
@@ -197,22 +199,16 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                 duration: const Duration(milliseconds: 400),
                 tabBackgroundColor: Theme.of(context).colorScheme.onSecondary,
                 color: Theme.of(context).unselectedWidgetColor,
-                tabs: _pages.map((e) => e.navItem!).toList(),
+                tabs: _pages.map((e) => GButton(
+                  icon: e.navItem!.icon,text:
+                AppLocalizations.of(context)!.translate(e.navItem!.title).capitalizeFirstLetter()
+                  ,)).toList(),
                 onTabChange:(int sel) {
                             _onPageChange(sel);
                             hideTrigger();
                           },
           ),
 
-          // BottomNavigationBar(
-          //   currentIndex: _currentPage,
-          //
-          //   onTap: (int sel) {
-          //     _onPageChange(sel);
-          //     hideTrigger();
-          //   },
-          //   items: _pages.map((e) => e.navItem!).toList()
-          // ),
         ),
       ),
     );

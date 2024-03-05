@@ -1,5 +1,6 @@
 {
 
+
   "nav_calc": "Calculations",
   "nav_cal": "Calendar",
   "nav_stats": "Statistics",
@@ -79,7 +80,7 @@
   "gain_weight": "Weight gain",
   "gain_weight_description": "Set nutrition percentage with 35% protein, 45% carbohydrate, and 20% fat.",
 
-  "body_calculations": "Body calculations",
+  "body_calculations": "dietary indicators",
 
   "protein": "Protein",
   "carbo": "Carbohydrate",
@@ -110,9 +111,22 @@
   "male": "Male",
   "female": "Female",
 
-  "save_to_chart": "Add to chart",
+  "save_to_chart": "Save result",
   "page_close": "Close",
   "add_favorite": "Favorite",
+
+  "menu_dash": "dash",
+  "menu_stats": "stats",
+  "menu_profile": "prof",
+  "menu_create": "create",
+  "menu_sets": "sets",
+
+  "exercises_category": "exercises",
+  "meals_category": "meals",
+  "drinks_category": "drinks",
+  "supplements_category": "doses",
+
+  "progress_bar":"Total",
 
   "read_more": "...read more  ",
 

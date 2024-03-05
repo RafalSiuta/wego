@@ -79,7 +79,7 @@
   "gain_weight": "Przybieranie wagi",
   "gain_weight_description": "Makroskładniki 35% białko, 45% węglowodany i 20% tłuszcze.",
 
-  "body_calculations": "Kalkulacje ",
+  "body_calculations": "wskaźniki dietetyczne ",
 
   "protein": "Białka",
   "carbo": "Węglowodany",
@@ -110,11 +110,24 @@
   "male": "Mężczyzna",
   "female": "Kobieta",
 
-  "save_to_chart": "Dodaj do diagramu",
+  "save_to_chart": "Zapisz wynik",
   "page_close": "Zamknij",
   "add_favorite": "Ulubione",
 
+  "menu_dash": "pulp",
+  "menu_stats": "stat",
+  "menu_profile": "prof",
+  "menu_create": "twórz",
+  "menu_sets": "ustaw",
+
+  "exercises_category": "ćwiczenia",
+  "meals_category": "posiłki",
+  "drinks_category": "napoje",
+  "supplements_category": "dawki",
+
   "read_more": "...czytaj więcej  ",
+
+  "progress_bar":"Całość",
 
   "bmi_title": "Wskaźnik Masy Ciała",
   "bmi_short_title": "BMI",

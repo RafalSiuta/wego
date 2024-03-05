@@ -7,11 +7,13 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wego/model/user_calendar_model/user_calendar_model.dart';
 import 'package:wego/providers/settings_provider/settings_provider.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
 import 'package:wego/widgets/responsive/column_row_builder.dart';
 import '../../../providers/calendar_provider/calendar_provider.dart';
 import '../../../utils/custom_page_route/custom_page_route.dart';
 import '../../utils/constans/prefs_keys.dart';
 import '../../utils/dimensions/size_info.dart';
+import '../../utils/internationalization/app_localizations.dart';
 
 
 class Calendar extends StatelessWidget {
@@ -32,7 +34,7 @@ class Calendar extends StatelessWidget {
         padding: const EdgeInsets.only(right: 8.0),
         child: AnimationLimiter(
           child: TableCalendar<UserCalendarModel>(
-            focusedDay: calendarProvider.focDay,
+            focusedDay: calendarProvider.currentDay,
             availableGestures: AvailableGestures.all,
             firstDay: DateTime(2000),
             lastDay: DateTime(DateTime.now().year + 2),
@@ -73,7 +75,9 @@ class Calendar extends StatelessWidget {
                         return Transform.scale(
                           scale: value,
                           child: Text(
-                            '${DateFormat('MMMM yy').format(date)} ',
+
+                            '${AppLocalizations.of(context)!.dateFormat(date, context).monthYear!.capitalizeFirstLetter()} ',
+                            //'${DateFormat('MMMM yy').format(date)} ',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!
@@ -93,7 +97,8 @@ class Calendar extends StatelessWidget {
                     child: FadeInAnimation(
                         child: Center(
                             child: Text(
-                              '${DateFormat('E').format(date)} ',
+                              '${AppLocalizations.of(context)!.dateFormat(date, context).shortWeekday!.capitalizeFirstLetter()}',
+                              //'${DateFormat('E').format(date)} ',
                               style: (date.weekday != 6 && date.weekday != 7)
                                   ? Theme.of(context)
                                   .textTheme

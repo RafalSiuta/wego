@@ -46,13 +46,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     Container(
                       margin: EdgeInsets.only(top: 53),
                       child: CarouselSlider.builder(
-                        itemCount: welcomeProvider.calendarProvider.taskListCounter,
+                        itemCount: welcomeProvider.calendarProvider.welcomeTaskListCounter,
                         carouselController: welcomeProvider.carouselController,
                         itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
-                          var data = welcomeProvider.calendarProvider.taskList[itemIndex];
+                          var data = welcomeProvider.calendarProvider.welcomeTaskList[itemIndex];
                           return WelcomeCard(
                               title: data.title,
-                              subtitle: '${4} ${data.subtitle}:',
+                              subtitle: data.subtitle,
+                              itemsList: data.items,
                               value: data.progressValue,
                               imagePath: data.imagePath,
                               category: data.category,
@@ -105,6 +106,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       icon: Icon(Icons.arrow_left),
                       onPressed: welcomeProvider.goToPrevious
                   ),
+                  welcomeProvider.calendarProvider.taskList.length > 4 ?
+                  TextCounterIndicators(
+                    items: welcomeProvider.calendarProvider.taskList,
+                    itemCount: welcomeProvider.calendarProvider.taskListCounter,
+                    fontSize: fontSize,
+                  ):
                   SliderIndicators(
                     items: welcomeProvider.calendarProvider.taskList,
                     itemCount: welcomeProvider.calendarProvider.taskListCounter,
@@ -141,7 +148,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Divider(indent: fontSize, endIndent: fontSize,),
                   //todo add categories to sort list items
                   Container(
-                    margin: EdgeInsets.all(8.0),
+                    margin: EdgeInsets.only(top:8.0, bottom: 8.0, left: 8.0),
 
                     height: MediaQuery.of(context).size.height / 5.2,
                     child: ListBuilder(

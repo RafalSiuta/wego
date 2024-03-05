@@ -66,6 +66,7 @@ class TaskList extends StatelessWidget {
                                 SmallCalendarCard(
                                   title: '${data.title}',
                                   subtitle: data.subtitle,
+                                  itemsList: [1,2,3,4],
                                   value: data.progressValue,
                                   imagePath: data.imagePath,
                                   category: data.category,
