@@ -25,8 +25,8 @@ final List<ItemElement>  workoutExerciseSets3 = [
 ];
 
 final List<CalendarItemsModel> calendarWorkoutItems = [
-  CalendarItemsModel(name: 'Podciąganie sztangi', qty: workoutExerciseSets.length, items: workoutExerciseSets),
-  CalendarItemsModel(name: 'Podciąganie drążek',qty: workoutExerciseSets2.length, items: workoutExerciseSets2),
+  CalendarItemsModel(name: 'Podciąganie sztangi', qty: workoutExerciseSets.length, items: workoutExerciseSets, isDone: true),
+  CalendarItemsModel(name: 'Podciąganie drążek',qty: workoutExerciseSets2.length, items: workoutExerciseSets2, isDone: true),
   CalendarItemsModel(name: 'Podciąganie hantli',qty: workoutExerciseSets.length, items: workoutExerciseSets),
   CalendarItemsModel(name: 'Martwe ciągi',qty: workoutExerciseSets3.length, items: workoutExerciseSets3),
 ] ;
@@ -74,11 +74,20 @@ final List<UserCalendarModel> DUMMY_DATA = [
       title: 'Back workout',
       subtitle: workoutCategory,
       category: workoutCategory,
-      imagePath: 'images/workout_dude.png',
+      imagePath: 'images/deadlift_male.png',
       progressValue: 0.2,
       date: DateTime.now(),
       items: calendarWorkoutItems
   ),
+  // UserCalendarModel(
+  //     title: 'Shoulders press',
+  //     subtitle: workoutCategory,
+  //     category: workoutCategory,
+  //     imagePath: 'images/workout_dude.png',
+  //     progressValue: 0.2,
+  //     date: DateTime.now(),
+  //     items: calendarWorkoutItems
+  // ),
   UserCalendarModel(
       title: 'High calories',
       subtitle: mealCategory,

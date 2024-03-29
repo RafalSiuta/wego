@@ -194,17 +194,21 @@ class WelcomeCard extends StatelessWidget {
                                                       TextSpan(
                                                         text: '${data.name} '.capitalizeFirstLetter(),
                                                       ),
-                                                      TextSpan(
-                                                        text: '${data.qty} '.capitalizeFirstLetter(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .headlineMedium!
-                                                            .copyWith(fontSize: fontSize),
-                                                      )
+                                                      // TextSpan(
+                                                      //   text: '${data.qty} '.capitalizeFirstLetter(),
+                                                      //   style: Theme.of(context)
+                                                      //       .textTheme
+                                                      //       .headlineMedium!
+                                                      //       .copyWith(fontSize: fontSize),
+                                                      // )
                                                     ]),
                                               ),
                                               Expanded(child: SizedBox(width: 2.0,)),
-                                              Icon( data.isDone! ? Icons.check_box_outline_blank : Icons.check_box_outline_blank, size: fontSize,),
+                                              Padding(
+                                                padding: EdgeInsets.only(right: rightPadding / 2),
+                                                child: Icon( data.isDone! ? Icons.check_box : Icons.check_box_outline_blank, size: fontSize,
+                                                color: data.isDone! ? Theme.of(context).indicatorColor : Theme.of(context).unselectedWidgetColor,),
+                                              )
                                               // Text('${number}) bench press 8x10'.capitalizeFirstLetter(), style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
                                             ],
                                           ),

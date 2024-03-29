@@ -5,8 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wego/providers/logic_provider/logic_provider.dart';
+import 'package:wego/utils/extensions/string_extension.dart';
 import 'package:wego/widgets/responsive/column_row_builder.dart';
-
 import 'package:provider/provider.dart';
 import '../../../model/calculation_model/calculation_model.dart';
 import '../../../model/color/color_switch.dart';
@@ -18,6 +18,7 @@ import '../../../widgets/headers/date_header.dart';
 import '../../../widgets/headers/sliver_date_header.dart';
 import '../../../widgets/headers/sliver_header.dart';
 import '../../../widgets/headers/sliver_image_header.dart';
+import '../../../widgets/headers/sliver_subtitle.dart';
 import '../../../widgets/shapes/card_small_pattern.dart';
 
 class DetailCalcScreen extends StatefulWidget {
@@ -51,8 +52,10 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
     var edgePadding = SizeInfo.leftEdgePadding;
     var cardBcgColor  = ColorSwitch(category: widget.data!.category);
     cardBcgColor.getColor(context);
-
     var shapeDecorationSize = MediaQuery.of(context).size.width;
+
+    double imgSize = 120;
+
     return
     Consumer<LogicProvider>(builder: (context, logic, child){
       return
@@ -104,44 +107,201 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                           delegate: SliverChildListDelegate([
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
-                              padding: EdgeInsets.symmetric(horizontal: edgePadding,),
+                              padding: EdgeInsets.only(left: edgePadding, right: edgePadding,),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.background,
                                 // borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
 
                               ),
                               child: Text(AppLocalizations.of(context)!.translate(widget.data!.description!),
-                                maxLines: 10,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.headlineMedium!.copyWith(height: 1.8, fontSize: descriptionFontSize),),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
-                              padding: EdgeInsets.symmetric(horizontal: edgePadding,),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                // borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-
-                              ),
-                              child: Text(AppLocalizations.of(context)!.translate(widget.data!.longDescription!),
-                                maxLines: 100,
+                                maxLines: 50,
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(height: 1.8, fontSize: descriptionFontSize),),
                             ),
                           ]),),
+                        //FORMULA SECTION
+                        SliverPersistentHeader(
+                            pinned: true,
+                            delegate: SliverSubtitle(
+                              title: 'formula_title_question',
+                              subtitle: 'counting_formula',
+                              minHeight: 70,
+                              isImageLeft: true,
+                              maxHeight: imgSize ,
+                              imagePath: 'images/nerd_boy.png'
+                            )
+                        ),
+                        SliverList(
+                          delegate: SliverChildListDelegate(
+                              [
 
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
+                              padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding/2 ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width:MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding/2 ),
+                                    decoration: BoxDecoration(
+                                      color: cardBcgColor.bcgColor,
+                                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.left,
+                                        maxLines: 4,
+                                        text: TextSpan(
+                                            text:widget.data!.formulaFemale! == "" ? "" :'${AppLocalizations.of(context)!.translate('male').capitalizeFirstLetter()}:\n',
+                                            style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: descriptionFontSize,height: 1.5),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: '\n${widget.data!.formulaMale!}\n',
+                                              )
+                                            ]
+                                        )),
+                                  ),
+                                  Visibility(
+                                    visible: widget.data!.formulaFemale! == "" ? false : true,
+                                    child: Container(
+                                      width:MediaQuery.of(context).size.width,
+                                      margin: EdgeInsets.symmetric(vertical: edgePadding, ),
+                                      padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding/2 ),
+                                      decoration: BoxDecoration(
+                                        color: cardBcgColor.bcgColor,
+                                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                                      ),
+                                      child: RichText(
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.left,
+                                          maxLines: 4,
+                                          text: TextSpan(
+                                              text: '${AppLocalizations.of(context)!.translate('female'
+                                              ).capitalizeFirstLetter()}:\n',
+                                              style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: descriptionFontSize,height: 1.5),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: '\n${widget.data!.formulaFemale!}\n',
+                                                )
+                                              ]
+                                          )),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: edgePadding ),
+                                    child: Text(AppLocalizations.of(context)!.translate(widget.data!.longDescription!),
+                                        maxLines: 100,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(height: 1.8, fontSize: descriptionFontSize),),
+                                  ),
 
-                        // SliverPersistentHeader(
-                        //   pinned: true,
-                        //   delegate: LargeSliverHeader(title: "detail_title", isInfoVisible: false, isBcgTransparent: false,margin: EdgeInsets.symmetric(horizontal: edgePadding/2),padding: EdgeInsets.symmetric(horizontal: edgePadding) ),),
+                                ],
+                              ),
+                            ),
 
-                        SliverToBoxAdapter(
-                            child:SizedBox(height: 50,)
+                            // Container(
+                            //   margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
+                            //   padding: EdgeInsets.symmetric(horizontal: edgePadding,),
+                            //   decoration: BoxDecoration(
+                            //     color: Theme.of(context).colorScheme.background,
+                            //     // borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                            //
+                            //   ),
+                            //   child: Text(AppLocalizations.of(context)!.translate(widget.data!.longDescription!),
+                            //     maxLines: 100,
+                            //     overflow: TextOverflow.ellipsis,
+                            //     style: Theme.of(context).textTheme.headlineMedium!.copyWith(height: 1.8, fontSize: descriptionFontSize),),
+                            // ),
+                          ]),),
+                        //CHART SECTION
+                        SliverPersistentHeader(
+                            pinned: true,
+                            delegate: SliverSubtitle(
+                                title: '',
+                                subtitle: 'chart_data',
+                                minHeight: 70,
+                               // isImageLeft: true,
+                                maxHeight: imgSize ,
+                                imagePath: 'images/chart.png'
+                            )
+                        ),
+                        SliverList(
+                          delegate: SliverChildListDelegate(
+                              [
+
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
+                                  padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding/2 ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.background,
+                                  ),
+                                  height: 120,
+                                ),
+
+                                // Container(
+                                //   margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
+                                //   padding: EdgeInsets.symmetric(horizontal: edgePadding,),
+                                //   decoration: BoxDecoration(
+                                //     color: Theme.of(context).colorScheme.background,
+                                //     // borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+                                //
+                                //   ),
+                                //   child: Text(AppLocalizations.of(context)!.translate(widget.data!.longDescription!),
+                                //     maxLines: 100,
+                                //     overflow: TextOverflow.ellipsis,
+                                //     style: Theme.of(context).textTheme.headlineMedium!.copyWith(height: 1.8, fontSize: descriptionFontSize),),
+                                // ),
+                              ]),),
+                        //WARNING USAGE SECTION
+                        SliverPersistentHeader(
+                            pinned: true,
+                            delegate: SliverSubtitle(
+                                title: '',
+                                subtitle: 'remember_warning',
+                                minHeight: 70,
+                                isImageLeft: true,
+                                maxHeight: imgSize ,
+                                imagePath: 'images/lawyer_girl.png'
+                            )
+                        ),
+                        SliverList(
+                          delegate: SliverChildListDelegate(
+                              [
+
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
+                                  padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding/2 ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.background,
+                                    borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15.0), bottomRight: Radius.circular(15.0))
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(vertical: edgePadding ),
+                                        child: Text(AppLocalizations.of(context)!.translate('usage_warning_description'),
+                                          maxLines: 100,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(height: 1.8, fontSize: descriptionFontSize),),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+
+                              ]),),
+
+                        const SliverToBoxAdapter(
+                            child:SizedBox(height: 90,)
                         ),
 
                       ],
                     ),
                   ),
+                  //menu nav
                   Visibility(
                     visible: isBottomBarVisible ,
                     child: Align(

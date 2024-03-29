@@ -289,6 +289,8 @@
   "dialog_camera": "Camera",
   "dialog_assets": "FitNumbers Avatar",
 
+  "input_title": "title",
+
   "options_title_about":"About",
   "options_title_advanced":"Settings",
   "options_title_themes":"Themes",
@@ -327,12 +329,11 @@
   "cancel": "Cancel",
   "confirm": "Accept",
 
-  "chart_data": "Chart history:",
+  "chart_data": "Results history:",
   "counting_formula": "Counting formula:",
   "formula_title_question": "How it is calculated ?",
   "remember_warning": "Remember !!!",
   "usage_warning_description": "All calculators are provided as self-help tools for self-use with results based on information provided by the user. All examples are hypothetical and for illustrative purposes only. Calculated results are believed to be accurate, but results are not guaranteed. The exercise, fitness, health, and weight loss calculators are not intended to provide medical advice and should not be replaced by medical direction. Users should consult their physician before undertaking strenuous exercise or diet plan.",
-
 
 
   "from_author": "From author:",

@@ -469,7 +469,7 @@ class LogicProvider extends ChangeNotifier {
       whr.formulaMale = 'WHR = Wa / Hi ';
       whr.formulaFemale = "";
       whr.chartList = chart;
-      whr.imagePath = 'images/food_1.png';//imagePath('male_index1', 'female_index2');
+      whr.imagePath = imagePath('whr', 'whr_female');
       whr.category = supplementCategory;
       whr.isFavorite = false;
 
@@ -1025,6 +1025,7 @@ class LogicProvider extends ChangeNotifier {
     try {
       maxDeadLift.value = (profile.userData.deadLiftPower! * 1.09703) + 14.2546;
     } catch (e) {
+      print('WHATS WRONG WITH DEADLIFT CALC ${profile.userData.deadLiftPower!}');
       maxDeadLift.value = 0;
     } finally {
       maxDeadLift.symbol = 'T';
@@ -1047,9 +1048,9 @@ class LogicProvider extends ChangeNotifier {
 
   String imagePath(String maleImagePath, String femaleImagePath) {
     if (profile.userData.gender == true) {
-      return maleImagePath;
+      return 'images/$maleImagePath.png';
     } else {
-      return femaleImagePath;
+      return 'images/$femaleImagePath.png';
     }
   }
 

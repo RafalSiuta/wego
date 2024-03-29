@@ -35,7 +35,7 @@ class ProfileProvider extends ChangeNotifier {
   void onGenderSelect(bool sel){
     isGenderSelected = sel;
     _prefs.storeBool(userGenderKey, isGenderSelected);
-
+    getUserDataValues();
     notifyListeners();
   }
 
@@ -255,13 +255,13 @@ class ProfileProvider extends ChangeNotifier {
         case 'neck':
           userData.neck = data[i].sliderValue.toDouble();
           break;
-        case 'bench press':
+        case 'bench_press':
           userData.benchPressPower = data[i].sliderValue.toDouble();
           break;
         case 'squat':
           userData.squatPower = data[i].sliderValue.toDouble();
           break;
-        case 'dead lift':
+        case 'dead_lift':
           userData.deadLiftPower = data[i].sliderValue.toDouble();
           break;
       }

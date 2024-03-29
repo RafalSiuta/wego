@@ -157,6 +157,7 @@ class CardLargePattern extends CustomPainter {
   path_0.cubicTo(size.width*0.3870361,size.height*0.1740167,size.width*0.4088434,size.height*0.1596083,size.width*0.4352892,size.height*0.1593250);
   path_0.close();
 
+
   Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
   paint_0_fill.color = color!;//Color(0xffE891BA).withOpacity(1.0);
   canvas.drawPath(path_0,paint_0_fill);
