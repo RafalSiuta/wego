@@ -219,14 +219,16 @@ class WelcomeCard extends StatelessWidget {
                               //progrss bar
                               Padding(
                                 padding: EdgeInsets.only(right: rightPadding),
-                                child: Column(
+                                child:
+
+                                Column(
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Text(AppLocalizations.of(context)!.translate("progress_bar").capitalizeFirstLetter(), style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
-                                        Text('${value!*100}%', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
+                                        Text('${(value!*100).toStringAsFixed(2)} %', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
                                       ],
                                     ),
                                     Padding(

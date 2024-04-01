@@ -6,7 +6,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wego/model/user_calendar_model/user_calendar_model.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
-
+import 'package:wego/utils/constans/prefs_keys.dart';
 import '../../model/color/color_switch.dart';
 import '../../model/menu/nav_model.dart';
 import '../../utils/dimensions/size_info.dart';
@@ -14,7 +14,7 @@ import '../../utils/internationalization/app_localizations.dart';
 import '../../widgets/buttons/menu_button.dart';
 import '../../widgets/headers/sliver_image.dart';
 import '../../widgets/headers/sliver_image_header.dart';
-import '../../widgets/headers/sliver_input_header.dart';
+import '../../widgets/headers/sliver_container.dart';
 import '../../widgets/navigators/side_nav.dart';
 import '../../widgets/responsive/column_row_builder.dart';
 import '../../widgets/shapes/page_bcg_shape.dart';
@@ -35,6 +35,16 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
   late AnimationController? _menuSlideInController;
   late Animation<Offset> _menuAnimation;
   int selectedIndex = 1;
+
+  String addBtnText = "";
+  String tileSubtitle = "";
+  String unitName = "";
+  String creatorCategory = "";
+
+  double tileElementsResult = 0;
+
+  double taskPercent = 0;
+
 
   List<NavModel> _menuItems = [
     NavModel(
@@ -61,13 +71,66 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
 
   FocusNode titleNode = FocusNode();
 
-  bool editTextEnable = false;
+  TextEditingController exerciseNameVal = TextEditingController();
+
+  FocusNode exerciseNameNode = FocusNode();
+
+  bool editTextEnable = true;
 
   void editText() {
     setState(() {
+      //print("EDIT WAS PRESSED $editTextEnable");
       editTextEnable = !editTextEnable;
-      FocusScope.of(context).unfocus();
+      if (editTextEnable) {
+        titleNode.requestFocus();
+      } else {
+        FocusScope.of(context).unfocus();
+      }
     });
+  }
+
+  double tileElementSummary(int index){
+    double total = 0;
+    total = widget.userModel.items![index].itemsValueSummery(creatorCategory);
+    // for(var item in widget.userModel.items![index].elems!){
+    //
+    //   if(widget.userModel.category == workoutCategory){
+    //     total += (item.qty! * item.value!);
+    //   }else{
+    //     total += item.value!;
+    //   }
+    //
+    // }
+    return total;
+  }
+
+  void categoryCheck(String? category){
+
+    if(category == workoutCategory){
+      addBtnText = "default_exercise_name";
+      tileSubtitle = "tile_exercise_summary";
+      unitName = "unit_kg";
+    }else if(category == mealCategory){
+      addBtnText = "default_meal_name";
+      tileSubtitle = "tile_meal_summary";
+      unitName = "unit_kcal";
+    }else if(category == drinkCategory){
+      addBtnText = "default_drink_name";
+      tileSubtitle = "tile_drink_summary";
+      unitName = "unit_litter";
+    }else if(category == supplementCategory){
+      addBtnText = "default_supl_name";
+      tileSubtitle = "tile_supl_summary";
+      unitName = "unit_mg";
+
+    }else {
+      addBtnText = "";
+      tileSubtitle = "";
+    }
+    setState(() {
+
+    });
+
   }
 
   ScrollDirection scrollDirection = ScrollDirection.idle;
@@ -76,6 +139,13 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
 
   @override
   void initState() {
+    creatorCategory = widget.userModel.category!;
+
+    tileElementsResult = widget.userModel.totalValSummary();
+
+    taskPercent = widget.userModel.percentProgress();
+
+    categoryCheck(widget.userModel.category);
     _menuSlideInController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
 
@@ -88,7 +158,11 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
         .then((value) => _menuSlideInController!.forward());
 
     titleVal.text = widget.userModel.title!;
+    exerciseNameVal.text = "";
+
   }
+
+  bool _customTileExpanded = false;
 
   @override
   void dispose() {
@@ -107,47 +181,30 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
     var leftPadding = SizeInfo.edgePadding;
     var inputHeight = SizeInfo.searchBarHeight;
     var navIconSize = SizeInfo.leadingAndTrailingIconSize;
-
+    int maxTitleLength = 20;
     int maxDescriptionLength = 4000;
+
     var cardBcgColor  = ColorSwitch(category: widget.userModel.category);
     cardBcgColor.getColor(context);
     var shapeDecorationSize = MediaQuery.of(context).size.width;
-
     double imgSize = 120;
-    //print("SCREEN WIDTH IS: ${MediaQuery.of(context).size.width}");
+    //print("CHECK SCREEN HEIGHT ${MediaQuery.of(context).size.height}");
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: cardBcgColor.bcgColor,//Theme.of(context).colorScheme.background,
-
+        backgroundColor: cardBcgColor.bcgColor,
       body: Stack(
         children: [
-
+          //page pattern bcg
           Container(
-        width: MediaQuery.of(context).size.width,
-        height:MediaQuery.of(context).size.width,
-        child: ClipPath(
-          clipper: PageBcgShape(),
-
-          child: Container(
-            constraints: BoxConstraints.expand(),
+            width: MediaQuery.of(context).size.width,
+            height:MediaQuery.of(context).size.height / 1.35,
             decoration: BoxDecoration(
               color: cardBcgColor.bcgColor,
             ),
             child: CustomPaint(
-              size: Size(MediaQuery.of(context).size.width , MediaQuery.of(context).size.width  ),
-              painter: PagePattern(color: cardBcgColor.patternColor),//CardSmallPattern
-
+              painter: PagePattern(color: cardBcgColor.patternColor),
             ),
-            )
-        ),
-      ),
-          // Container(
-          //   child: CustomPaint(
-          //     size: Size(MediaQuery.of(context).size.width , MediaQuery.of(context).size.width  ),
-          //     painter: PagePattern(color: cardBcgColor.patternColor),//CardSmallPattern
-          //
-          //   ),
-          // ),
+          ),
           SafeArea(
             child:
           NotificationListener<UserScrollNotification>(
@@ -163,51 +220,198 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
           return true;
           },
           child: CustomScrollView(
-              physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               slivers: [
                 //image
                 SliverPersistentHeader(
                   pinned: true,
                   delegate:SliverImage(
                     imagePath: widget.userModel.imagePath!,
-                    heroTag: widget.heroTag
+                    heroTag: widget.heroTag,
+                    category: widget.userModel.category
                   )
                   ,),
                 //input title
                 SliverPersistentHeader(
                   pinned: true,
-                  delegate: SliverInputHeader(
-                    controller: titleVal,
-                    editText: editText,
-                    onChange: (newText){
-                              setState(() {
-                                widget.userModel.title = newText;
-                                titleVal.selection =
-                                    TextSelection.fromPosition(
-                                        TextPosition(
-                                            offset: titleVal
-                                                .text.length));
-                              });
-                    },
-                    editEnable: editTextEnable,
+                  delegate: SliverContainer(
+                    color: Theme.of(context).indicatorColor,
+                    child: GestureDetector(
+                              onTap: () {
+                                editText();
+                              },
+                              child: SizedBox(
+                                key: widget.key,
+                                height: inputHeight,
+                                child: TextField(
+                                  maxLengthEnforcement:
+                                  MaxLengthEnforcement.enforced,
+                                  cursorWidth: 1,
+                                  focusNode: titleNode,
+                                  maxLines: 1,
+                                  maxLength: maxTitleLength,
+                                  onSubmitted: (val) {
+                                    setState(() {
+                                      titleNode.unfocus();
+                                      // FocusScope.of(context)
+                                      //     .requestFocus(
+                                      //     descriptionNode);
+                                    });
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  enabled: editTextEnable,
+                                  onChanged: (newText) {
 
-                  )
-                  ,),
+                                    setState(() {
+                                      widget.userModel.title = newText;
+                                      titleVal.selection =
+                                          TextSelection.fromPosition(
+                                              TextPosition(
+                                                  offset: titleVal
+                                                      .text.length));
+                                    });
+                                  },
+                                  cursorColor: Theme.of(context).textTheme.titleSmall!.color,
+                                  controller: titleVal,
+                                  autofocus: false,
+                                  style: Theme.of(context)
+                                      .textTheme.titleSmall!.copyWith(
+                                      fontSize: titleFontSize,
+                                      decoration: TextDecoration.none),
+                                  textAlign: TextAlign.start,
+                                  decoration: InputDecoration(
+                                    helperText: AppLocalizations.of(context)!.translate('input_title').capitalizeFirstLetter(),
+                                    helperStyle: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .helperStyle!
+                                        .copyWith(
+                                        color: Theme.of(context).textTheme.titleSmall!.color,
+                                        fontSize: helpTextFontSize),
+                                  ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                  ),
+                //create button
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: SliverContainer(
+                    minHeight: 80,
+                    maxHeight: 83,
+                    color: Theme.of(context).colorScheme.background,
+                    isRoundedCorners: false,
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap:(){
+                            setState(() {
+                              print("Add element was pressed");
+                            });
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: edgePadding),
+                            child:
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(AppLocalizations.of(context)!.translate(addBtnText).capitalizeFirstLetter(), style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: fontSize),),
+                                Icon(Icons.add, color: Theme.of(context).unselectedWidgetColor,),
+                                // Expanded(
+                                //   child: GestureDetector(
+                                //     onTap: () {
+                                //       editText();
+                                //     },
+                                //     child: SizedBox(
+                                //       key: widget.key,
+                                //       height: inputHeight,
+                                //       child: TextField(
+                                //
+                                //         maxLengthEnforcement:
+                                //         MaxLengthEnforcement.enforced,
+                                //         cursorWidth: 1,
+                                //         focusNode: exerciseNameNode,
+                                //         maxLines: 1,
+                                //         maxLength: maxTitleLength,
+                                //         onSubmitted: (val) {
+                                //           setState(() {
+                                //             exerciseNameNode.unfocus();
+                                //           });
+                                //         },
+                                //         keyboardType: TextInputType.text,
+                                //         enabled: editTextEnable,
+                                //         onChanged: (newText) {
+                                //           setState(() {
+                                //             exerciseNameVal.text = newText;
+                                //             exerciseNameVal.selection =
+                                //                 TextSelection.fromPosition(
+                                //                     TextPosition(
+                                //                         offset: exerciseNameVal
+                                //                             .text.length));
+                                //           });
+                                //         },
+                                //         cursorColor: Theme.of(context).indicatorColor,
+                                //         controller: exerciseNameVal,
+                                //         autofocus: false,
+                                //         style: Theme.of(context)
+                                //             .textTheme.headlineLarge!.copyWith(
+                                //             fontSize: titleFontSize,
+                                //             decoration: TextDecoration.none),
+                                //         textAlign: TextAlign.start,
+                                //         decoration: InputDecoration(
+                                //           // border: UnderlineInputBorder(
+                                //           //     borderSide: BorderSide(
+                                //           //       width: .5,
+                                //           //       color: Theme.of(context).unselec,
+                                //           //     )
+                                //           // ),
+                                //           hintText: AppLocalizations.of(context)!.translate('default_exercise_name').capitalizeFirstLetter(),
+                                //           helperText: AppLocalizations.of(context)!.translate('input_exercise_helper').capitalizeFirstLetter(),
+                                //           helperStyle: Theme.of(context)
+                                //               .inputDecorationTheme
+                                //               .helperStyle!
+                                //               .copyWith(
+                                //               color: Theme.of(context).textTheme.headlineLarge!.color,
+                                //               fontSize: helpTextFontSize),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                // IconButton(
+                                //     alignment: Alignment.centerRight,
+                                //     padding: EdgeInsets.zero,
+                                //     onPressed: (){
+                                //
+                                // }, icon: Icon(Icons.add))
+                              ],
+                            ),
+                          ),
+                        ),
+                        const Divider()
+                      ],
+                    ),
+                  ),
+                ),
                 SliverAnimatedList(
                   initialItemCount: widget.userModel.items!.length,
                   itemBuilder: (context,index,animation){
                     var data = widget.userModel.items![index];
                     int exerciseNumber = index + 1;
-                    return Container(
+
+                    return
+                      Container(
                         margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
-                        padding: EdgeInsets.all(edgePadding),
-                        decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RichText(
+                        child: ExpansionTile(
+                          backgroundColor: index.isEven ?
+                          Theme.of(context).scaffoldBackgroundColor
+                              : Theme.of(context).colorScheme.background,
+                          collapsedBackgroundColor: index.isEven ?
+                          Theme.of(context).scaffoldBackgroundColor
+                              : Theme.of(context).colorScheme.background,
+                          childrenPadding: EdgeInsets.only(bottom: edgePadding),
+                          title: RichText(
                             maxLines:1,
                             text: TextSpan(
                                 text: '${exerciseNumber}. ',
@@ -219,217 +423,189 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                                   TextSpan(
                                     text: '${data.name} '.capitalizeFirstLetter(),
                                   ),
-                                  TextSpan(
-                                    text: '${data.qty} '.capitalizeFirstLetter(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(fontSize: fontSize),
-                                  )
+                                  // TextSpan(
+                                  //   text: '${data.qty} '.capitalizeFirstLetter(),
+                                  //   style: Theme.of(context)
+                                  //       .textTheme
+                                  //       .headlineMedium!
+                                  //       .copyWith(fontSize: fontSize),
+                                  // )
                                 ]),
                           ),
-                          Expanded(child: SizedBox(width: 2.0,)),
-                          Padding(
-                            padding: EdgeInsets.only(right: edgePadding / 2),
-                            child: Icon( data.isDone! ? Icons.check_box : Icons.check_box_outline_blank, size: fontSize,
-                              color: data.isDone! ? Theme.of(context).indicatorColor : Theme.of(context).unselectedWidgetColor,),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: 5),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    RichText(
+                                      maxLines:1,
+                                      text: TextSpan(
+                                          text: AppLocalizations.of(context)!.translate(tileSubtitle).capitalizeFirstLetter(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium!
+                                              .copyWith(fontSize: fontSize),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: ' ${tileElementSummary(index)} '.capitalizeFirstLetter(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium!
+                                                  .copyWith(fontSize: fontSize),
+                                            ),
+                                            TextSpan(
+                                              text: AppLocalizations.of(context)!.translate(unitName).capitalizeFirstLetter(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium!
+                                                  .copyWith(fontSize: fontSize),
+                                            )
+                                          ]),
+                                    ),
+                                    SizedBox(width: 10,)
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: edgePadding),
+                                child: Icon(
+                                  _customTileExpanded
+                                      ? Icons.keyboard_arrow_up
+                                      : Icons.keyboard_arrow_down,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    );
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Checkbox(
+                                side: BorderSide(
+                                    color: data.isDone! ? Theme.of(context).indicatorColor : Theme.of(context).unselectedWidgetColor,
+                                    width: 0.5
+                                ),
+                                activeColor: Theme.of(context).indicatorColor,
+                                value: data.isDone!,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    data.isDone = value!;
+                                    taskPercent = widget.userModel.percentProgress();
+                                  });
+                                },
+                                splashRadius: 2.0,
+                              ),
+                              Icon(Icons.edit)
+                            ],
+                          ),
+                          children: List.generate(widget.userModel.items![index].elems!.length, (idx){
+                            var itemData = widget.userModel.items![index].elems![idx];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: edgePadding * 2, vertical: 5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text('${itemData.name} ${itemData.qty} ${itemData.unit} ${itemData.value} ${itemData.totalUnit}',
+                                    textAlign: TextAlign.start,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium!
+                                      .copyWith(fontSize: fontSize),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+
+                          ),
+                          onExpansionChanged: (bool expanded) {
+                            setState(() {
+                              _customTileExpanded = expanded;
+                            });
+                          },
+                        ),
+                      );
                 },),
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: edgePadding / 2, ),
+                    padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding ),
+                    color: Theme.of(context).colorScheme.background,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Divider(),
+                        RichText(
+                          maxLines:1,
+                          text: TextSpan(
+                              text: AppLocalizations.of(context)!.translate('progress_bar').capitalizeFirstLetter(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineLarge!
+                                  .copyWith(fontSize: fontSize),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: ' $tileElementsResult '.capitalizeFirstLetter(),
+                                ),
+                                TextSpan(
+                                  text: AppLocalizations.of(context)!.translate(unitName),
+                                )
+                              ]),
+                        ),
 
-                // SliverList(
-                //   delegate: SliverChildListDelegate(
-                //     [
-                //       Container(
-                //         margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
-                //         padding: EdgeInsets.all(edgePadding),
-                //         decoration: BoxDecoration(
-                //           color: Theme.of(context).colorScheme.background,
-                //           //borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-                //
-                //         ),
-                //         // child:
-                //         // GestureDetector(
-                //         //   onTap: () {
-                //         //     editText();
-                //         //   },
-                //         //   child: SizedBox(
-                //         //     key: widget.key,
-                //         //     height: inputHeight,
-                //         //     child: TextField(
-                //         //       maxLengthEnforcement:
-                //         //       MaxLengthEnforcement.enforced,
-                //         //       cursorWidth: 1,
-                //         //       focusNode: titleNode,
-                //         //       maxLines: 1,
-                //         //       maxLength: maxTitleLength,
-                //         //       onSubmitted: (val) {
-                //         //         setState(() {
-                //         //           titleNode.unfocus();
-                //         //           // FocusScope.of(context)
-                //         //           //     .requestFocus(
-                //         //           //     descriptionNode);
-                //         //         });
-                //         //       },
-                //         //       keyboardType: TextInputType.text,
-                //         //       enabled: editTextEnable,
-                //         //       onChanged: (newText) {
-                //         //         setState(() {
-                //         //           widget.userModel.title = newText;
-                //         //           titleVal.selection =
-                //         //               TextSelection.fromPosition(
-                //         //                   TextPosition(
-                //         //                       offset: titleVal
-                //         //                           .text.length));
-                //         //         });
-                //         //       },
-                //         //       cursorColor: Theme.of(context).indicatorColor,
-                //         //       controller: titleVal,
-                //         //       autofocus: true,
-                //         //       style: Theme.of(context)
-                //         //           .textTheme.titleSmall!.copyWith(
-                //         //           fontSize: titleFontSize,
-                //         //           decoration: TextDecoration.none),
-                //         //       textAlign: TextAlign.start,
-                //         //       decoration: InputDecoration(
-                //         //         helperText: AppLocalizations.of(context)!.translate('').capitalizeFirstLetter(),//'Enter title',
-                //         //         helperStyle: Theme.of(context)
-                //         //             .inputDecorationTheme
-                //         //             .helperStyle!
-                //         //             .copyWith(
-                //         //             fontSize: helpTextFontSize),
-                //         //       ),
-                //         //     ),
-                //         //   ),
-                //         // ),
-                //       ),
-                //     ]
-                //   ),
-                // )
+                      ],
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: edgePadding / 2),
+                    padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                    ),
 
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(AppLocalizations.of(context)!.translate("progress_bar").capitalizeFirstLetter(), style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
+                            Text('${(taskPercent*100).toStringAsFixed(2)}%', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 5.0, bottom: edgePadding),
+                          child: LinearProgressIndicator(
+                            value: taskPercent,
+                            semanticsLabel: 'Progress',
+                            backgroundColor: Theme.of(context).unselectedWidgetColor.withOpacity(0.5),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                cardBcgColor.bcgColor!
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: SizedBox(height: 120,),
+                )
                 ]
           )
-
             ,),
-            // Expanded(
-            //   child: SingleChildScrollView(
-            //     child: AnimationLimiter(
-            //       child: Column(
-            //           mainAxisAlignment: MainAxisAlignment.start,
-            //           crossAxisAlignment: CrossAxisAlignment.center,
-            //           mainAxisSize: MainAxisSize.max,
-            //           children:
-            //           AnimationConfiguration.toStaggeredList(
-            //             duration: const Duration(milliseconds: 300),
-            //             childAnimationBuilder: (widget) =>
-            //                 ScaleAnimation(
-            //                   scale: 0.8,
-            //                   child: FadeInAnimation(
-            //                     child: widget,
-            //                   ),
-            //                 ),
-            //             children: [
-            //               IntrinsicHeight(
-            //                 child: Hero(
-            //                   tag: widget.heroTag,
-            //                   child: Image(
-            //                       alignment: Alignment.topRight,
-            //                       width: MediaQuery.of(context).size.width / 1.5,
-            //                       fit: BoxFit.contain,
-            //                       image: AssetImage(widget.userModel.imagePath!)),
-            //                 ),
-            //               ),
-            //             ],
-            //           )),
-            //     ),
-            //   ),
-            // ),
-        //     Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: [
-        //       Expanded(
-        //         child: SingleChildScrollView(
-        //         child: AnimationLimiter(
-        //           child: Column(
-        //               mainAxisAlignment: MainAxisAlignment.start,
-        //               crossAxisAlignment: CrossAxisAlignment.center,
-        //               mainAxisSize: MainAxisSize.max,
-        //               children:
-        //               AnimationConfiguration.toStaggeredList(
-        //                 duration: const Duration(milliseconds: 300),
-        //                 childAnimationBuilder: (widget) =>
-        //                     ScaleAnimation(
-        //                       scale: 0.8,
-        //                       child: FadeInAnimation(
-        //                         child: widget,
-        //                       ),
-        //                     ),
-        //                 children: [
-        //                   IntrinsicHeight(
-        //                     child: Hero(
-        //                       tag: widget.heroTag,
-        //                       child: Image(
-        //                           alignment: Alignment.topRight,
-        //                           width: MediaQuery.of(context).size.width / 1.5,
-        //                           fit: BoxFit.contain,
-        //                           image: AssetImage(widget.userModel.imagePath!)),
-        //                     ),
-        //                   ),
-        //                 ],
-        //               )),
-        //         ),
-        //       ),
-        //       ),
-        //       //menu nav:
-        //       SlideTransition(
-        //         position: _menuAnimation,
-        //         child: CreatorNav(
-        //           backgroundColor:
-        //           Theme.of(context).scaffoldBackgroundColor,
-        //           navDotIndicatorSize: navIconSize,
-        //           itemCount: _menuItems.length,
-        //           titles: _menuItems,
-        //           selectedItem: selectedIndex,
-        //           onTap: (int index) {
-        //             setState(() {
-        //               selectedIndex = index;
-        //               switch (selectedIndex) {
-        //                 case 0:
-        //                   //save all crated items
-        //                   Navigator.pop(context, true);
-        //                   break;
-        //                 case 1:
-        //
-        //                   break;
-        //                 case 2:
-        //
-        //                   break;
-        //                 case 3:
-        //                  // _pickDate(context);
-        //                   break;
-        //                 case 4:
-        //                   //delete element
-        //
-        //                   break;
-        //                 case 5:
-        //                   //cancel
-        //                   Navigator.pop(context, true);
-        //                   break;
-        //                 case 6:
-        //
-        //                   Navigator.pop(context, true);
-        //                   break;
-        //               }
-        //             });
-        //           },
-        //         ),
-        //       ), //nav rail menu
-        //     ],
-        // ),
           ),
+          //bottom nav
           Visibility(
             visible: isBottomBarVisible ,
             child: Align(
@@ -461,14 +637,8 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                     return MenuButton(
                       onPress: (){
                         setState(() {
-                          // if(index == 1){
-                          //
-                          // }else if(index == 2){
-                          //   Navigator.pop(context);
-                          // }
                           switch (index) {
                             case 0:
-                            //save all crated items
 
                               break;
                             case 1:
@@ -497,7 +667,6 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                         });
 
                       },
-                     // isChecked: index == 1 ? widget.data!.isFavorite! : false,
                       icon: menuItem.icon ,
                       title: menuItem.title,
                       fontSize: 8.0,

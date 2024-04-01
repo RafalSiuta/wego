@@ -67,7 +67,7 @@ class TaskList extends StatelessWidget {
                                   title: '${data.title}',
                                   subtitle: data.subtitle,
                                   itemsList: [1,2,3,4],
-                                  value: data.progressValue,
+                                  value: data.percentProgress(),
                                   imagePath: data.imagePath,
                                   category: data.category,
                                   heroTag: '${data.imagePath}$index${data.title}',

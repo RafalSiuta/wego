@@ -15,7 +15,7 @@ const theme_4descriptionColor = Color(0xFF636363);
 const dividerColor = Color(0xFF636363);
 const unselectedColor = Color(0xFF9e9e9e); //595959
 //const theme_4calendarWeekendColor = Color(0xFFab977b);
-const theme_4indicatorColor = Color(0xFF6F57E5);//Color(0xFFffca28); Color(0xFFF3EBA0); Color(0xFF94FFAF)// FEA735 f5f5f5 //94FFAF
+const indicatorColor = Color(0xFF6F57E5);//Color(0xFFffca28); Color(0xFFF3EBA0); Color(0xFF94FFAF)// FEA735 f5f5f5 //94FFAF
 const theme_4shadowColor = Color(0xFFC0C0C0);
 const baseTextColor = Color(0xFF091C2B);
 const menuSelectionBackground = Color(0xFF6F57E5);//7a5eff
@@ -53,7 +53,7 @@ final themeLight = ThemeData(
     primaryColorLight: theme_4middleGradientColor,
     primaryColorDark: theme_4lastGradientColor,
     cardColor: theme_4middleGradientColor,
-    indicatorColor: theme_4indicatorColor,
+    indicatorColor: indicatorColor,
     highlightColor: Colors.transparent,
     shadowColor: mainBcgColor,
     dialogBackgroundColor: theme_4lastGradientColor,
@@ -88,7 +88,7 @@ final themeLight = ThemeData(
       displayMedium: GoogleFonts.exo2(
           textStyle: const TextStyle(
               fontSize: 10,
-              color: theme_4indicatorColor,
+              color: indicatorColor,
               fontWeight: FontWeight.w500,
               )),
       //small unselected text
@@ -101,7 +101,7 @@ final themeLight = ThemeData(
       bodyLarge: GoogleFonts.exo2(
           textStyle: const TextStyle(
             fontSize: 18,
-            color: theme_4indicatorColor,
+            color: indicatorColor,
           )),
       //task/note/project description text style:
       bodyMedium:  GoogleFonts.exo2(
@@ -154,13 +154,13 @@ final themeLight = ThemeData(
               return GoogleFonts.exo2(
                   textStyle: const TextStyle(
                     fontSize: 10,
-                    color: theme_4indicatorColor,
+                    color: indicatorColor,
                     fontWeight: FontWeight.w500,
                   ));
             return GoogleFonts.exo2(
                 textStyle: const TextStyle(
                   fontSize: 10,
-                  color: theme_4indicatorColor,
+                  color: indicatorColor,
                   fontWeight: FontWeight.w500,
                 )); // Defer to the widget's default.
           },
@@ -171,7 +171,7 @@ final themeLight = ThemeData(
               return unselectedColor;
             if (states.contains(MaterialState.focused) ||
                 states.contains(MaterialState.pressed))
-              return theme_4indicatorColor;
+              return indicatorColor;
             return unselectedColor; // Defer to the widget's default.
           },
         ),
@@ -197,7 +197,7 @@ final themeLight = ThemeData(
                 return unselectedColor;
               if (states.contains(MaterialState.focused) ||
                   states.contains(MaterialState.pressed))
-                return theme_4indicatorColor;
+                return indicatorColor;
               return unselectedColor; // Defer to the widget's default.
             },
           ),
@@ -228,7 +228,7 @@ final themeLight = ThemeData(
     sliderTheme: SliderThemeData(
       trackShape: RectangularSliderTrackShape(),
       trackHeight: 2,
-      activeTrackColor:theme_4indicatorColor,
+      activeTrackColor:indicatorColor,
       inactiveTrackColor: unselectedColor,
       thumbColor: titleBoxBcgColor,
       overlayColor: titleBoxBcgColor.withOpacity(0.3),
@@ -244,7 +244,7 @@ final themeLight = ThemeData(
       indicatorColor: Colors.transparent,
       groupAlignment: -.5,
       selectedIconTheme: const IconThemeData(
-        color: theme_4indicatorColor,
+        color: indicatorColor,
 
       ),
       unselectedIconTheme: const IconThemeData(color: unselectedColor,),
@@ -260,7 +260,7 @@ final themeLight = ThemeData(
           )),
     ),
    // actionIconTheme: const ActionIconThemeData(),//const IconThemeData(color: theme_4noteCardColor, size: 18),
-    iconTheme: const IconThemeData(color: theme_4indicatorColor, size: 15),
+    iconTheme: const IconThemeData(color: indicatorColor, size: 15),
     switchTheme: SwitchThemeData(
 
         thumbColor: MaterialStateProperty.resolveWith(
@@ -275,7 +275,7 @@ final themeLight = ThemeData(
         trackColor: MaterialStateProperty.resolveWith(
               (states) {
             if (states.contains(MaterialState.selected)) {
-              return theme_4indicatorColor;
+              return indicatorColor;
             } else if (states.contains(MaterialState.disabled)){
               return unselectedColor;
             } else{
@@ -287,7 +287,7 @@ final themeLight = ThemeData(
       fillColor: MaterialStateProperty.resolveWith(
             (states) {
           if (states.contains(MaterialState.selected)) {
-            return theme_4indicatorColor;
+            return indicatorColor;
           } else if (states.contains(MaterialState.disabled)){
             return unselectedColor;
           } else{
@@ -301,7 +301,7 @@ final themeLight = ThemeData(
 
       selectedIconTheme: const IconThemeData(
         size: 18.0,
-        color: theme_4indicatorColor
+        color: indicatorColor
       ),
       unselectedIconTheme: const IconThemeData(
             size: 18.0,
@@ -309,7 +309,7 @@ final themeLight = ThemeData(
       ),
       selectedLabelStyle:  GoogleFonts.exo2(
           textStyle: const TextStyle(
-              color: theme_4indicatorColor,
+              color: indicatorColor,
               fontSize: 10.0,
               fontWeight: FontWeight.w500
           )),
@@ -319,12 +319,12 @@ final themeLight = ThemeData(
               fontSize: 10.0,
               fontWeight: FontWeight.w500
           )),
-      selectedItemColor: theme_4indicatorColor,
+      selectedItemColor: indicatorColor,
       unselectedItemColor: unselectedColor
     ),
     floatingActionButtonTheme:
     const FloatingActionButtonThemeData(
-        backgroundColor: theme_4indicatorColor
+        backgroundColor: indicatorColor
     ),
     dialogTheme: DialogTheme(
         elevation: 5.0,
@@ -355,7 +355,11 @@ final themeLight = ThemeData(
       focusedErrorBorder: InputBorder.none,
       isDense: true,
       filled: false,
-      hintStyle:const TextStyle(color: baseTextColor , fontSize: 20),
+      hintStyle: GoogleFonts.exo2(
+          textStyle: const TextStyle(
+            fontSize: 15,
+            color: unselectedColor,
+            fontWeight: FontWeight.w500,)),
       contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
       suffixStyle: const TextStyle(
         color: unselectedColor,
@@ -378,7 +382,7 @@ final themeLight = ThemeData(
     ),
     progressIndicatorTheme:const ProgressIndicatorThemeData(
       refreshBackgroundColor: unselectedColor,
-      linearTrackColor: theme_4indicatorColor,
+      linearTrackColor: indicatorColor,
 
       // linearTrackColor: theme_4indicatorColor
 
@@ -392,13 +396,12 @@ final themeLight = ThemeData(
             left: (Radius.circular(15)), right: (Radius.circular(15))),
       ),
     ),
-
     tabBarTheme: TabBarTheme(
       dividerColor: dividerColor.withOpacity(0.5),
 
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       indicator: const UnderlineTabIndicator(
-          borderSide: BorderSide(width: 2.0, color: theme_4indicatorColor),
+          borderSide: BorderSide(width: 2.0, color: indicatorColor),
           insets: EdgeInsets.symmetric(horizontal: 12.0),),
       labelColor: baseTextColor ,
       unselectedLabelColor: unselectedColor,
@@ -428,6 +431,48 @@ final themeLight = ThemeData(
       ),
       side: const BorderSide(style: BorderStyle.none)
     ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: MaterialStateProperty.all(Colors.white),
+      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.hovered))
+            return indicatorColor;
+          if (states.contains(MaterialState.focused) ||
+              states.contains(MaterialState.pressed))
+            return indicatorColor;
+          return unselectedColor; // Defer to the widget's default.
+        },
+      ),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.hovered))
+            return indicatorColor;
+          if (states.contains(MaterialState.focused) ||
+              states.contains(MaterialState.pressed))
+            return indicatorColor;
+          return Colors.transparent;
+        },
+      ),
+
+    ),
+  expansionTileTheme: ExpansionTileThemeData(
+    textColor: baseTextColor,
+    backgroundColor: titleBoxBcgColor,
+    collapsedBackgroundColor:titleBoxBcgColor,
+    collapsedShape: RoundedRectangleBorder(
+      side: BorderSide.none,
+    ),
+    shape: RoundedRectangleBorder(
+      side: BorderSide.none,
+    ),
+
+    expandedAlignment: Alignment.topLeft,
+    iconColor: indicatorColor,
+    collapsedIconColor: unselectedColor
+
+  )
 
 );
 

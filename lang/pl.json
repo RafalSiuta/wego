@@ -85,6 +85,7 @@
   "carbo": "Węglowodany",
   "fat": "Tłuszcze",
 
+  "unit_mg": "mg",
   "unit_kg": "kg",
   "unit_cm": "cm",
   "unit_litter": "L",
@@ -293,6 +294,15 @@
   "dialog_assets": "FitNumbers Avatar",
 
   "input_title": "tytuł",
+  "input_exercise_helper": "nazwa ćwiczenia",
+  "default_exercise_name": "dodaj ćwiczenie",
+  "default_meal_name": "dodaj posiłek",
+  "default_drink_name": "dodaj napój",
+  "default_supl_name": "dodaj suplement",
+  "tile_exercise_summary": "podsumowanie serii",
+  "tile_meal_summary": "podsumowanie kalorii",
+  "tile_drink_summary": "podsumowanie napoji",
+  "tile_supl_summary": "podsumowanie suplementów",
 
   "sets_primary": "Aktualizuj diagram",
   "sets_primary_info": "Tutaj możesz ustawić kiedy chcesz dodawać wyniki do diagramu",

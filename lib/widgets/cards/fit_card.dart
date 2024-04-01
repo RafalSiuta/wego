@@ -232,7 +232,7 @@ class FitCardLarge extends StatelessWidget {
                                     RichText(
                                         overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.center,
-                                        maxLines: 2,
+                                        maxLines: 1,
                                         text: TextSpan(
                                             text: '${data.value!.toStringAsFixed(2)} ',
                                             style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: data.infoColor, fontSize: fontSize),

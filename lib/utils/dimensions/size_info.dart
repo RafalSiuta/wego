@@ -58,7 +58,7 @@ class SizeInfo {
   static double cameraIconButtonSize = 35;
 
   ///search bar:
-  static double searchBarHeight = 40;
+  static double searchBarHeight = 50;
   static double searchIconSize = 18;
 
   ///calendar dimens:

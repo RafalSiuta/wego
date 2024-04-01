@@ -25,10 +25,10 @@ final List<ItemElement>  workoutExerciseSets3 = [
 ];
 
 final List<CalendarItemsModel> calendarWorkoutItems = [
-  CalendarItemsModel(name: 'Podciąganie sztangi', qty: workoutExerciseSets.length, items: workoutExerciseSets, isDone: true),
-  CalendarItemsModel(name: 'Podciąganie drążek',qty: workoutExerciseSets2.length, items: workoutExerciseSets2, isDone: true),
-  CalendarItemsModel(name: 'Podciąganie hantli',qty: workoutExerciseSets.length, items: workoutExerciseSets),
-  CalendarItemsModel(name: 'Martwe ciągi',qty: workoutExerciseSets3.length, items: workoutExerciseSets3),
+  CalendarItemsModel(name: 'Podciąganie sztangi', qty: workoutExerciseSets.length, elems: workoutExerciseSets, isDone: true),
+  CalendarItemsModel(name: 'Podciąganie drążek',qty: workoutExerciseSets2.length, elems: workoutExerciseSets2, isDone: true),
+  CalendarItemsModel(name: 'Podciąganie hantli',qty: workoutExerciseSets.length, elems: workoutExerciseSets),
+  CalendarItemsModel(name: 'Martwe ciągi',qty: workoutExerciseSets3.length, elems: workoutExerciseSets3),
 ] ;
 
 final List<ItemElement>  calendarMealsDinner = [
@@ -38,16 +38,16 @@ final List<ItemElement>  calendarMealsDinner = [
 ];
 
 final List<CalendarItemsModel> calendarMealsItems = [
-  CalendarItemsModel(name: 'Breakfast', qty: calendarMealsDinner.length, items: calendarMealsDinner),
-  CalendarItemsModel(name: 'Launch',qty: calendarMealsDinner.length, items: calendarMealsDinner),
-  CalendarItemsModel(name: 'dinner',qty: calendarMealsDinner.length, items: calendarMealsDinner),
-  CalendarItemsModel(name: 'suppper',qty: calendarMealsDinner.length, items: calendarMealsDinner),
+  CalendarItemsModel(name: 'Breakfast', qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Launch',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'dinner',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'suppper',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
 ] ;
 
 final List<CalendarItemsModel> calendarDrinkItems = [
-  CalendarItemsModel(name: 'Tea', qty: drinkItems.length, items: drinkItems),
-  CalendarItemsModel(name: 'Coffee',qty: drinkItems.length, items: drinkItems),
-  CalendarItemsModel(name: 'Water',qty: drinkItems.length, items: drinkItems),
+  CalendarItemsModel(name: 'Tea', qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Coffee',qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Water',qty: drinkItems.length, elems: drinkItems),
 ] ;
 
 final List<ItemElement>  drinkItems = [
@@ -57,10 +57,10 @@ final List<ItemElement>  drinkItems = [
 ];
 
 final List<CalendarItemsModel> calendarSupplementsItems = [
-  CalendarItemsModel(name: 'Creatine', qty: supplementsItems.length, items: supplementsItems),
-  CalendarItemsModel(name: 'Vit-C',qty: supplementsItems.length, items: supplementsItems),
-  CalendarItemsModel(name: 'ADEK',qty: supplementsItems.length, items: supplementsItems),
-  CalendarItemsModel(name: 'Ginseng',qty: supplementsItems.length, items: supplementsItems),
+  CalendarItemsModel(name: 'Creatine', qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Vit-C',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'ADEK',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Ginseng',qty: supplementsItems.length, elems: supplementsItems),
 ] ;
 
 final List<ItemElement>  supplementsItems = [
@@ -75,7 +75,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: workoutCategory,
       category: workoutCategory,
       imagePath: 'images/deadlift_male.png',
-      progressValue: 0.2,
+
       date: DateTime.now(),
       items: calendarWorkoutItems
   ),
@@ -84,7 +84,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
   //     subtitle: workoutCategory,
   //     category: workoutCategory,
   //     imagePath: 'images/workout_dude.png',
-  //     progressValue: 0.2,
+  //
   //     date: DateTime.now(),
   //     items: calendarWorkoutItems
   // ),
@@ -94,7 +94,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       category: mealCategory,
       imagePath: 'images/food_1.png',
       date: DateTime.now(),
-      progressValue: 0.7,
+
       items: calendarMealsItems,
   ),
   UserCalendarModel(
@@ -104,14 +104,14 @@ final List<UserCalendarModel> DUMMY_DATA = [
       imagePath: 'images/drink_1.png',
       date: DateTime.now(),
       items: calendarDrinkItems,
-      progressValue: 0.8),
+  ),
   UserCalendarModel(
       title: 'Supplements',
       subtitle: supplementCategory,
       category: supplementCategory,
       imagePath: 'images/supl_1.png',
       date: DateTime.now(),
-      progressValue: 0.4,
+
       items: calendarSupplementsItems
   ),
   //############ new list
@@ -120,7 +120,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
     subtitle: mealCategory,
     category: mealCategory,
     imagePath: 'images/food_1.png',
-    progressValue: 0.7,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
     items: calendarMealsItems,
   ),
@@ -129,7 +129,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: supplementCategory,
       category: supplementCategory,
       imagePath: 'images/supl_1.png',
-      progressValue: 0.4,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
       items: calendarSupplementsItems
   ),
@@ -138,7 +138,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: drinkCategory,
       category: drinkCategory,
       imagePath: 'images/drink_1.png',
-      progressValue: 0.8,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
     items: calendarDrinkItems,
   ),
@@ -148,7 +148,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: workoutCategory,
       category: workoutCategory,
       imagePath: 'images/workout_dude.png',
-      progressValue: 0.2,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
       items: calendarWorkoutItems
 
@@ -158,7 +158,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: workoutCategory,
       category: workoutCategory,
       imagePath: 'images/workout_dude.png',
-      progressValue: 0.2,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
       items: calendarWorkoutItems
 
@@ -169,7 +169,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: mealCategory,
       category: mealCategory,
       imagePath: 'images/food_1.png',
-      progressValue: 0.7,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
       items: calendarMealsItems,
   ),
@@ -178,7 +178,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: supplementCategory,
       category: supplementCategory,
       imagePath: 'images/supl_1.png',
-      progressValue: 0.4,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
       items: calendarSupplementsItems
   ),
@@ -187,7 +187,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: drinkCategory,
       category: drinkCategory,
       imagePath: 'images/drink_1.png',
-      progressValue: 0.8,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
     items: calendarDrinkItems,
   ),
@@ -197,7 +197,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       subtitle: workoutCategory,
       category: workoutCategory,
       imagePath: 'images/workout_dude.png',
-      progressValue: 0.2,
+
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
       items: calendarWorkoutItems
 

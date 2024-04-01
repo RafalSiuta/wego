@@ -54,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               title: data.title,
                               subtitle: data.subtitle,
                               itemsList: data.items,
-                              value: data.progressValue,
+                              value: data.percentProgress(),
                               imagePath: data.imagePath,
                               category: data.category,
                               heroTag: '${data.imagePath}$itemIndex',
@@ -62,7 +62,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 Navigator.of(context).push(
                                   PageRouteBuilder(
                                     pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data, heroTag: '${data.imagePath}$itemIndex',),
-                                    transitionDuration: Duration(milliseconds: 300),
+                                    transitionDuration: Duration(milliseconds: 400),
                                     transitionsBuilder:
                                         (context, animation, secondaryAnimation, child) {
                                       var scale = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -169,21 +169,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   data: listData,
                                   heroTag: '${listData.imagePath}$index',
                                 ),
-                                transitionDuration: Duration(milliseconds: 300),
+                                transitionDuration: Duration(milliseconds: 400),
                                 transitionsBuilder:
                                     (context, animation, secondaryAnimation, child) {
                                   var scale = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                                       parent: animation, curve: Curves.easeIn));
                                   return ScaleTransition(
-                                      alignment: Alignment.center, scale: scale, child: child);
+                                      alignment: Alignment.bottomCenter, scale: scale, child: child);
                                 },
                               ),);
                         },
                       );
                     },
-                    //   separatorBuilder: (context, index){
-                    //     return SizedBox(width: 1,);
-                    // }
                     ),
                   ),
                 ],

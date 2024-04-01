@@ -86,6 +86,8 @@
   "carbo": "Carbohydrate",
   "fat": "Fat",
 
+
+  "unit_mg": "mg",
   "unit_kg": "kg",
   "unit_cm": "cm",
   "unit_litter": "L",
@@ -290,6 +292,15 @@
   "dialog_assets": "FitNumbers Avatar",
 
   "input_title": "title",
+  "input_exercise_helper": "exercise name",
+  "default_exercise_name": "add exercise",
+  "default_meal_name": "add meal",
+  "default_drink_name": "add drink",
+  "default_supl_name": "add supplement",
+  "tile_exercise_summary": "sets summary",
+  "tile_meal_summary": "calories summary",
+  "tile_drink_summary": "drinks summary",
+  "tile_supl_summary": "supplements summary",
 
   "options_title_about":"About",
   "options_title_advanced":"Settings",
