@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wego/providers/profile_provider/profile_provider.dart';
 import '../../../model/choice_model/choice_model.dart';
+import '../../../utils/extensions/wego_sys_icons.dart';
 import '../../../widgets/buttons/tile_button.dart';
 import '../../../widgets/headers/info_text.dart';
 import '../../../widgets/responsive/list_builder.dart';
@@ -35,7 +36,7 @@ class UserDataPage extends StatelessWidget {
               children: [
                 TileButton(
                   choiceModel: ChoiceModel(
-                    icon: FontAwesomeIcons.mars,
+                    icon: SysIcons.mars_male,
                     title: "male",
                     groupValue: profileProvider.isGenderSelected,
                     selectedValue: true,
@@ -47,7 +48,7 @@ class UserDataPage extends StatelessWidget {
                 ),
                 TileButton(
                   choiceModel: ChoiceModel(
-                      icon: FontAwesomeIcons.venus,
+                      icon: SysIcons.venus_famale,
                       title: "female",
                       groupValue: profileProvider.isGenderSelected,
                       selectedValue: false

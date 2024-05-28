@@ -22,6 +22,8 @@
   "chips_hydro": "nawodnienie",
   "chips_strength": "siła",
   "chips_fav": "ulubione",
+  "chips_workout": "trening",
+  "chips_supplements":"suplementacja",
 
   "theme_mode": "motyw",
   "light_theme": "jasny motyw",
@@ -39,7 +41,7 @@
   "weight": "Waga",
   "height": "Wzrost",
   "waist": "Obwód Talii",
-  "hip": "Obwód Bioder",
+  "hips": "Obwód Bioder",
   "neck": "Obwód Szyi",
 
   "activity_level": "Poziom Aktywności",
@@ -80,6 +82,9 @@
   "gain_weight_description": "Makroskładniki 35% białko, 45% węglowodany i 20% tłuszcze.",
 
   "body_calculations": "wskaźniki dietetyczne ",
+  "calendar_history": "historia kalendarza",
+  "calculation_history": "historia kalkulacji",
+  "body_history": "historia pomiarów ciała",
 
   "protein": "Białka",
   "carbo": "Węglowodany",
@@ -115,6 +120,10 @@
   "page_close": "Zamknij",
   "add_favorite": "Ulubione",
 
+  "option_save": "Zapisz",
+  "option_date": "Data",
+  "option_trash": "Usuń",
+
   "menu_dash": "pulp",
   "menu_stats": "stat",
   "menu_profile": "prof",
@@ -125,6 +134,11 @@
   "meals_category": "posiłki",
   "drinks_category": "napoje",
   "supplements_category": "dawki",
+
+  "plans_workout":"plany treningowe",
+  "plans_meals":"plany dietetyczne",
+  "plans_drink":"plany nawodnienia",
+  "plans_supplement":"plany suplementacyjne",
 
   "read_more": "...czytaj więcej  ",
 
@@ -405,7 +419,10 @@
   "are_you_sure": "Czy chcesz całkowicie usunąć dane ?",
   "yes": "Akceptuję",
   "no": "Anuluj",
-  "detail_title": "Szczegóły"
+  "detail_title": "Szczegóły",
+
+  "error_null": "wystąpił błąd",
+  "error_user": "sprawdź ustawienia profilowe"
 
 
 }

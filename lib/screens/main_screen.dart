@@ -9,6 +9,7 @@ import 'package:wego/utils/extensions/string_extension.dart';
 
 import '../model/menu/nav_model.dart';
 import '../model/menu/screen_model.dart';
+import '../utils/extensions/wego_sys_icons.dart';
 import '../utils/internationalization/app_localizations.dart';
 import '../widgets/navigators/side_nav.dart';
 import 'creator_screen/creator_screen.dart';
@@ -42,34 +43,34 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     ScreenModel(
       page:  const WelcomeScreen(),
       navItem: NavModel(
-      icon: Icons.dashboard,
+      icon: SysIcons.dash,
       title: "menu_dash"
       ),
     ),
     ScreenModel(
       page:  const StatsScreen(),
       navItem: NavModel(
-        icon: Icons.calendar_month,
+        icon: SysIcons.calendar_stats,
         title: "menu_stats"
         ),
     ),
     ScreenModel(
       page: const ProfileScreen(),
       navItem: NavModel(
-          icon: Icons.person,
+          icon: SysIcons.person,
           title: "menu_profile"
       ),),
     ScreenModel(
         page: const CreatorScreen(),
         navItem: NavModel(
-          icon: Icons.create,
+          icon: SysIcons.create,
           title: "menu_create"
           ),),
 
     ScreenModel(
         page: const SettingsScreen(),
         navItem:  NavModel(
-          icon: Icons.settings,
+          icon: SysIcons.settings,
           title: "menu_sets"
         )
         // BottomNavigationBarItem(
@@ -144,28 +145,33 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-
-            Expanded(
-              child: Center(
-                  key: widget.key,
-                  child: PageView.builder(
-                      physics: const BouncingScrollPhysics(
-                          parent: NeverScrollableScrollPhysics()),
-                      itemCount: _pages.length,
-                      controller: _pageController,
-                      onPageChanged: _onPageChange,
-                      itemBuilder: (context, index) {
-                        return _pages
-                            .map((e) => e.page!)
-                            .toList()
-                            .elementAt(index);
-                      })),
-            ),
-          ],
+        child:
+        Expanded(
+          child: Center(
+              key: widget.key,
+              child: PageView.builder(
+                  physics: const BouncingScrollPhysics(
+                      parent: NeverScrollableScrollPhysics()),
+                  itemCount: _pages.length,
+                  controller: _pageController,
+                  onPageChanged: _onPageChange,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: _pages
+                          .map((e) => e.page!)
+                          .toList()
+                          .elementAt(index),
+                    );
+                  })),
         ),
+        // Row(
+        //   crossAxisAlignment: CrossAxisAlignment.stretch,
+        //   children: [
+        //
+        //
+        //   ],
+        // ),
       ),
       bottomNavigationBar: Container(
         //height: 40,

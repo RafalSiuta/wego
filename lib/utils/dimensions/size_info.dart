@@ -19,7 +19,7 @@ class SizeInfo {
   static double cornerRadius = 15.0;
 
   ///general - repeat in other widgets:
-  static double headerTitleSize = 32;
+  static double headerTitleSize = 28;
   static double headerSubtitleSize = 15;
   static double verticalHeaderPadding = 5.0;
 
@@ -27,7 +27,7 @@ class SizeInfo {
 
   static double topMargin = 24;
 
-  static double switchButtonIconSize = 18;
+  static double iconSize = 18;
 
   ///social bar:
   static double socialIcons = 18;
@@ -115,7 +115,7 @@ class SizeInfo {
     calendarMarkerSize = 23;
     calendarMarkerFontSize = 15;
     calendarCellMargin = 12;
-    switchButtonIconSize = 23;
+    iconSize = 23;
 
     ///task card:
     taskCardTitle = 23.0;
@@ -139,7 +139,7 @@ class SizeInfo {
     settingsCardHeight = 90;
     settingsCardTitleFontSize = 23;
     settingsCardDescriptionFontSize = 18;
-    switchButtonIconSize = 30;
+    iconSize = 30;
 
     ///carousel:
     carouselHeight = 3;

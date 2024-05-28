@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../utils/constans/prefs_keys.dart';
+import '../../../widgets/list/creator_list.dart';
 
-class MealsCreatorScreen extends StatefulWidget {
+class MealsCreatorScreen extends StatelessWidget {
   const MealsCreatorScreen({super.key});
 
   @override
-  State<MealsCreatorScreen> createState() => _MealsCreatorScreenState();
-}
-
-class _MealsCreatorScreenState extends State<MealsCreatorScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Meals creator"),);
+    return const Placeholder();
   }
 }

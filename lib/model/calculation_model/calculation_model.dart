@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+
 import '../chart_model/chart_model.dart';
 
 class CalculationModel {
   int? id;
-  String? symbol;
+  IconData? symbol;
   String? title;
   String? shortTitle;
   String? category;
@@ -18,6 +20,7 @@ class CalculationModel {
   String? imagePath;
   List<ChartModel>? chartList;
   Color? infoColor;
+  bool? isActiveChips;
 
   CalculationModel({this.id,
     this.symbol,
@@ -33,7 +36,8 @@ class CalculationModel {
     this.imagePath = '',
     this.chartList,
     this.infoColor,
-    this.category
+    this.category,
+    this.isActiveChips = false
   });
 
   Map<String, dynamic> toJson() =>

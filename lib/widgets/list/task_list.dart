@@ -34,11 +34,6 @@ class TaskList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // InfoText(
-              //   title: 'You have ${calendarProvider.taskListCounter} task${calendarProvider.taskListCounter > 1 ? 's' : ""}',
-              //   padding: EdgeInsets.only(left: sidePadding, ),
-              //   isInfoIcon: false,
-              // ),
               CounterText(
                 text1: 'counter_txt_1',
                 text2: calendarProvider.taskListCounter > 1 ? "counter_txt_3" : "counter_txt_2",
@@ -66,12 +61,12 @@ class TaskList extends StatelessWidget {
                                 SmallCalendarCard(
                                   title: '${data.title}',
                                   subtitle: data.subtitle,
-                                  itemsList: [1,2,3,4],
+                                  itemsList: data.items,
                                   value: data.percentProgress(),
                                   imagePath: data.imagePath,
                                   category: data.category,
                                   heroTag: '${data.imagePath}$index${data.title}',
-                                  openDetails: (){
+                                  onTap: (){
                                     Navigator.of(context).push(
                                       PageRouteBuilder(
                                         pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data,heroTag: '${data.imagePath}$index${data.title}',),

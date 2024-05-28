@@ -3,6 +3,8 @@ import 'package:wego/providers/profile_provider/user_activity_level.dart';
 import 'package:wego/providers/profile_provider/user_nutrition.dart';
 import 'package:flutter/material.dart';
 import 'package:wego/providers/profile_provider/user_body_data.dart';
+import '../../data/dummy_chart_data.dart';
+import '../../model/chart_model/chart_model.dart';
 import '../../model/user_data_model/user_data_model.dart';
 import '../../utils/prefs/prefs.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -25,6 +27,9 @@ class ProfileProvider extends ChangeNotifier {
     getUserActivityValues();
     getUserNutritionValues();
     getUserData();
+
+    chipBodyList = userDataList.getRange(1, userDataList.length).toList();
+    switchChartData(0);
   }
 
   final Prefs _prefs = Prefs();
@@ -44,6 +49,47 @@ class ProfileProvider extends ChangeNotifier {
   UserBodyData usrData = UserBodyData();
 
   List userDataList = [];
+
+  //stats chips btn selectors:
+  int selectedChip = 0;
+  List chipBodyList = [];
+
+  void userChipChoice(int index, bool val) {
+
+    for (int i = 0; i < chipBodyList.length; i++) {
+      print('SELECTED CHIP BODY: ${i}: ${index}');
+      val = (i == index);
+
+      //userDataList[i].isActiveChips = (i == index) && val;
+    }
+    selectedChip = index;
+    switchChartData(index);
+    notifyListeners();
+  }
+  List<ChartModel> profileSavesList = [];
+  void switchChartData(int index){
+
+    switch(index){
+      case 0:
+        profileSavesList = DUMMY_WEIGHT_CHART_DATA;
+        break;
+      case 1:
+        profileSavesList = DUMMY_WEIGHT_CHART_DATA;
+        break;
+      case 2:
+        profileSavesList = DUMMY_WAIST_CHART_DATA;
+        break;
+      case 3:
+        profileSavesList = DUMMY_HIPS_CHART_DATA;
+        break;
+      case 4:
+        profileSavesList = DUMMY_NECK_CHART_DATA;
+        break;
+      default:
+        profileSavesList = DUMMY_WEIGHT_CHART_DATA;
+    }
+  }
+
 
   void setUserData( int index, double maxValue,{double? newValue,String? operator}) {
     var data = userDataList[index];
@@ -267,7 +313,7 @@ class ProfileProvider extends ChangeNotifier {
       }
     }
 
-    if(isCustomNutrition == false){
+    if(isCustomNutrition == true){
 
       for(int i = 0; i < userNutritionDataList.length ; i++){
         //print('This is new list nutri data custom nutri ${isCustomNutrition} - ${userNutritionDataList[i].name}');
@@ -286,24 +332,33 @@ class ProfileProvider extends ChangeNotifier {
     }else{
 
       for(int i = 0; i < userNutritionDefaultList.length ; i++){
-       // print('This is new list nutri data custom nutri ${isCustomNutrition} - ${userNutritionDefaultList[i].name}');
-        switch(userNutritionDefaultList[i].name){
-          case 'weight loss':
-            userData.proteinPercent = userNutritionDefaultList[i].protein.toDouble();
-            userData.carbPercent = userNutritionDefaultList[i].carbohydrate.toDouble();
-            userData.fatPercent = userNutritionDefaultList[i].fat.toDouble();
-            break;
-          case 'maintain':
-            userData.proteinPercent = userNutritionDefaultList[i].protein.toDouble();
-            userData.carbPercent = userNutritionDefaultList[i].carbohydrate.toDouble();
-            userData.fatPercent = userNutritionDefaultList[i].fat.toDouble();
-            break;
-          case 'gain weight':
-            userData.proteinPercent = userNutritionDefaultList[i].protein.toDouble();
-            userData.carbPercent = userNutritionDefaultList[i].carbohydrate.toDouble();
-            userData.fatPercent = userNutritionDefaultList[i].fat.toDouble();
-            break;
-        }
+       // print('This is new list nutri data custom nutri i val: $i :\n${isCustomNutrition} - ${userNutritionDefaultList[i].name}');
+
+        // print('SETUP VALUES nutrition choice: $defaultNutritionChoice \nprot ${userData.proteinPercent} \ncarb ${userData.carbPercent} \nfat ${userData.fatPercent}');
+
+        userData.proteinPercent = userNutritionDefaultList[defaultNutritionChoice].protein.toDouble();
+        userData.carbPercent = userNutritionDefaultList[defaultNutritionChoice].carbohydrate.toDouble();
+        userData.fatPercent = userNutritionDefaultList[defaultNutritionChoice].fat.toDouble();
+        // switch(defaultNutritionChoice){
+        //   case 0:
+        //
+        //
+        //    // print('WEIGHT LOSS: \nprot ${userData.proteinPercent} \ncarb ${userData.carbPercent} \nfat ${userData.fatPercent}');
+        //     break;
+        //   case 1:
+        //     userData.proteinPercent = userNutritionDefaultList[1].protein.toDouble();
+        //     userData.carbPercent = userNutritionDefaultList[1].carbohydrate.toDouble();
+        //     userData.fatPercent = userNutritionDefaultList[1].fat.toDouble();
+        //    // print('WEIGHT MAINTAIN: \nprot ${userData.proteinPercent} \ncarb ${userData.carbPercent} \nfat ${userData.fatPercent}');
+        //     break;
+        //   case 2:
+        //     userData.proteinPercent = userNutritionDefaultList[2].protein.toDouble();
+        //     userData.carbPercent = userNutritionDefaultList[2].carbohydrate.toDouble();
+        //     userData.fatPercent = userNutritionDefaultList[2].fat.toDouble();
+        //     //print('WEIGHT GAIN: \nprot ${userData.proteinPercent} \ncarb ${userData.carbPercent} \nfat ${userData.fatPercent}');
+        //     break;
+        // }
+        notifyListeners();
       }
     }
 

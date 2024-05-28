@@ -47,7 +47,7 @@ class Prefs extends ChangeNotifier {
 
   Future<double> restoreDouble(String key, double input) async {
     final prefs = await _prefs;
-    final inputValue = prefs.getDouble(key) ?? 0;
+    final inputValue = prefs.getDouble(key) ?? 0.0;
     input = inputValue;
     notifyListeners();
     return input;
@@ -61,7 +61,7 @@ class Prefs extends ChangeNotifier {
 
   Future<bool> restoreBool(String key, bool input) async {
     final prefs = await _prefs;
-    final inputValue = prefs.getBool(key) ?? false;
+    final inputValue = prefs.getBool(key) ?? true;
     input = inputValue;
     notifyListeners();
     return input;

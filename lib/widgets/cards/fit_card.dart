@@ -4,8 +4,56 @@ import 'package:intl/intl.dart';
 
 import '../../model/calculation_model/calculation_model.dart';
 import '../../model/color/color_switch.dart';
+import '../../utils/dimensions/size_info.dart';
 import '../../utils/internationalization/app_localizations.dart';
 import '../shapes/card_small_pattern.dart';
+
+class FitCardMini extends StatelessWidget {
+  const FitCardMini({this.iconData,required this.title,required this.category, required this.onTap,required this.value, super.key});
+ // final CalculationModel data;
+  final IconData? iconData;
+  final String? title;
+  final String? category;
+  final Function(bool)? onTap;
+  final bool? value;
+
+  @override
+  Widget build(BuildContext context) {
+    double fontSize = 10.0;
+    double iconSize = SizeInfo.iconSize;
+    var cardBcgColor  = ColorSwitch(category: category);
+    cardBcgColor.getColor(context);
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: ChoiceChip(
+        selectedColor: cardBcgColor.bcgColor,
+        disabledColor: Theme.of(context).unselectedWidgetColor,
+        showCheckmark: false,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+        elevation: 0,
+        avatar: iconData != null ? Icon(iconData,color: Theme.of(context).textTheme.headlineMedium!.color, size: iconSize,)
+        : null,
+        label: Padding(
+          padding: EdgeInsets.only(left: iconData != null ? 5.0 : 0),
+          child: Text(
+            title!,
+            textAlign:  TextAlign.center,
+            style: value! ? Theme.of(context).textTheme.headlineMedium!.copyWith( fontSize: fontSize, ):Theme.of(context).textTheme.displaySmall!.copyWith( fontSize: fontSize, ) ,
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+          side: BorderSide(color: Theme.of(context).unselectedWidgetColor),
+        ),
+        selected: value!,
+        onSelected: onTap,
+        side: BorderSide(style: value! ? BorderStyle.none : BorderStyle.solid, width: 0.5, color: Theme.of(context).unselectedWidgetColor.withOpacity(0.5)),
+      ),
+    );
+  }
+}
+
 
 class FitCardSmall extends StatelessWidget {
   const FitCardSmall({ required this.data, required this.onTap, required this.heroTag, super.key});
@@ -17,6 +65,7 @@ class FitCardSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double fontSize = 10.0;
+    double iconSize = SizeInfo.iconSize;
     var cardBcgColor  = ColorSwitch(category: data.category);
     cardBcgColor.getColor(context);
     return AspectRatio(
@@ -89,7 +138,7 @@ class FitCardSmall extends StatelessWidget {
                                    textAlign: TextAlign.center,
                                    maxLines: 1,
                                    text: TextSpan(
-                                   text: '${data.value!.toStringAsFixed(2)} ',
+                                   text: data.value != null ? '${data.value!.toStringAsFixed(2)} ': "",
                                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: data.infoColor, fontSize: fontSize),
                                    children: <TextSpan>[
                                      TextSpan(
@@ -117,6 +166,20 @@ class FitCardSmall extends StatelessWidget {
                      ),
                    ),
                  ],
+               ),
+               Align(
+                 alignment: Alignment.topLeft,
+                 child: Container(
+                   padding: const EdgeInsets.all(8.0),
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.all(Radius.circular(iconSize)),
+                     color: cardBcgColor.patternColor
+                   ),
+                   child: Icon(data.symbol, size: iconSize,
+                     color: Theme.of(context).colorScheme.secondary,
+                   ),
+                 ),
+
                ),
                Column(
                  children: [
@@ -157,6 +220,7 @@ class FitCardLarge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double fontSize = 12.0;
+    double iconSize = SizeInfo.iconSize;
     var cardBcgColor  = ColorSwitch(category: data.category);
     cardBcgColor.getColor(context);
     return GestureDetector(
@@ -234,7 +298,7 @@ class FitCardLarge extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
                                         text: TextSpan(
-                                            text: '${data.value!.toStringAsFixed(2)} ',
+                                            text: data.value != null ? '${data.value!.toStringAsFixed(2)} ': "",
                                             style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: data.infoColor, fontSize: fontSize),
                                             children: <TextSpan>[
                                               TextSpan(
@@ -263,6 +327,18 @@ class FitCardLarge extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      color: cardBcgColor.patternColor
+                  ),
+                  child: Icon(data.symbol, size: iconSize,color: Theme.of(context).colorScheme.secondary,),
+                ),
+
               ),
               Column(
                 children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wego/utils/extensions/string_extension.dart';
+import 'package:wego/utils/extensions/wego_sys_icons.dart';
 
 import '../../utils/internationalization/app_localizations.dart';
 
@@ -86,7 +87,7 @@ class SeekBar extends StatelessWidget {
               child:
                   IconButton(
                     padding: EdgeInsets.zero,
-                    icon: Icon(Icons.remove),
+                    icon: Icon(SysIcons.minus),
                     onPressed: btnMinus,
                   ),
 
@@ -107,7 +108,7 @@ class SeekBar extends StatelessWidget {
               child:
               IconButton(
                 padding: EdgeInsets.zero,
-                icon: Icon(Icons.add),
+                icon: Icon(SysIcons.plus),
                 onPressed: btnPlus,
               ),
 

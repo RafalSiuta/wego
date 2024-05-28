@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wego/model/user_calendar_model/user_calendar_model.dart';
 import 'package:wego/utils/constans/prefs_keys.dart';
+import '../../data/dummy_chart_data.dart';
+import '../../model/chart_model/chart_model.dart';
+import '../../model/choice_model/chip_choice.dart';
 import '../../utils/prefs/prefs.dart';
 import '../settings_provider/settings_provider.dart';
 import 'package:wego/data/dummy_data_list.dart';
@@ -17,8 +20,12 @@ class CalendarProvider extends ChangeNotifier {
   final Prefs _prefs = Prefs();
 
   void initCalendarData() async {
+    dummyDBList = DUMMY_DATA;
     getAllTasks();
+    loadDefaultCharts();
   }
+
+
 
   DateTime currentDay =
   DateTime(DateTime
@@ -42,6 +49,8 @@ class CalendarProvider extends ChangeNotifier {
   Map<DateTime, List<UserCalendarModel>> tasks = {};
 
   // temp dummy data:
+  List<UserCalendarModel> dummyDBList = [];
+
   List<UserCalendarModel> _taskList = [];//DUMMY_DATA;
 
   List<UserCalendarModel> _welcomeList = [];
@@ -114,11 +123,10 @@ class CalendarProvider extends ChangeNotifier {
 
   getAllTasks() {
     // Sortujemy listę DUMMY_DATA za pomocą funkcji porównującej
-    DUMMY_DATA.sort(compareByCategory);
+    dummyDBList.sort(compareByCategory);
 
 // Teraz mamy posortowaną listę według kategorii, możesz ją przekształcić na nową listę w tej kolejności
-    _taskList = DUMMY_DATA.toList();
-
+    _taskList = dummyDBList.toList();
 
 
     _taskList.forEach((element) {
@@ -133,6 +141,9 @@ class CalendarProvider extends ChangeNotifier {
     notifyListeners();
 
   }
+
+
+
   final categoryOrder = [
     workoutCategory,
     mealCategory,
@@ -160,6 +171,61 @@ class CalendarProvider extends ChangeNotifier {
       }
     }
     return count;
+  }
+
+  List<ChipChoice> categoryChartList = [
+    ChipChoice(name:'chips_workout' ,category: workoutCategory, value:false),
+    ChipChoice(name:'chips_calories', category: mealCategory, value:false),
+    ChipChoice(name:'chips_hydro', category: drinkCategory, value:false),
+    ChipChoice(name:'chips_supplements' ,category: supplementCategory, value:false),
+  ];
+  // void calendarChipChoice(int index, bool val){
+  //   categoryChartList[index].value = val;
+  //  // _prefs.storeList(chipChoiceListKey, categoryChartList);
+  //   notifyListeners();
+  // }
+  String selectedChartCategory = '';
+
+  List<ChartModel> selectedChartList = [];
+
+  void loadDefaultCharts(){
+    categoryChartList.first.value = true;
+    selectedChartCategory = categoryChartList.first.category!;
+    updateChartList();
+    notifyListeners();
+  }
+//todo temporary solution change to load from main DB list saves:
+  void updateChartList(){
+    switch (selectedChartCategory){
+      case workoutCategory:
+        selectedChartList = DUMMY_WORKOUT_CHART_DATA;
+        break;
+      case mealCategory:
+        selectedChartList = DUMMY_CALORIES_CHART_DATA;
+        break;
+      case drinkCategory:
+        selectedChartList = DUMMY_DRINK_CHART_DATA;
+        break;
+      case supplementCategory:
+        selectedChartList = DUMMY_SUPPLEMENTS_CHART_DATA;
+        break;
+      default: DUMMY_WORKOUT_CHART_DATA;
+
+    }
+    notifyListeners();
+  }
+
+
+
+  void calendarChipChoice(int index, bool val) {
+    for (int i = 0; i < categoryChartList.length; i++) {
+      categoryChartList[i].value = (i == index) && val;
+
+    }
+    selectedChartCategory = categoryChartList[index].category!;
+    updateChartList();
+    notifyListeners();
+    // _prefs.storeList(chipChoiceListKey, categoryChartList); // Jeśli używasz zapisu stanu
   }
 
 

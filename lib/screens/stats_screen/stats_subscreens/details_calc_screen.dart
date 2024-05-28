@@ -12,8 +12,10 @@ import '../../../model/calculation_model/calculation_model.dart';
 import '../../../model/color/color_switch.dart';
 import '../../../model/menu/nav_model.dart';
 import '../../../utils/dimensions/size_info.dart';
+import '../../../utils/extensions/wego_sys_icons.dart';
 import '../../../utils/internationalization/app_localizations.dart';
 import '../../../widgets/buttons/menu_button.dart';
+import '../../../widgets/chart/chart_card.dart';
 import '../../../widgets/headers/date_header.dart';
 import '../../../widgets/headers/sliver_date_header.dart';
 import '../../../widgets/headers/sliver_header.dart';
@@ -36,9 +38,9 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
   int navIndex = 0;
 
   List<NavModel> _menuItems = [
-    NavModel(title: "save_to_chart", icon: Icons.add_chart),
+    NavModel(title: "save_to_chart", icon: SysIcons.save_chart),
     NavModel(title: "add_favorite", icon: Icons.favorite_border),
-    NavModel(title: "page_close", icon: Icons.close),
+    NavModel(title: "page_close", icon: SysIcons.close),
   ];
 
   ScrollDirection scrollDirection = ScrollDirection.idle;
@@ -92,10 +94,13 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                     child: CustomScrollView(
                       physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       slivers: [
-                        SliverPersistentHeader(
-                          pinned: false,
-
-                          delegate: SliverDateHeader(isIconVisible: false),),
+                        SliverToBoxAdapter(
+                          child: SizedBox(height: 50,),
+                        ),
+                        // SliverPersistentHeader(
+                        //   pinned: false,
+                        //
+                        //   delegate: SliverDateHeader(isIconVisible: false),),
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: SliverImageHeader(
@@ -224,7 +229,7 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                                 subtitle: 'chart_data',
                                 minHeight: 70,
                                // isImageLeft: true,
-                                maxHeight: imgSize ,
+                                maxHeight: imgSize - 30,
                                 imagePath: 'images/chart.png'
                             )
                         ),
@@ -233,12 +238,19 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                               [
 
                                 Container(
-                                  margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
-                                  padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding/2 ),
+                                  margin: EdgeInsets.symmetric(horizontal:edgePadding/2),
+                                  padding: EdgeInsets.only(top: 30, bottom: 5.0),
                                   decoration: BoxDecoration(
+                                    //borderRadius: BorderRadius.all(Radius.circular(15.0)),
                                     color: Theme.of(context).colorScheme.background,
                                   ),
-                                  height: 120,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.height/3.5,
+
+                                  child: ChartCard(
+                                    category: widget.data!.category,
+                                    chartData: widget.data!.chartList!,
+                                  ),
                                 ),
 
                                 // Container(
@@ -335,7 +347,7 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                                 setState(() {
                                   if(index == 1){
                                     logic.addToFavorite(widget.data!);
-                                    print("value from model:${widget.data!.title} is: ${widget.data!.isFavorite}");
+                                   // print("value from model:${widget.data!.title} is: ${widget.data!.isFavorite}");
                                   }else if(index == 2){
                                     Navigator.pop(context);
                                   }

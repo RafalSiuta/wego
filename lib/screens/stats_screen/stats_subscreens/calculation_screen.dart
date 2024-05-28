@@ -4,24 +4,21 @@ import 'package:provider/provider.dart';
 import '../../../providers/logic_provider/logic_provider.dart';
 import '../../../providers/profile_provider/profile_provider.dart';
 import '../../../providers/settings_provider/settings_provider.dart';
+import '../../../utils/dimensions/size_info.dart';
 import '../../../widgets/cards/fit_card.dart';
 import '../../../widgets/chips/chips_list.dart';
 import '../../../widgets/headers/info_text.dart';
 import '../../../widgets/headers/widget_header.dart';
 import 'details_calc_screen.dart';
 
-class CalculationScreen extends StatefulWidget {
+class CalculationScreen extends StatelessWidget {
   const CalculationScreen({super.key});
 
   @override
-  State<CalculationScreen> createState() => _CalculationScreenState();
-}
-
-class _CalculationScreenState extends State<CalculationScreen> {
-  @override
   Widget build(BuildContext context) {
     double fontSize = 12.0;
-    double sidePadding = 12.0;
+    //double sidePadding = 12.0;
+    var edgePadding = SizeInfo.edgePadding;
     return Consumer3<ProfileProvider, LogicProvider, SettingsProvider>(
         builder: (context, profile, logic, settings, child){
 
@@ -31,7 +28,7 @@ class _CalculationScreenState extends State<CalculationScreen> {
         children: [
           InfoText(
             title: 'body_calculations',
-            padding: EdgeInsets.only(left: sidePadding, ),
+            padding: EdgeInsets.only(left: edgePadding, ),
           ),
           const ChoiceChipsList(),
           SizedBox(height: 8.0,),

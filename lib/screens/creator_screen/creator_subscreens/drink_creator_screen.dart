@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../utils/constans/prefs_keys.dart';
+import '../../../widgets/list/creator_list.dart';
 
-class DrinksCreatorScreen extends StatefulWidget {
+class DrinksCreatorScreen extends StatelessWidget {
   const DrinksCreatorScreen({super.key});
 
   @override
-  State<DrinksCreatorScreen> createState() => _DrinksCreatorScreenState();
-}
-
-class _DrinksCreatorScreenState extends State<DrinksCreatorScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Drinks creator"),);
+    return const Placeholder();
   }
 }

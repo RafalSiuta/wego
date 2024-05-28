@@ -34,19 +34,6 @@ class UserCalendarModel {
     return scaledProgress;
   }
 
-  // double percentValue(bool isDone){
-  //   double progress = 0;
-  //   for(var item in items!){
-  //     if(isDone == true){
-  //       progress += item.value;
-  //     }
-  //   }
-  //   //progress może wynieść np. 3345.89
-  //   // całość wartości np. 6400
-  //   //jak przemnozyć progress zeby mogło wyświetlić w LinearProgressIndicator
-  //   // jeśli ten przyjmuje wartości między 0.0, a 1.0 gdzie 1.0 = 100%
-  //   return progress;
-  // }
 
 
 

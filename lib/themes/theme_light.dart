@@ -23,6 +23,12 @@ const lightAccentShade = Color(0xFF876eff);
 const cardLightBackground = Color(0xFFD5CEFD);//D5CEFD //D5CEFD //9585F9 //998BF6
 const cardDarkBackground = Color(0xFF9585F9);
 
+const textColor = Colors.black54;
+// final activeColor = Colors.deepPurpleAccent.shade200;
+//final unselectedColor = Colors.grey.shade500;
+//const cardBackgroundColor = Colors.white;
+
+
 
 final themeLight = ThemeData(
 
@@ -60,14 +66,12 @@ final themeLight = ThemeData(
     primarySwatch: Colors.amber,
     splashColor: Colors.transparent,
     textTheme: TextTheme(
-      /// main big title //headline 1
       headlineLarge: GoogleFonts.exo2(
           textStyle: const TextStyle(
             color: baseTextColor ,
             fontSize: 32,
             fontWeight: FontWeight.bold
           )),
-      /// list title //headline 3 // calendar header/ header secondary date
       headlineMedium: GoogleFonts.exo2(
         textStyle: const TextStyle(
             fontSize: 18,

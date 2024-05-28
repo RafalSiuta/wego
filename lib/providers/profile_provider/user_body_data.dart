@@ -29,7 +29,7 @@ class UserBodyData {
         maxValue: 300,
         sliderValue: 95),
     SliderModel(
-        name: 'hip',
+        name: 'hips',
         unit: 'unit_cm',
         minValue: 0,
         maxValue: 300,

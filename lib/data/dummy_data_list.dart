@@ -5,23 +5,23 @@ import '../model/user_calendar_model/user_calendar_model.dart';
 import '../utils/constans/prefs_keys.dart';
 
 final List<ItemElement>  workoutExerciseSets = [
-  ItemElement(qty: 12, value:  60, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 10, value:  80, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 8, value:  100, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 6, value:  110, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 6, value:  120, unit: "reps", totalUnit: "kg"),
+  ItemElement(qty: 12, value:  60, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 10, value:  80, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 8, value:  100, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 6, value:  110, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 6, value:  120, unit: "powt", totalUnit: "kg"),
 ];
 final List<ItemElement>  workoutExerciseSets2 = [
-  ItemElement(qty: 10, value:  110, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 10, value:  110, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 10, value:  110, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 10, value:  110, unit: "reps", totalUnit: "kg"),
+  ItemElement(qty: 10, value:  110, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 10, value:  110, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 10, value:  110, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 10, value:  110, unit: "powt", totalUnit: "kg"),
 ];
 
 final List<ItemElement>  workoutExerciseSets3 = [
-  ItemElement(qty: 12, value:  20, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 12, value:  30, unit: "reps", totalUnit: "kg"),
-  ItemElement(qty: 10, value:  40, unit: "reps", totalUnit: "kg"),
+  ItemElement(qty: 12, value:  20, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 12, value:  30, unit: "powt", totalUnit: "kg"),
+  ItemElement(qty: 10, value:  40, unit: "powt", totalUnit: "kg"),
 ];
 
 final List<CalendarItemsModel> calendarWorkoutItems = [
@@ -38,16 +38,18 @@ final List<ItemElement>  calendarMealsDinner = [
 ];
 
 final List<CalendarItemsModel> calendarMealsItems = [
-  CalendarItemsModel(name: 'Breakfast', qty: calendarMealsDinner.length, elems: calendarMealsDinner),
-  CalendarItemsModel(name: 'Launch',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
-  CalendarItemsModel(name: 'dinner',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
-  CalendarItemsModel(name: 'suppper',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Śniadanie', qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'przekąska',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Obiad',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Podwieczorek',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Kolacja',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
 ] ;
 
 final List<CalendarItemsModel> calendarDrinkItems = [
-  CalendarItemsModel(name: 'Tea', qty: drinkItems.length, elems: drinkItems),
-  CalendarItemsModel(name: 'Coffee',qty: drinkItems.length, elems: drinkItems),
-  CalendarItemsModel(name: 'Water',qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Herbata', qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Woda',qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Kawa',qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Woda',qty: drinkItems.length, elems: drinkItems),
 ] ;
 
 final List<ItemElement>  drinkItems = [
@@ -57,10 +59,10 @@ final List<ItemElement>  drinkItems = [
 ];
 
 final List<CalendarItemsModel> calendarSupplementsItems = [
-  CalendarItemsModel(name: 'Creatine', qty: supplementsItems.length, elems: supplementsItems),
-  CalendarItemsModel(name: 'Vit-C',qty: supplementsItems.length, elems: supplementsItems),
-  CalendarItemsModel(name: 'ADEK',qty: supplementsItems.length, elems: supplementsItems),
-  CalendarItemsModel(name: 'Ginseng',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Kreatyna', qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Wit-C',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Wit ADEK',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Żeńszeń',qty: supplementsItems.length, elems: supplementsItems),
 ] ;
 
 final List<ItemElement>  supplementsItems = [

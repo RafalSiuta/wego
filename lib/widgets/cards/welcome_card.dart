@@ -151,10 +151,6 @@ class WelcomeCard extends StatelessWidget {
                                               )
                                             ]),
                                       ),
-                                      // Text(
-                                      //  // subtitle!
-                                      //   AppLocalizations.of(context)!.translate(subtitle!).capitalizeFirstLetter()
-                                      //   ,overflow: TextOverflow.ellipsis,maxLines: 1, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: fontSize),),
                                        Icon(
                                           Icons.info_outline,
                                         color: Theme.of(context).unselectedWidgetColor,
@@ -184,6 +180,7 @@ class WelcomeCard extends StatelessWidget {
                                             children: [
                                               RichText(
                                                 maxLines:1,
+                                                overflow: TextOverflow.ellipsis,
                                                 text: TextSpan(
                                                     text: '${number}. ',
                                                     style: Theme.of(context)

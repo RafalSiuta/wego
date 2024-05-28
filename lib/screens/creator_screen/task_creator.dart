@@ -10,6 +10,7 @@ import 'package:wego/utils/constans/prefs_keys.dart';
 import '../../model/color/color_switch.dart';
 import '../../model/menu/nav_model.dart';
 import '../../utils/dimensions/size_info.dart';
+import '../../utils/extensions/wego_sys_icons.dart';
 import '../../utils/internationalization/app_localizations.dart';
 import '../../widgets/buttons/menu_button.dart';
 import '../../widgets/headers/sliver_image.dart';
@@ -48,7 +49,8 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
 
   List<NavModel> _menuItems = [
     NavModel(
-      icon: FontAwesomeIcons.floppyDisk,
+      icon:SysIcons.save,
+      title: 'option_save'
     ),
     // NavModel(
     //   icon: FontAwesomeIcons.image,
@@ -57,13 +59,16 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
     //   icon: FontAwesomeIcons.pen,
     // ),
     NavModel(
-      icon: FontAwesomeIcons.calendarDay,
+      icon: SysIcons.calendar,
+      title: 'option_date'
     ),
     NavModel(
-      icon: FontAwesomeIcons.trash,
+      icon: SysIcons.trash,
+      title: 'option_trash'
     ),
     NavModel(
-      icon: FontAwesomeIcons.arrowLeft,
+      icon: SysIcons.close,
+      title: 'page_close'
     ),
   ];
 
@@ -177,7 +182,7 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
     var fontSize = SizeInfo.taskCreatorDescription;
     var helpTextFontSize = SizeInfo.helpTextSize;
     var edgePadding = SizeInfo.leftEdgePadding;
-    var raterIconSize = SizeInfo.switchButtonIconSize;
+    var raterIconSize = SizeInfo.iconSize;
     var leftPadding = SizeInfo.edgePadding;
     var inputHeight = SizeInfo.searchBarHeight;
     var navIconSize = SizeInfo.leadingAndTrailingIconSize;

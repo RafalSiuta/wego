@@ -27,6 +27,7 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
     var titleSize = SizeInfo.headerTitleSize;
     var subtitleSize = SizeInfo.headerSubtitleSize;
     var cardBcgColor  = ColorSwitch(category: data!.category);
+    var symbolSize = SizeInfo.iconSize;
     cardBcgColor.getColor(context);
     
     //print('MAX XTENT: ${maxHeight} / ${shrinkOffset * 0.1}');
@@ -44,6 +45,7 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
               color: cardBcgColor.bcgColor!.withOpacity(opacity(shrinkOffset)),
             ),
           ),
+
           Container(
             width: MediaQuery.of(context).size.width,
             height: 120,
@@ -58,28 +60,55 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                RichText(
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    maxLines: 3,
-
-                    text: TextSpan(
-                        text: '${data!.shortTitle}\n',
-                        style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: titleSize,height: 1.5),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: AppLocalizations.of(context)!.translate(data!.title!),
-                            style: Theme.of(context).textTheme.headlineLarge!.copyWith( fontSize: subtitleSize),
-                          )
-                        ]
-                    )),
+                Text('${data!.shortTitle}',style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: titleSize,height: 1.5,),),
+                // Container(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.all(Radius.circular(10)),
+                //       color: cardBcgColor.bcgColor
+                //   ),
+                //   child:
+                //
+                //   Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     mainAxisSize: MainAxisSize.min,
+                //     children: [
+                //       Text('${data!.shortTitle}',style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: titleSize,height: 1.5,),),
+                //       Padding(
+                //         padding: const EdgeInsets.only(left: 8.0),
+                //         child: Icon(data!.symbol, size: symbolSize + 2,color: Theme.of(context).textTheme.headlineLarge!.color,),
+                //       ),
+                //
+                //       // RichText(
+                //       //     overflow: TextOverflow.ellipsis,
+                //       //     textAlign: TextAlign.left,
+                //       //     maxLines: 3,
+                //       //
+                //       //     text: TextSpan(
+                //       //         text: '${data!.shortTitle}\n',
+                //       //         style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: titleSize,height: 1.5),
+                //       //         children: <TextSpan>[
+                //       //           // TextSpan(
+                //       //           //   text: AppLocalizations.of(context)!.translate(data!.title!),
+                //       //           //   style: Theme.of(context).textTheme.headlineLarge!.copyWith( fontSize: subtitleSize),
+                //       //           // )
+                //       //         ]
+                //       //     )),
+                //     ],
+                //   ),
+                // ),
                 RichText(text: TextSpan(
-                    text: '${data!.value!.toStringAsFixed(2)} ',
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: data!.infoColor,height: 1.5, fontSize: subtitleSize),
+                    text: AppLocalizations.of(context)!.translate(data!.title!),
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(height: 1.5, fontSize: subtitleSize),
                     children: <TextSpan>[
                       TextSpan(
+                        text: data!.value != null ? '\n${data!.value!.toStringAsFixed(2)} ': "\n",//'\n${data!.value!.toStringAsFixed(2)} ',
+                        style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: data!.infoColor, fontSize: subtitleSize),
+                      ),
+                      TextSpan(
                         text: AppLocalizations.of(context)!.translate(data!.unit!),
-                        // style: Theme.of(context).textTheme.headlineMedium!.copyWith( fontSize: descriptionFontSize),
+                        style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: data!.infoColor,fontSize: subtitleSize),
                       )
                     ]),),
                 Divider( )
@@ -97,6 +126,21 @@ class SliverImageHeader extends SliverPersistentHeaderDelegate {
                   fit: BoxFit.contain,
                   alignment: Alignment.topRight,
                   image: AssetImage(data!.imagePath!)),
+            ),
+          ),
+          Transform.translate(
+            offset:  Offset(0, transY(shrinkOffset)),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                margin: EdgeInsets.only(left: 8.0, ),
+                padding: const EdgeInsets.all( 8.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(titleSize)),
+                    color: cardBcgColor.patternColor
+                ),
+                child: Icon(data!.symbol, size: titleSize,color: Theme.of(context).colorScheme.secondary,),
+              ),
             ),
           ),
 

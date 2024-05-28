@@ -23,6 +23,8 @@
   "chips_hydro": "hydration",
   "chips_strength": "strength",
   "chips_fav": "favorites",
+  "chips_workout": "workout",
+  "chips_supplements":"supplements",
 
   "theme_mode": "theme mode",
   "light_theme": "light theme",
@@ -40,7 +42,7 @@
   "weight": "Weight",
   "height": "Height",
   "waist": "Waist",
-  "hip": "Hip",
+  "hips": "Hips",
   "neck": "Neck",
 
   "activity_level": "Activity level",
@@ -81,6 +83,9 @@
   "gain_weight_description": "Set nutrition percentage with 35% protein, 45% carbohydrate, and 20% fat.",
 
   "body_calculations": "dietary indicators",
+  "calendar_history": "calendar history",
+  "calculation_history": "calculations history",
+  "body_history": "body measurement history",
 
   "protein": "Protein",
   "carbo": "Carbohydrate",
@@ -117,6 +122,11 @@
   "page_close": "Close",
   "add_favorite": "Favorite",
 
+  "option_save": "Save",
+  "option_date": "Date",
+  "option_trash": "Delete",
+
+
   "menu_dash": "dash",
   "menu_stats": "stats",
   "menu_profile": "prof",
@@ -127,6 +137,11 @@
   "meals_category": "meals",
   "drinks_category": "drinks",
   "supplements_category": "doses",
+
+  "plans_workout":"workout plans",
+  "plans_meals":"diet plans",
+  "plans_drink":"hydration plans",
+  "plans_supplement":"supplement plans",
 
   "progress_bar":"Total",
 
@@ -406,7 +421,9 @@
   "are_you_sure": "Do you want delete all data?",
   "yes": "Accept",
   "no": "Cancel",
-  "detail_title": "Details"
+  "detail_title": "Details",
+  "error_null": "somethink went wrong",
+  "error_user": "check ypur rofile settings"
 
 }
 

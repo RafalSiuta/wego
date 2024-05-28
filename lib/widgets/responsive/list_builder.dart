@@ -56,12 +56,14 @@ class ListBuilder extends StatelessWidget {
   required this.itemCount,
   this.padding = EdgeInsets.zero,
   this.scrollDirection = Axis.vertical,
+    this.shrinkWrap = true,
   super.key});
 
 final IndexedWidgetBuilder? itemBuilder;
 final int? itemCount;
 final EdgeInsets? padding;
 final Axis scrollDirection;
+final bool? shrinkWrap;
 
 @override
 Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ Widget build(BuildContext context) {
       padding: padding!,
       physics: const BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics()),
-      shrinkWrap: true,
+      shrinkWrap: shrinkWrap!,
       itemCount: itemCount!,
       itemBuilder: (context,index) => AnimationConfiguration.staggeredList(
         position: index,

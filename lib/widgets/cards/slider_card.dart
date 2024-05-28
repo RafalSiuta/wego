@@ -12,34 +12,32 @@ class SliderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child:  AspectRatio(
-        aspectRatio: 3/2,
-        child: Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                size:24,
-                color:  color,
-              ),
-              const SizedBox(height: 8.0,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child:Text(
-                  AppLocalizations.of(context)!.translate(description!).capitalizeFirstLetter(),
-                 // description!.capitalizeFirstLetter(),
-                  overflow:TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.displayMedium),
-              )
-            ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Card(
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: Icon(
+              icon,
+              size:36,
+              color:  color,
+            ),
           ),
         ),
-      ),
+        const SizedBox(height: 8.0,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child:Text(
+            AppLocalizations.of(context)!.translate(description!).capitalizeFirstLetter(),
+            overflow:TextOverflow.ellipsis,
+            maxLines: 2,
+            style: Theme.of(context).textTheme.displayMedium),
+        )
+      ],
     );
   }
 }

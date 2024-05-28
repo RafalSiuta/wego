@@ -25,7 +25,7 @@ class TileButton extends StatelessWidget {
             children: [
               Icon(
                 choiceModel!.icon,
-                size:24,
+                size:36,
                 color: choiceModel!.groupValue == choiceModel!.selectedValue ? Theme.of(context).iconTheme.color : Theme.of(context).unselectedWidgetColor,
               ),
               const SizedBox(height: 8.0,),

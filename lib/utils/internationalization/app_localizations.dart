@@ -56,6 +56,7 @@ class AppLocalizations {
   DateModel dateFormat(DateTime date, BuildContext context){
     var tag = Localizations.maybeLocaleOf(context)?.toLanguageTag();
     DateModel dateModel = DateModel();
+    dateModel.shortDate = DateFormat('dd MMM ', tag).format(date);
     dateModel.fullDate = DateFormat('dd MMM yyyy', tag).format(date);
     dateModel.weekDay = DateFormat('EEEE', tag).format(date);
     dateModel.monthYear  = DateFormat('MMMM yy', tag).format(date);

@@ -40,9 +40,9 @@ class ActivityCarousel extends StatelessWidget {
                     );
                   },
                   options: CarouselOptions(
-                    height: 90,
-                    aspectRatio: 3/2,
-                    viewportFraction: 0.8,
+                    height: 160,
+                    aspectRatio: 5,
+                    viewportFraction: 1,
                     initialPage: profileProvider.activityLevel,
                     enableInfiniteScroll: true,
                     reverse: false,
@@ -63,7 +63,7 @@ class ActivityCarousel extends StatelessWidget {
                     itemCount: profileProvider.userActivityLevel.activityLevelListCounter,
                     mapIndicators: (i, url) {
                       return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
+                        margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                         child: Icon(
                           Icons.circle,
                           size: 6.0,

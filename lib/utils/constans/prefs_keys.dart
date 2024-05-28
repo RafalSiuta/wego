@@ -14,6 +14,7 @@ const themeMode = "THEME_MODE";
 
 const calendarFormatKey = "CALENDAR_FORMAT";
 
+
 const workoutCategory = "exercises_category";
 const mealCategory = "meals_category";
 const drinkCategory = "drinks_category";
