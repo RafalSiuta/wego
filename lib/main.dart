@@ -45,6 +45,7 @@ class WeGo extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

@@ -46,7 +46,7 @@ class CreatorScreen extends StatelessWidget {
               )),
           SubScreenModel(
               page: CreatorList(
-                titleKey: "plans_supplements",
+                titleKey: "plans_supplement",
                 list: creatorProvider.supplementList,
               ),
               title: NavModel(

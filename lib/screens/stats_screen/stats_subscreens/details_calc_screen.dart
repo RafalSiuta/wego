@@ -358,7 +358,7 @@ class _DetailCalcScreenState extends State<DetailCalcScreen> {
                               icon: widget.data!.isFavorite! && index == 1 ? Icons.favorite :  menuItem.icon ,
                               title: menuItem.title,
                               fontSize: 8.0,
-                              spaceMargin: 12,
+                             // spaceMargin: 12,
 
                             );
                           },

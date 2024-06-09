@@ -4,7 +4,7 @@ import 'package:wego/utils/extensions/string_extension.dart';
 import '../../utils/internationalization/app_localizations.dart';
 
 class MenuButton extends StatelessWidget {
-  const MenuButton({required this.title, required this.icon, this.spaceMargin = 8.0, this.fontSize = 8.0, required this.onPress, this.isChecked = false, super.key});
+  const MenuButton({required this.title, required this.icon, this.spaceMargin = 5.0, this.fontSize = 8.0, required this.onPress, this.isChecked = false, super.key});
 
   final String? title;
   final IconData? icon;
@@ -28,7 +28,8 @@ class MenuButton extends StatelessWidget {
             color: isChecked! ? Theme.of(context).indicatorColor : Theme.of(context).unselectedWidgetColor,
           ),
           SizedBox(
-            width: spaceMargin,
+            //width: spaceMargin,
+            height: spaceMargin,
           ),
           Text(
             AppLocalizations.of(context)!.translate(title!).capitalizeFirstLetter(),

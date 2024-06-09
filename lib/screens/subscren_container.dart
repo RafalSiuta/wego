@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wego/model/user_calendar_model/user_calendar_model.dart';
 import '../model/menu/subscreen_model.dart';
+import '../utils/constans/prefs_keys.dart';
 import '../widgets/navigators/side_nav.dart';
+import 'creator_screen/task_creator.dart';
 
 class SubScreenContainer extends StatefulWidget {
   const SubScreenContainer({required this.pages, super.key});
@@ -25,8 +28,26 @@ class _SubScreenContainerState extends State<SubScreenContainer> {
     });
   }
 
+  UserCalendarModel? data;
+
+  UserCalendarModel cardSwitch (){
+    UserCalendarModel card = UserCalendarModel();
+    if(_currentPage == 0){
+      card = UserCalendarModel(category: workoutCategory, title: "",subtitle: "",date: DateTime.now(),items: [],id: 1,imagePath: "");
+    }else if(_currentPage == 1){
+      card = UserCalendarModel(category: mealCategory, title: "",subtitle: "",date: DateTime.now(),items: [],id: 1,imagePath: "");
+    }else if(_currentPage == 2){
+      card = UserCalendarModel(category: drinkCategory, title: "",subtitle: "",date: DateTime.now(),items: [],id: 1,imagePath: "");
+    }else{
+      card = UserCalendarModel(category: supplementCategory, title: "",subtitle: "",date: DateTime.now(),items: [],id: 1,imagePath: "");
+    }
+
+    return card;
+  }
+
   @override
   void initState() {
+    data = cardSwitch();
     _pageController = PageController(initialPage: _currentPage);
     super.initState();
   }
@@ -66,7 +87,24 @@ class _SubScreenContainerState extends State<SubScreenContainer> {
              // size: 20,
             ),
             onPressed: () async {
+              // if(_currentPage == 0){
+              //
+              // }else if(){
+              //
+              // }
              // await Navigator.pushNamed(context, '/settings');
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) => TaskCreator(userModel: data!, heroTag: 'def',),
+                  transitionDuration: Duration(milliseconds: 400),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    var scale = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+                        parent: animation, curve: Curves.easeIn));
+                    return ScaleTransition(
+                        alignment: Alignment.center, scale: scale, child: child);
+                  },
+                ),);
             },
           ),
           iconSize: iconSize,

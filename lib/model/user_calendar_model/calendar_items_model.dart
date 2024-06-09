@@ -11,16 +11,33 @@ class CalendarItemsModel{
   bool? isDone;
   List<ItemElement>? elems;
 
-  double itemsValueSummery(String? category){
+  // double itemsValueSummery(String? category){
+  //   double total = 0;
+  //   if(elems != null){
+  //     for( var item in elems){
+  //       if(category == workoutCategory){
+  //         total += (qty! * item.value);
+  //       }else{
+  //         total += item.value;
+  //       }
+  //
+  //     }
+  //   }
+  //
+  //   return total;
+  // }
+  double itemsValueSummery(String? category) {
     double total = 0;
-    for( var item in elems!){
-      if(category == workoutCategory){
-        total += (qty! * item.value!);
-      }else{
-        total += item.value!;
+    elems?.forEach((item) {
+      double itemValue = item.value ?? 0;
+      if (category != null && category == workoutCategory) {
+        int effectiveQty = qty ?? 0;
+        total += (effectiveQty * itemValue);
+      } else {
+        total += itemValue;
       }
-
-    }
+    });
     return total;
   }
+
 }

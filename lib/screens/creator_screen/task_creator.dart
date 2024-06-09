@@ -44,7 +44,7 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
 
   double tileElementsResult = 0;
 
-  double taskPercent = 0;
+  double? taskPercent;
 
 
   List<NavModel> _menuItems = [
@@ -142,13 +142,33 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
 
   bool isBottomBarVisible = true;
 
+  void debugData(){
+    print(
+      'ID:${widget.userModel.id}\nCAT:${widget.userModel.category}\nIMG${widget.userModel.imagePath}\nTITLE${widget.userModel.title}\nSUBTITLE:${widget.userModel.subtitle}\nITEMS${widget.userModel.items}'
+    );
+
+
+  }
+
+
   @override
   void initState() {
+
     creatorCategory = widget.userModel.category!;
 
-    tileElementsResult = widget.userModel.totalValSummary();
 
-    taskPercent = widget.userModel.percentProgress();
+    if(widget.userModel.items != null){
+      tileElementsResult = widget.userModel.totalValSummary();
+      taskPercent = widget.userModel.percentProgress();
+    }else{
+      tileElementsResult = 0;
+      taskPercent = 0;
+    }
+
+
+
+
+    debugData();
 
     categoryCheck(widget.userModel.category);
     _menuSlideInController = AnimationController(
@@ -220,12 +240,14 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
           });
           if (scrollDirection == ScrollDirection.forward) {
           } else if (scrollDirection == ScrollDirection.reverse) {
+
           } else {
           }
           return true;
           },
           child: CustomScrollView(
               physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              shrinkWrap: true,
               slivers: [
                 //image
                 SliverPersistentHeader(
@@ -233,7 +255,10 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                   delegate:SliverImage(
                     imagePath: widget.userModel.imagePath!,
                     heroTag: widget.heroTag,
-                    category: widget.userModel.category
+                    category: widget.userModel.category,
+                    minHeight: taskPercent! >= 0 ? 180 : 90,
+                    maxHeight: taskPercent! >= 0 ? 250 : 95
+
                   )
                   ,),
                 //input title
@@ -323,73 +348,7 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                               children: [
                                 Text(AppLocalizations.of(context)!.translate(addBtnText).capitalizeFirstLetter(), style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: fontSize),),
                                 Icon(Icons.add, color: Theme.of(context).unselectedWidgetColor,),
-                                // Expanded(
-                                //   child: GestureDetector(
-                                //     onTap: () {
-                                //       editText();
-                                //     },
-                                //     child: SizedBox(
-                                //       key: widget.key,
-                                //       height: inputHeight,
-                                //       child: TextField(
-                                //
-                                //         maxLengthEnforcement:
-                                //         MaxLengthEnforcement.enforced,
-                                //         cursorWidth: 1,
-                                //         focusNode: exerciseNameNode,
-                                //         maxLines: 1,
-                                //         maxLength: maxTitleLength,
-                                //         onSubmitted: (val) {
-                                //           setState(() {
-                                //             exerciseNameNode.unfocus();
-                                //           });
-                                //         },
-                                //         keyboardType: TextInputType.text,
-                                //         enabled: editTextEnable,
-                                //         onChanged: (newText) {
-                                //           setState(() {
-                                //             exerciseNameVal.text = newText;
-                                //             exerciseNameVal.selection =
-                                //                 TextSelection.fromPosition(
-                                //                     TextPosition(
-                                //                         offset: exerciseNameVal
-                                //                             .text.length));
-                                //           });
-                                //         },
-                                //         cursorColor: Theme.of(context).indicatorColor,
-                                //         controller: exerciseNameVal,
-                                //         autofocus: false,
-                                //         style: Theme.of(context)
-                                //             .textTheme.headlineLarge!.copyWith(
-                                //             fontSize: titleFontSize,
-                                //             decoration: TextDecoration.none),
-                                //         textAlign: TextAlign.start,
-                                //         decoration: InputDecoration(
-                                //           // border: UnderlineInputBorder(
-                                //           //     borderSide: BorderSide(
-                                //           //       width: .5,
-                                //           //       color: Theme.of(context).unselec,
-                                //           //     )
-                                //           // ),
-                                //           hintText: AppLocalizations.of(context)!.translate('default_exercise_name').capitalizeFirstLetter(),
-                                //           helperText: AppLocalizations.of(context)!.translate('input_exercise_helper').capitalizeFirstLetter(),
-                                //           helperStyle: Theme.of(context)
-                                //               .inputDecorationTheme
-                                //               .helperStyle!
-                                //               .copyWith(
-                                //               color: Theme.of(context).textTheme.headlineLarge!.color,
-                                //               fontSize: helpTextFontSize),
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                                // IconButton(
-                                //     alignment: Alignment.centerRight,
-                                //     padding: EdgeInsets.zero,
-                                //     onPressed: (){
-                                //
-                                // }, icon: Icon(Icons.add))
+
                               ],
                             ),
                           ),
@@ -399,14 +358,16 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                     ),
                   ),
                 ),
+                // widget.userModel.items == [] ? SliverToBoxAdapter(
+                //   child: SizedBox(width: 20,height: 20,),
+                // ):
                 SliverAnimatedList(
                   initialItemCount: widget.userModel.items!.length,
                   itemBuilder: (context,index,animation){
                     var data = widget.userModel.items![index];
                     int exerciseNumber = index + 1;
 
-                    return
-                      Container(
+                    return  Container(
                         margin: EdgeInsets.symmetric(horizontal: edgePadding/2, ),
                         child: ExpansionTile(
                           backgroundColor: index.isEven ?
@@ -537,6 +498,7 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                         ),
                       );
                 },),
+                taskPercent! >= 0 ?
                 SliverToBoxAdapter(
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: edgePadding / 2, ),
@@ -568,9 +530,12 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                       ],
                     ),
                   ),
+                ) : SliverToBoxAdapter(
+                  child: SizedBox(width: 20,),
                 ),
-                SliverToBoxAdapter(
-                  child: Container(
+                taskPercent! >= 0 ? SliverToBoxAdapter(
+                  child:
+                  Container(
                     margin: EdgeInsets.symmetric(horizontal: edgePadding / 2),
                     padding: EdgeInsets.symmetric(horizontal: edgePadding, vertical: edgePadding),
                     decoration: BoxDecoration(
@@ -578,14 +543,15 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
                     ),
 
-                    child: Column(
+                    child:  Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(AppLocalizations.of(context)!.translate("progress_bar").capitalizeFirstLetter(), style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
-                            Text('${(taskPercent*100).toStringAsFixed(2)}%', style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
+                            Text(
+                                '${(taskPercent!*100).toStringAsFixed(2)}%',style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: fontSize),),
                           ],
                         ),
                         Padding(
@@ -598,10 +564,12 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                                 cardBcgColor.bcgColor!
                             ),
                           ),
-                        ),
+                        ) ,
                       ],
                     ),
                   ),
+                ) : SliverToBoxAdapter(
+                  child: SizedBox(width: 20,),
                 ),
                 const SliverToBoxAdapter(
                   child: SizedBox(height: 120,),
@@ -619,7 +587,7 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                 duration: Duration(milliseconds: 300),
                 height: 50,
                 // width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(25)),
                     color: Theme.of(context).colorScheme.background.withOpacity(isBottomBarVisible ? 1.0 : 0.0),
@@ -675,7 +643,7 @@ class _TaskCreatorState extends State<TaskCreator> with TickerProviderStateMixin
                       icon: menuItem.icon ,
                       title: menuItem.title,
                       fontSize: 8.0,
-                      spaceMargin: 12,
+                     // spaceMargin: 12,
 
                     );
                   },

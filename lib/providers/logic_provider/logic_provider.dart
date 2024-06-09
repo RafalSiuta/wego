@@ -648,7 +648,7 @@ class LogicProvider extends ChangeNotifier {
       potton.formulaFemale = 'Potton = H  - 100 - ((H  - 100) / 20)';
       potton.chartList = chart;
       potton.imagePath =
-          'images/food_1.png';//imagePath('male_weight_potton', 'female_weight_potton');
+          'images/potton.png';
       potton.infoColor = checkWarning(0);
       potton.category = supplementCategory;
       potton.isFavorite = false;
@@ -824,7 +824,7 @@ class LogicProvider extends ChangeNotifier {
         }
         if (settings.isProteinKcal == true) {
           proteinIntake.unit = "unit_kcal";
-          proteinIntakeValue = (bmr * proteinPercent) / 100;
+          proteinIntake.value = (bmr * proteinPercent) / 100;
 
         } else {
           proteinIntake.unit = "unit_gram";

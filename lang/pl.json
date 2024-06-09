@@ -14,7 +14,7 @@
   "nav_supl": "suplementy",
 
   "nav_sets": "Ustawienia",
-  "nav_sets_adv": "Zaawansowane",
+  "nav_sets_adv": "Więcej",
   "nav_about": "O apce",
 
   "chips_indicators": "wskaźniki",
@@ -422,9 +422,12 @@
   "detail_title": "Szczegóły",
 
   "error_null": "wystąpił błąd",
-  "error_user": "sprawdź ustawienia profilowe"
+  "error_user": "sprawdź ustawienia profilowe",
 
-
+  "policy": "polityka prywatności",
+  "share": "podziel się",
+  "web": "sttrona www",
+  "rate": "oceń mnie"
 }
 
 

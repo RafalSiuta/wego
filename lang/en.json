@@ -15,7 +15,7 @@
   "nav_supl": "supplements",
 
   "nav_sets": "Settings",
-  "nav_sets_adv": "Advanced",
+  "nav_sets_adv": "More",
   "nav_about": "About",
 
   "chips_indicators": "indicators",
@@ -423,7 +423,11 @@
   "no": "Cancel",
   "detail_title": "Details",
   "error_null": "somethink went wrong",
-  "error_user": "check ypur rofile settings"
+  "error_user": "check ypur rofile settings",
 
+  "policy": "privacy policy",
+  "share": "share",
+  "web": "website",
+  "rate": "rate me"
 }
 

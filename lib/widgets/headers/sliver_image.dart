@@ -8,6 +8,7 @@ import '../../model/calculation_model/calculation_model.dart';
 import '../../model/color/color_switch.dart';
 import '../../utils/dimensions/size_info.dart';
 import '../../utils/internationalization/app_localizations.dart';
+import '../image_box/image_box.dart';
 import '../shapes/card_large_pattern.dart';
 
 class SliverImage extends SliverPersistentHeaderDelegate {
@@ -45,12 +46,12 @@ class SliverImage extends SliverPersistentHeaderDelegate {
             offset:  Offset(transX(shrinkOffset), transY(shrinkOffset)),
             child: Hero(
               tag: heroTag ?? '',
-              child: Image(
+              child: ImageBox(
                   width: MediaQuery.of(context).size.width ,
                   height: MediaQuery.of(context).size.width ,
-                  fit: BoxFit.contain,
-                  alignment: Alignment.topCenter,
-                  image: AssetImage(imagePath)),
+                  path: imagePath,
+                  iconColor: cardBcgColor.patternColor!,
+              ),
             ),
           ),
         ],

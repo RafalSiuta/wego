@@ -172,7 +172,7 @@ class Calendar extends StatelessWidget {
 
                         return Container(
                           decoration: BoxDecoration(
-                            color: bcgColor,
+                            color: counter != 0 ? bcgColor: Colors.transparent,
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(index == 0 ? 5 : 0),
                               bottomRight: Radius.circular(index == calendarProvider.categoryOrder.length - 1 ? 5 : 0),
@@ -182,7 +182,7 @@ class Calendar extends StatelessWidget {
                           height: markerRadius,
                           child: Center(
                             child: Text(
-                              '$counter',
+                              counter != 0 ? '$counter' : "",
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
                                   .textTheme

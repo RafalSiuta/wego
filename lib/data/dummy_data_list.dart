@@ -31,6 +31,13 @@ final List<CalendarItemsModel> calendarWorkoutItems = [
   CalendarItemsModel(name: 'Martwe ciągi',qty: workoutExerciseSets3.length, elems: workoutExerciseSets3),
 ] ;
 
+final List<CalendarItemsModel> calendarWorkoutItems2 = [
+  CalendarItemsModel(name: 'Wiosła w opadzie', qty: workoutExerciseSets.length, elems: workoutExerciseSets, isDone: true),
+  CalendarItemsModel(name: 'Wyciąg łyżka',qty: workoutExerciseSets2.length, elems: workoutExerciseSets2, isDone: true),
+  CalendarItemsModel(name: 'Wypady tułowia',qty: workoutExerciseSets.length, elems: workoutExerciseSets),
+  CalendarItemsModel(name: 'Brzuszki',qty: workoutExerciseSets3.length, elems: workoutExerciseSets3),
+] ;
+
 final List<ItemElement>  calendarMealsDinner = [
   ItemElement(name:"Ryż", qty: 100,unit: "g", value:  300, totalUnit: "kcal"),
   ItemElement(name:"Udo indyk",qty: 120, unit: "g", value: 543, totalUnit: "kcal"),
@@ -44,11 +51,32 @@ final List<CalendarItemsModel> calendarMealsItems = [
   CalendarItemsModel(name: 'Podwieczorek',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
   CalendarItemsModel(name: 'Kolacja',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
 ] ;
+final List<CalendarItemsModel> calendarMealsItems2 = [
+  CalendarItemsModel(name: 'Odżywka', qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Posiłek 1',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Obiad',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Owoce',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Posiłek 5',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+] ;
+final List<CalendarItemsModel> calendarMealsItems3 = [
+  CalendarItemsModel(name: 'Płatki', qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Posiłek 2',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Odżywka',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Deser',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+  CalendarItemsModel(name: 'Kolacja',qty: calendarMealsDinner.length, elems: calendarMealsDinner),
+] ;
 
 final List<CalendarItemsModel> calendarDrinkItems = [
-  CalendarItemsModel(name: 'Herbata', qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Izotonik', qty: drinkItems.length, elems: drinkItems),
   CalendarItemsModel(name: 'Woda',qty: drinkItems.length, elems: drinkItems),
   CalendarItemsModel(name: 'Kawa',qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Herbata',qty: drinkItems.length, elems: drinkItems),
+] ;
+
+final List<CalendarItemsModel> calendarDrinkItems2 = [
+  CalendarItemsModel(name: 'Woda', qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Sok',qty: drinkItems.length, elems: drinkItems),
+  CalendarItemsModel(name: 'Herbata',qty: drinkItems.length, elems: drinkItems),
   CalendarItemsModel(name: 'Woda',qty: drinkItems.length, elems: drinkItems),
 ] ;
 
@@ -65,6 +93,20 @@ final List<CalendarItemsModel> calendarSupplementsItems = [
   CalendarItemsModel(name: 'Żeńszeń',qty: supplementsItems.length, elems: supplementsItems),
 ] ;
 
+final List<CalendarItemsModel> calendarSupplementsItems2 = [
+  CalendarItemsModel(name: 'Aminokawasy', qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Wit-C',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Glutamina',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'B-kompleks',qty: supplementsItems.length, elems: supplementsItems),
+] ;
+
+final List<CalendarItemsModel> calendarSupplementsItems3 = [
+  CalendarItemsModel(name: 'BCAA', qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Wit-C',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Magnez',qty: supplementsItems.length, elems: supplementsItems),
+  CalendarItemsModel(name: 'Potas',qty: supplementsItems.length, elems: supplementsItems),
+] ;
+
 final List<ItemElement>  supplementsItems = [
   ItemElement(qty: 1, value:  500, unit: "dawka", totalUnit: "mg"),
   ItemElement(qty: 2, value:  2500, unit: "dawka", totalUnit: "mg"),
@@ -73,11 +115,10 @@ final List<ItemElement>  supplementsItems = [
 final List<UserCalendarModel> DUMMY_DATA = [
 
   UserCalendarModel(
-      title: 'Back workout',
+      title: 'martwy ciąg',
       subtitle: workoutCategory,
       category: workoutCategory,
       imagePath: 'images/deadlift_male.png',
-
       date: DateTime.now(),
       items: calendarWorkoutItems
   ),
@@ -91,7 +132,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
   //     items: calendarWorkoutItems
   // ),
   UserCalendarModel(
-      title: 'High calories',
+      title: 'wysokobiałkowe',
       subtitle: mealCategory,
       category: mealCategory,
       imagePath: 'images/food_1.png',
@@ -100,7 +141,7 @@ final List<UserCalendarModel> DUMMY_DATA = [
       items: calendarMealsItems,
   ),
   UserCalendarModel(
-      title: 'High hydration',
+      title: 'napoje zimne',
       subtitle: drinkCategory,
       category: drinkCategory,
       imagePath: 'images/drink_1.png',
@@ -108,100 +149,98 @@ final List<UserCalendarModel> DUMMY_DATA = [
       items: calendarDrinkItems,
   ),
   UserCalendarModel(
-      title: 'Supplements',
+      title: 'odżywki',
       subtitle: supplementCategory,
       category: supplementCategory,
       imagePath: 'images/supl_1.png',
       date: DateTime.now(),
-
       items: calendarSupplementsItems
   ),
   //############ new list
   UserCalendarModel(
-    title: 'High calories',
+    title: 'mało kalorii',
     subtitle: mealCategory,
     category: mealCategory,
-    imagePath: 'images/food_1.png',
-
+    imagePath: 'images/meal_3.png',
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
-    items: calendarMealsItems,
+    items: calendarMealsItems2,
   ),
   UserCalendarModel(
-      title: 'Supplements',
+      title: 'witaminy',
       subtitle: supplementCategory,
       category: supplementCategory,
-      imagePath: 'images/supl_1.png',
+      imagePath: 'images/supl_2.png',
 
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
-      items: calendarSupplementsItems
+      items: calendarSupplementsItems2
   ),
   UserCalendarModel(
-      title: 'High hydration',
+      title: 'izotoniki',
       subtitle: drinkCategory,
       category: drinkCategory,
       imagePath: 'images/drink_1.png',
 
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
-    items: calendarDrinkItems,
+    items: calendarDrinkItems2,
   ),
 
-  UserCalendarModel(
-      title: 'Back workout',
-      subtitle: workoutCategory,
-      category: workoutCategory,
-      imagePath: 'images/workout_dude.png',
-
-      date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
-      items: calendarWorkoutItems
-
-  ),
-  UserCalendarModel(
-      title: 'Chest workout',
-      subtitle: workoutCategory,
-      category: workoutCategory,
-      imagePath: 'images/workout_dude.png',
-
-      date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
-      items: calendarWorkoutItems
-
-  ),
+  // UserCalendarModel(
+  //     title: 'barki tył',
+  //     subtitle: workoutCategory,
+  //     category: workoutCategory,
+  //     imagePath: 'images/deadlift_girl.png',
+  //
+  //     date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
+  //     items: calendarWorkoutItems
+  //
+  // ),
+  // UserCalendarModel(
+  //     title: 'Klatka siła',
+  //     subtitle: workoutCategory,
+  //     category: workoutCategory,
+  //     imagePath: 'images/deadlift_male.png',
+  //
+  //     date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 2 ),
+  //     items: calendarWorkoutItems
+  //
+  // ),
   //############ new list
   UserCalendarModel(
-      title: 'High calories',
+      title: 'wysokokaloryczna',
       subtitle: mealCategory,
       category: mealCategory,
-      imagePath: 'images/food_1.png',
+      imagePath: 'images/meal_2.png',
 
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
-      items: calendarMealsItems,
+      items: calendarMealsItems3,
   ),
   UserCalendarModel(
-      title: 'Supplements',
+      title: 'suplementy trening',
       subtitle: supplementCategory,
       category: supplementCategory,
-      imagePath: 'images/supl_1.png',
+      imagePath: 'images/supl_2.png',
 
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
-      items: calendarSupplementsItems
+      items: calendarSupplementsItems3
   ),
   UserCalendarModel(
-      title: 'High hydration',
+      title: 'nawadnianie',
       subtitle: drinkCategory,
       category: drinkCategory,
-      imagePath: 'images/drink_1.png',
+      imagePath: 'images/drink_2.png',
 
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
-    items: calendarDrinkItems,
+    items: calendarDrinkItems2,
   ),
 
   UserCalendarModel(
-      title: 'Back workout',
+      title: 'trening plecy',
       subtitle: workoutCategory,
       category: workoutCategory,
-      imagePath: 'images/workout_dude.png',
+      imagePath: 'images/deadlift_girl.png',
 
       date: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day + 5 ),
-      items: calendarWorkoutItems
+      items: calendarWorkoutItems2
 
   ),
 ];

@@ -30,12 +30,13 @@ class SliderCard extends StatelessWidget {
         ),
         const SizedBox(height: 8.0,),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 45.0),
           child:Text(
             AppLocalizations.of(context)!.translate(description!).capitalizeFirstLetter(),
             overflow:TextOverflow.ellipsis,
             maxLines: 2,
-            style: Theme.of(context).textTheme.displayMedium),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 10)),
         )
       ],
     );

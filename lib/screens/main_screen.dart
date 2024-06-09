@@ -146,9 +146,10 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child:
-        Expanded(
-          child: Center(
-              key: widget.key,
+        Center(
+            key: widget.key,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
               child: PageView.builder(
                   physics: const BouncingScrollPhysics(
                       parent: NeverScrollableScrollPhysics()),
@@ -156,15 +157,12 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                   controller: _pageController,
                   onPageChanged: _onPageChange,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: _pages
-                          .map((e) => e.page!)
-                          .toList()
-                          .elementAt(index),
-                    );
-                  })),
-        ),
+                    return _pages
+                        .map((e) => e.page!)
+                        .toList()
+                        .elementAt(index);
+                  }),
+            )),
         // Row(
         //   crossAxisAlignment: CrossAxisAlignment.stretch,
         //   children: [
